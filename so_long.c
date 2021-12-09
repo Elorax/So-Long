@@ -1,10 +1,10 @@
-#include "./minilibx/include/mlx.h"
+//#include "./minilibx/include/mlx.h"
 
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "./gnl/get_next_line.h"
+#include "get_next_line.h"
 #include <fcntl.h>
 #define UP_ARROW_KEY 65362
 #define LEFT_ARROW_KEY 65361
