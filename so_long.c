@@ -19,12 +19,19 @@
 #define ESCAPE_KEY 65307
 
 
-/* typedef struct	s_vars
+ typedef struct	s_vars
 {
 	void	*mlx;
 	void	*win;
 }	t_vars;
 
+typedef struct s_img
+{
+	void	*img;
+	int	img_width;
+	int	img_height;
+	char	*path;
+}	t_img;
 
 typedef struct s_data
 {
@@ -42,13 +49,6 @@ void	ft_mlx_close(t_vars *vars)
 	exit(EXIT_SUCCESS);
 }
 
-void	ft_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
 
 int	key_hook(int keycode, t_vars *vars)
 {
@@ -59,13 +59,6 @@ int	key_hook(int keycode, t_vars *vars)
 	return(printf("Hello from key_hook %d!\n", keycode));
 }
 
-typedef struct s_img
-{
-	void	*img;
-	int	img_width;
-	int	img_height;
-	char	*path;
-}	t_img;*/
 
 static	char	*ft_strchr(char *str, char c)
 {
@@ -81,9 +74,7 @@ static int	ft_strlen(char *str)
 
 	i = 0;
 	while (str[i])
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -147,7 +138,7 @@ int	ft_init_map(t_map *map)
 			return(printf("Erreur : Mauvaise map.\n"), -1);
 		i++;
 	}
-	if (i < 1)ft_check_first_line(map->map[0]) || ft_check_first_line(map->map[i - 1]))
+	if ((i > 1) && (ft_check_first_line(map->map[0]) || ft_check_first_line(map->map[i - 1])))
 		return(printf("Erreur : Mauvaise map.\n"), -1);
 	if (map->nb_player != 1 || map->nb_exit != 1 || map->nb_collec < 1)
 		return(printf("Erreur : Mauvaise map.\n"), -1);
@@ -157,9 +148,71 @@ int	ft_init_map(t_map *map)
 	return (0);
 }
 
-int	ft_count_lines(t_map *map)
+int	ft_count_lines(t_map map)
 {
+	char	*str;
+	int	i;
 
+	str = get_next_line(map.fd);
+	i = 0;
+	while (str != NULL)
+	{
+		str = get_next_line(map.fd);
+		i++;
+	}
+	return (i);
+}
+
+void	ft_display_map(t_map map)
+{
+	int	i;
+	int	j;
+	void	*img;
+	int	img_width;
+	int	img_height;
+	t_vars	vars;
+
+	i = 0;
+	j = 0;
+	int	k = 0;
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, 50 * map.length, 50 * map.height, "Thanks for all the fish !");
+	while (k < 10000)
+	{	
+		while (map.map[i])
+		{
+			while (map.map[i][j] != '\n')
+			{
+				if (map.map[i][j] == '0')
+				{
+					if (k % 4 == 0)
+						img = mlx_xpm_file_to_image(vars.mlx, "Sol1.xpm", &img_width, &img_height);
+					if (k % 4 == 1)
+						img = mlx_xpm_file_to_image(vars.mlx, "Sol2.xpm", &img_width, &img_height);
+					if (k % 4 == 2)
+						img = mlx_xpm_file_to_image(vars.mlx, "Sol3.xpm", &img_width, &img_height);
+					if (k % 4 == 3)
+						img = mlx_xpm_file_to_image(vars.mlx, "Sol4.xpm", &img_width, &img_height);
+				}
+				if (map.map[i][j] == '1')
+					img = mlx_xpm_file_to_image(vars.mlx, "Obstacle1.xpm", &img_width, &img_height);
+				if (map.map[i][j] == 'E')
+					img = mlx_xpm_file_to_image(vars.mlx, "Exit1.xpm", &img_width, &img_height);
+				if (map.map[i][j] == 'P')
+					img = mlx_xpm_file_to_image(vars.mlx, "Personnage1.xpm", &img_width, &img_height);
+				if (map.map[i][j] == 'C')
+					img = mlx_xpm_file_to_image(vars.mlx, "Collectible1.xpm", &img_width, &img_height);
+				mlx_put_image_to_window(vars.mlx, vars.win, img, j * img_width, i * img_height);
+				j++;
+			}
+			i++;
+			j = 0;
+		}
+		i = 0;
+		k++;
+		usleep(250000);
+	}
+	mlx_loop(vars.mlx);
 }
 
 int main(int ac, char **av)
@@ -195,9 +248,9 @@ int main(int ac, char **av)
 	}
 	printf("hauteur, largeur : %d, %d\n", map.height, map.length);
 	printf("Exit : %d, Player : %d, collec : %d\n", map.nb_exit, map.nb_player, map.nb_collec);
-	close(map.fd);
-}
+	ft_display_map(map);
 
+}
 
 
 
