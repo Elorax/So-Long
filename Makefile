@@ -1,5 +1,5 @@
 
-SRCS		= so_long.c
+SRCS		= so_long.c get_next_line.c get_next_line_utils.c
 
 OBJS		= $(SRCS:.c=.o)
 

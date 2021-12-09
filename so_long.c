@@ -1,4 +1,4 @@
-//#include "./minilibx/include/mlx.h"
+#include "./minilibx/mlx.h"
 
 #include <limits.h>
 #include <stdio.h>
@@ -137,6 +137,8 @@ int	ft_check_first_line(char *str)
 int	ft_init_map(t_map *map)
 {
 	int	i;
+
+	i = 0;
 	while ((map->map[i] = get_next_line(map->fd)))
 	{
 		if (ft_check_line(map, i) != 0)
@@ -145,7 +147,7 @@ int	ft_init_map(t_map *map)
 			return(printf("Erreur : Mauvaise map.\n"), -1);
 		i++;
 	}
-	if (ft_check_first_line(map->map[0]) || ft_check_first_line(map->map[i - 1]))
+	if (i < 1)ft_check_first_line(map->map[0]) || ft_check_first_line(map->map[i - 1]))
 		return(printf("Erreur : Mauvaise map.\n"), -1);
 	if (map->nb_player != 1 || map->nb_exit != 1 || map->nb_collec < 1)
 		return(printf("Erreur : Mauvaise map.\n"), -1);
@@ -153,6 +155,11 @@ int	ft_init_map(t_map *map)
 	map->length = ft_strlen(map->map[0]) - 1;
 	i = 0;
 	return (0);
+}
+
+int	ft_count_lines(t_map *map)
+{
+
 }
 
 int main(int ac, char **av)
@@ -175,6 +182,9 @@ int main(int ac, char **av)
 	map.fd = open(av[1], O_RDONLY);
 	if (map.fd <= 0)
 		return(printf("Erreur lors de l'ouverture du fichier"), -1);
+	map.height = ft_count_lines(map);
+	close(map.fd);
+	map.fd = open(av[1], O_RDONLY);
 	if (ft_init_map(&map) == -1)
 		return(-1);
 	printf("Map valide !\n");
