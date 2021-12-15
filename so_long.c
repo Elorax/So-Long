@@ -75,6 +75,24 @@ typedef struct s_img
 	char	*path;
 }	t_img;
 
+int	is_adjacent(t_vars *vars, int y, int x)
+{
+//	printf("On entre dans adjacent\n");
+	if (!x || !y || x == vars->map.length - 1 || y == vars->map.height - 1)
+		return (0);
+	if (vars->map.map[y - 1][x] == 'P')
+		return (1);
+	if (vars->map.map[y][x] == 'P')
+		return (1);
+	if (vars->map.map[y + 1][x] == 'P')
+		return (1);
+	if (vars->map.map[y][x + 1] == 'P')
+		return (1);
+	if (vars->map.map[y][x - 1] == 'P')
+		return (1);
+	return (0);
+}
+
 void	ft_update_map(t_vars *vars)
 {
 	int	i;
@@ -82,25 +100,29 @@ void	ft_update_map(t_vars *vars)
 	void	*img;
 	int	img_width;
 	int	img_height;
+	int	adj;
 
+	adj = 0;
 	img = NULL;
 	i = 0;
 	j = 0;
 	while (vars->map.map[i])
 	{
 		while (vars->map.map[i][j] != '\n')
-		{
-			if (vars->map.map[i][j] == '0')
+		{	
+			adj = is_adjacent(vars, i, j);
+			if (vars->map.map[i][j] == '0' && adj)
 				img = mlx_xpm_file_to_image(vars->mlx, "Sol1.xpm", &img_width, &img_height);
-			if (vars->map.map[i][j] == '1')
+			if (vars->map.map[i][j] == '1' && adj)
 				img = mlx_xpm_file_to_image(vars->mlx, "Obstacle1.xpm", &img_width, &img_height);
-			if (vars->map.map[i][j] == 'E')
+			if (vars->map.map[i][j] == 'E' && adj)
 				img = mlx_xpm_file_to_image(vars->mlx, "Exit1.xpm", &img_width, &img_height);
 			if (vars->map.map[i][j] == 'P')
-				img = mlx_xpm_file_to_image(vars->mlx, "Personnage1.xpm", &img_width, &img_height);
-			if (vars->map.map[i][j] == 'C')
+				img = mlx_xpm_file_to_image(vars->mlx, "Personnage4.xpm", &img_width, &img_height);
+			if (vars->map.map[i][j] == 'C' && adj)
 				img = mlx_xpm_file_to_image(vars->mlx, "Collectible1.xpm", &img_width, &img_height);
-			mlx_put_image_to_window(vars->mlx, vars->win, img, j * img_width, i * img_height);
+			if (adj != 0)
+				mlx_put_image_to_window(vars->mlx, vars->win, img, j * img_width, i * img_height);
 			j++;
 		}
 		i++;
@@ -111,7 +133,7 @@ void	ft_update_map(t_vars *vars)
 void	ft_mlx_close(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
-	ft_update_map(vars);
+//	ft_update_map(vars);
 	printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
 	exit(EXIT_SUCCESS);
 }
@@ -155,7 +177,7 @@ void	ft_cswitch(char *a, char *b)
 
 int	is_accessible(char c, t_vars vars)
 {
-	if (c == '1' || (c == 'E' && vars.collected != vars.map.nb_collec))	//update avec counter de collectibles
+	if (c == '1' || (c == 'E' && vars.collected != vars.map.nb_collec))
 		return (0);
 	return (1);
 }
@@ -165,7 +187,7 @@ void	ft_move(t_vars *vars, int keycode)
 	int	x;
 	int	y;
 	get_coords(vars, &x, &y);
-	if (keycode == W_KEY && is_accessible(vars->map.map[y - 1][x], *vars))	//update avec exit et collectibles.
+	if (keycode == W_KEY && is_accessible(vars->map.map[y - 1][x], *vars))
 	{
 		vars->collected += (vars->map.map[y - 1][x] == 'C');
 		vars->nb_moves++;
@@ -173,8 +195,9 @@ void	ft_move(t_vars *vars, int keycode)
 			ft_mlx_close(vars);
 		vars->map.map[y][x] = '0';	
 		vars->map.map[y - 1][x] = 'P';	
+		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
 	}
-	else if (keycode == S_KEY && is_accessible(vars->map.map[y + 1][x], *vars))	//update avec exit et collectibles.
+	else if (keycode == S_KEY && is_accessible(vars->map.map[y + 1][x], *vars))
 	{
 		vars->collected += (vars->map.map[y + 1][x] == 'C');
 		vars->nb_moves++;
@@ -182,8 +205,9 @@ void	ft_move(t_vars *vars, int keycode)
 			ft_mlx_close(vars);
 		vars->map.map[y][x] = '0';	
 		vars->map.map[y + 1][x] = 'P';	
+		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
 	}
-	else if (keycode == D_KEY && is_accessible(vars->map.map[y][x + 1], *vars))	//update avec exit et collectibles.
+	else if (keycode == D_KEY && is_accessible(vars->map.map[y][x + 1], *vars))
 	{
 		vars->collected += (vars->map.map[y][x + 1] == 'C');
 		vars->nb_moves++;
@@ -191,8 +215,9 @@ void	ft_move(t_vars *vars, int keycode)
 			ft_mlx_close(vars);
 		vars->map.map[y][x] = '0';	
 		vars->map.map[y][x + 1] = 'P';	
+		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
 	}
-	else if (keycode == A_KEY && is_accessible(vars->map.map[y][x - 1], *vars))	//update avec exit et collectibles.
+	else if (keycode == A_KEY && is_accessible(vars->map.map[y][x - 1], *vars))
 	{
 		vars->collected += (vars->map.map[y][x - 1] == 'C');
 		vars->nb_moves++;
@@ -200,13 +225,12 @@ void	ft_move(t_vars *vars, int keycode)
 			ft_mlx_close(vars);
 		vars->map.map[y][x] = '0';
 		vars->map.map[y][x - 1] = 'P';
+		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
 	}
-	printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
 }
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	
 	if (keycode == 65307)
 		ft_mlx_close(vars);
 	if (keycode == W_KEY || keycode == A_KEY || keycode == S_KEY || keycode == D_KEY)
@@ -308,7 +332,6 @@ void	ft_display_map(t_vars *vars)
 	void	*img;
 	int	img_width;
 	int	img_height;
-//	t_vars	vars;
 
 	img = NULL;
 	i = 0;
@@ -329,7 +352,7 @@ void	ft_display_map(t_vars *vars)
 				img = mlx_xpm_file_to_image(vars->mlx, "Personnage1.xpm", &img_width, &img_height);
 			if (vars->map.map[i][j] == 'C')
 				img = mlx_xpm_file_to_image(vars->mlx, "Collectible1.xpm", &img_width, &img_height);
-			mlx_put_image_to_window(vars->mlx, vars->win, img, j * img_width, i * img_height);
+			mlx_put_image_to_window(vars->mlx, vars->win, img, j * img_width, i * img_height);//Pour le scrolling c'est ici
 			j++;
 		}
 		i++;
