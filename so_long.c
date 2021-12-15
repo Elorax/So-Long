@@ -75,16 +75,6 @@ typedef struct s_img
 	char	*path;
 }	t_img;
 
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int	bits_per_pixel;
-	int	line_length;
-	int	endian;
-}	t_data;
-
-
 void	ft_update_map(t_vars *vars)
 {
 	int	i;
@@ -121,6 +111,8 @@ void	ft_update_map(t_vars *vars)
 void	ft_mlx_close(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
+	ft_update_map(vars);
+	printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
 	exit(EXIT_SUCCESS);
 }
 
