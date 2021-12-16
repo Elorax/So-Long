@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include "get_next_line.h"
 #include <fcntl.h>
+#include <time.h>
 #define UP_ARROW_KEY 65362
 #define LEFT_ARROW_KEY 65361
 #define RIGHT_ARROW_KEY 65363
@@ -55,7 +56,6 @@ typedef struct s_map
 	int	nb_player;
 	int	nb_collec;
 	char	*map[21];
-	char	**src_images;
 }	t_map;
 
 typedef struct	s_vars
@@ -65,6 +65,9 @@ typedef struct	s_vars
 	int		collected;
 	int		nb_moves;
 	t_map	map;
+	int	img_width;
+	int	img_height;
+	void	**images;
 }	t_vars;
 
 typedef struct s_img
@@ -74,6 +77,18 @@ typedef struct s_img
 	int	img_height;
 	char	*path;
 }	t_img;
+
+
+int	handle_no_event(t_vars *vars)
+{
+	static unsigned long i = 0;
+	usleep(1000);
+	return (0);
+}
+
+
+
+void	**ft_init_images(t_vars *vars);
 
 int	is_adjacent(t_vars *vars, int y, int x)
 {
@@ -329,53 +344,73 @@ void	ft_display_map(t_vars *vars)
 {
 	int	i;
 	int	j;
-	void	*img;
-	int	img_width;
-	int	img_height;
+	//void	*img;
+	//int	img_width;
+	//int	img_height;
 
-	img = NULL;
+	//img = NULL;
 	i = 0;
 	j = 0;
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, 50 * vars->map.length, 50 * vars->map.height, "Thanks for all the fish !");
+	vars->images = ft_init_images(vars);
 	while (vars->map.map[i])
 	{
 		while (vars->map.map[i][j] != '\n')
 		{
 			if (vars->map.map[i][j] == '0')
-				img = mlx_xpm_file_to_image(vars->mlx, "Sol1.xpm", &img_width, &img_height);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[0], j * vars->img_width, i * vars->img_height);
+				//img = mlx_xpm_file_to_image(vars->mlx, "Sol1.xpm", &img_width, &img_height);
 			if (vars->map.map[i][j] == '1')
-				img = mlx_xpm_file_to_image(vars->mlx, "Obstacle1.xpm", &img_width, &img_height);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[13], j * vars->img_width, i * vars->img_height);
+				//img = mlx_xpm_file_to_image(vars->mlx, "Obstacle1.xpm", &img_width, &img_height);
 			if (vars->map.map[i][j] == 'E')
-				img = mlx_xpm_file_to_image(vars->mlx, "Exit1.xpm", &img_width, &img_height);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[12], j * vars->img_width, i * vars->img_height);
+			//	img = mlx_xpm_file_to_image(vars->mlx, "Exit1.xpm", &img_width, &img_height);
 			if (vars->map.map[i][j] == 'P')
-				img = mlx_xpm_file_to_image(vars->mlx, "Personnage1.xpm", &img_width, &img_height);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[8], j * vars->img_width, i * vars->img_height);
+			//	img = mlx_xpm_file_to_image(vars->mlx, "Personnage1.xpm", &img_width, &img_height);
 			if (vars->map.map[i][j] == 'C')
-				img = mlx_xpm_file_to_image(vars->mlx, "Collectible1.xpm", &img_width, &img_height);
-			mlx_put_image_to_window(vars->mlx, vars->win, img, j * img_width, i * img_height);//Pour le scrolling c'est ici
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[4], j * vars->img_width, i * vars->img_height);
+			//	img = mlx_xpm_file_to_image(vars->mlx, "Collectible1.xpm", &img_width, &img_height);
+			//mlx_put_image_to_window(vars->mlx, vars->win, img, j * img_width, i * img_height);//Pour le scrolling c'est ici
 			j++;
 		}
 		i++;
 		j = 0;
 	}
 	mlx_key_hook(vars->win, key_hook, vars);
+	mlx_loop_hook(vars->mlx, &handle_no_event, vars);
 	mlx_loop(vars->mlx);
 }
 
-char	**ft_init_images(void)
+void	**ft_init_images(t_vars *vars)
 {
-	char	**dest;
+	void	**images;
 
-	dest = malloc(sizeof(char *) * 6);
-	if (!dest)
+	images = malloc(sizeof(*images) * 15);
+	if (!images)
 		return (NULL);
-	dest[0] = ft_strdup("Sol1.xpm");
-	dest[1] = ft_strdup("Obstacle1.xpm");
-	dest[2] = ft_strdup("Collectible1.xpm");
-	dest[3] = ft_strdup("Personnage1.xpm");
-	dest[4] = ft_strdup("Exit1.xpm");
-	dest[5] = NULL;
-	return(dest);
+	images[0] = mlx_xpm_file_to_image(vars->mlx, "Sol1.xpm", &vars->img_width, &vars->img_height);
+	images[1] = mlx_xpm_file_to_image(vars->mlx, "Sol2.xpm", &vars->img_width, &vars->img_height);
+	images[2] = mlx_xpm_file_to_image(vars->mlx, "Sol3.xpm", &vars->img_width, &vars->img_height);
+	images[3] = mlx_xpm_file_to_image(vars->mlx, "Sol4.xpm", &vars->img_width, &vars->img_height);
+
+	images[4] = mlx_xpm_file_to_image(vars->mlx, "Collectible1.xpm", &vars->img_width, &vars->img_height);
+	images[5] = mlx_xpm_file_to_image(vars->mlx, "Collectible1.xpm", &vars->img_width, &vars->img_height);
+	images[6] = mlx_xpm_file_to_image(vars->mlx, "Collectible1.xpm", &vars->img_width, &vars->img_height);
+	images[7] = mlx_xpm_file_to_image(vars->mlx, "Collectible1.xpm", &vars->img_width, &vars->img_height);
+	
+	images[8] = mlx_xpm_file_to_image(vars->mlx, "Personnage1.xpm", &vars->img_width, &vars->img_height);
+	images[9] = mlx_xpm_file_to_image(vars->mlx, "Personnage2.xpm", &vars->img_width, &vars->img_height);
+	images[10] = mlx_xpm_file_to_image(vars->mlx, "Personnage3.xpm", &vars->img_width, &vars->img_height);
+	images[11] = mlx_xpm_file_to_image(vars->mlx, "Personnage4.xpm", &vars->img_width, &vars->img_height);
+
+	images[12] = mlx_xpm_file_to_image(vars->mlx, "Exit1.xpm", &vars->img_width, &vars->img_height);
+	images[13] = mlx_xpm_file_to_image(vars->mlx, "Obstacle1.xpm", &vars->img_width, &vars->img_height);
+	images[14] = NULL;
+	printf("Coucou\n");
+	return(images);
 }
 
 void	ft_init_vars(t_vars *vars)
@@ -387,7 +422,7 @@ void	ft_init_vars(t_vars *vars)
 	vars->map.nb_collec = 0;
 	vars->map.nb_player = 0;
 	vars->map.fd = 0;
-	vars->map.src_images = ft_init_images();
+	//vars->images = ft_init_images(vars);
 	vars->collected = 0;
 	vars->nb_moves = 0;
 }
