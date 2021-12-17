@@ -91,7 +91,9 @@ typedef struct s_img
 
 int	exit_hook(t_vars *vars)
 {
-	ft_mlx_close(vars);
+	printf("On quitte avec la croix rouge\n");
+	key_hook(65307, vars);
+	//ft_mlx_close(vars);
 	return (0);
 }
 
@@ -193,7 +195,11 @@ void	ft_update_map(t_vars *vars)
 
 void	ft_mlx_close(t_vars *vars)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
+	if (vars->win != NULL)
+	{
+		mlx_destroy_window(vars->mlx, vars->win);
+		vars->win = NULL;	
+	}
 //	ft_update_map(vars);
 	printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
 //	exit(EXIT_SUCCESS);
@@ -428,9 +434,9 @@ void	ft_display_map(t_vars *vars)
 		i++;
 		j = 0;
 	}
-	mlx_key_hook(vars->win, key_hook, vars);
 	mlx_loop_hook(vars->mlx, &handle_no_event, vars);
 	mlx_hook(vars->win, 17, 0, exit_hook, vars);
+	mlx_key_hook(vars->win, key_hook, vars);
 }
 
 void	**ft_init_images(t_vars *vars)
@@ -517,7 +523,9 @@ int main(int ac, char **av)
 		close(vars.map.fd);
 		ft_display_map(&vars);
 		mlx_loop(vars.mlx);
+		printf("test ! \n");
 		i++;
 		ft_delete_vars(&vars);
 	}
+	printf("tout s'est bien passe\n");
 }

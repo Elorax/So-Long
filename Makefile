@@ -6,7 +6,7 @@ OBJS		= $(SRCS:.c=.o)
 CC		= gcc
 RM		= rm -rf
 
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -g3
 
 NAME=	so_long
 
@@ -20,7 +20,7 @@ LINUX		= -I /usr/include -L /usr/lib -L mlx_linux -I mlx_linux -lXext -l X11 -lm
 
 $(NAME): $(OBJS)
 		make -C $(PATH_MLX) all
-		$(CC) $(OBJS) minilibx/libmlx_Linux.a $(LINUX) -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJS) minilibx/libmlx_Linux.a $(LINUX) -o $(NAME)
 
 all:		$(NAME)
 
