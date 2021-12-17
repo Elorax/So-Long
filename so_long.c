@@ -1,4 +1,5 @@
 #include "./minilibx/mlx.h"
+//#include "so_long.h"
 
 #include <limits.h>
 #include <stdio.h>
@@ -7,10 +8,10 @@
 #include "get_next_line.h"
 #include <fcntl.h>
 #include <time.h>
-#define UP_ARROW_KEY 65362
-#define LEFT_ARROW_KEY 65361
-#define RIGHT_ARROW_KEY 65363
-#define DOWN_ARROW_KEY 65364
+#define UP_KEY 65362
+#define LEFT_KEY 65361
+#define RIGHT_KEY 65363
+#define DOWN_KEY 65364
 #define A_KEY 97
 #define W_KEY 119
 #define Z_KEY 122
@@ -82,11 +83,13 @@ typedef struct s_img
 
 int	handle_no_event(t_vars *vars)
 {
-	ft_animate_map(vars);
+	static unsigned long count = 0;
+
+	count++;
+	if(!(count % 20000))
+		ft_animate_map(vars);
 	return (0);
 }
-
-
 
 void	**ft_init_images(t_vars *vars);
 
@@ -112,11 +115,7 @@ void	ft_animate_map(t_vars *vars)
 {
 	int	i;
 	int	j;
-	static unsigned long count = 0;
 
-	count++;
-	if (count % 19949)
-		return ;
 	i = 0;
 	j = 0;
 	printf("Animation !\n");
@@ -229,7 +228,7 @@ void	ft_move(t_vars *vars, int keycode)
 	int	x;
 	int	y;
 	get_coords(vars, &x, &y);
-	if (keycode == W_KEY && is_accessible(vars->map.map[y - 1][x], *vars))
+	if ((keycode == W_KEY || keycode == UP_KEY || keycode == Z_KEY) && is_accessible(vars->map.map[y - 1][x], *vars))
 	{
 		vars->collected += (vars->map.map[y - 1][x] == 'C');
 		vars->nb_moves++;
@@ -239,7 +238,7 @@ void	ft_move(t_vars *vars, int keycode)
 		vars->map.map[y - 1][x] = 'P';	
 		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
 	}
-	else if (keycode == S_KEY && is_accessible(vars->map.map[y + 1][x], *vars))
+	else if ((keycode == S_KEY || keycode == DOWN_KEY) && is_accessible(vars->map.map[y + 1][x], *vars))
 	{
 		vars->collected += (vars->map.map[y + 1][x] == 'C');
 		vars->nb_moves++;
@@ -249,7 +248,7 @@ void	ft_move(t_vars *vars, int keycode)
 		vars->map.map[y + 1][x] = 'P';	
 		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
 	}
-	else if (keycode == D_KEY && is_accessible(vars->map.map[y][x + 1], *vars))
+	else if ((keycode == D_KEY || keycode == RIGHT_KEY) && is_accessible(vars->map.map[y][x + 1], *vars))
 	{
 		vars->collected += (vars->map.map[y][x + 1] == 'C');
 		vars->nb_moves++;
@@ -259,7 +258,7 @@ void	ft_move(t_vars *vars, int keycode)
 		vars->map.map[y][x + 1] = 'P';	
 		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
 	}
-	else if (keycode == A_KEY && is_accessible(vars->map.map[y][x - 1], *vars))
+	else if ((keycode == A_KEY || keycode == Q_KEY || keycode == LEFT_KEY) && is_accessible(vars->map.map[y][x - 1], *vars))
 	{
 		vars->collected += (vars->map.map[y][x - 1] == 'C');
 		vars->nb_moves++;
@@ -275,7 +274,7 @@ int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 65307)
 		ft_mlx_close(vars);
-	if (keycode == W_KEY || keycode == A_KEY || keycode == S_KEY || keycode == D_KEY)
+	if (keycode == W_KEY || keycode == A_KEY || keycode == S_KEY || keycode == D_KEY || keycode == UP_KEY || keycode == DOWN_KEY || keycode == RIGHT_KEY || keycode == LEFT_KEY || keycode == Z_KEY || keycode == Q_KEY)
 	{
 		ft_move(vars, keycode);
 		ft_update_map(vars);

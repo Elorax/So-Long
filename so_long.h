@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 22:51:35 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/17 01:21:59 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/17 04:16:54 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "libft/libft.h"
+//# include "libft/libft.h"
 # include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -35,7 +35,9 @@
 # define RIGHT_KEY 65363
 # define DOWN_KEY 65364
 
-/*typedef struct s_map
+/* Structures */
+
+typedef struct s_map
 {
 	int		fd;
 	int		height;
@@ -52,21 +54,33 @@ typedef struct s_vars
 	int		nb_moves;
 	int		img_width;
 	int		img_height;
+	int		frames;
 	void	*mlx;
 	void	*win;
 	void	**images;
 	t_map	map;
 }	t_vars;
-*/
-/*int	handle_no_event(t_vars *vars);
-void	**ft_init_images(t_vars *vars);
-void	ft_update_map(t_vars *vars);
+
+int		handle_no_event(t_vars *vars);
+int		key_hook(int keycode, t_vars *vars);
 int		is_adjacent(t_vars *vars, int y, int x);
-void	ft_mlx_close(t_vars *vars);
-void	get_coords(t_vars *vars, int *x, int *y);
-void	ft_cswitch(char *a, char *b);
 int		is_accessible(char c, t_vars vars);
-void	ft_move(t_vars *vars, int keycode);
-int		key_hook(int keycodem t_vars *vars);
 int		ft_check_line(t_map *map, int i);
-*/
+int		ft_check_first_line(char *str);
+int		ft_init_map(t_map *map);
+int		ft_count_lines(t_map map);
+void	get_coords(t_vars *vars, int *x, int *y);
+void	ft_move(t_vars *vars, int keycode);
+void	ft_mlx_close(t_vars *vars);
+void	ft_cswitch(char *a, char *b);
+void	ft_display_map(t_vars *vars);
+void	ft_update_map(t_vars *vars);
+void	ft_init_vars(t_vars *vars);
+void	**ft_init_images(t_vars *vars);
+void	**ft_init_images(t_vars *vars);
+
+/* fonctions bonus */
+
+void	ft_animate_map(t_vars *vars);
+
+#endif
