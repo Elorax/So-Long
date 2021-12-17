@@ -68,6 +68,7 @@ typedef struct	s_vars
 	int	img_width;
 	int	img_height;
 	void	**images;
+	int	frames;
 }	t_vars;
 
 typedef struct s_img
@@ -81,8 +82,7 @@ typedef struct s_img
 
 int	handle_no_event(t_vars *vars)
 {
-	static unsigned long i = 0;
-	usleep(1000);
+	ft_animate_map(vars);
 	return (0);
 }
 
@@ -107,18 +107,47 @@ int	is_adjacent(t_vars *vars, int y, int x)
 		return (1);
 	return (0);
 }
+/*Fonction bonus*/
+void	ft_animate_map(t_vars *vars)
+{
+	int	i;
+	int	j;
+	static unsigned long count = 0;
+
+	count++;
+	if (count % 19949)
+		return ;
+	i = 0;
+	j = 0;
+	printf("Animation !\n");
+	vars->frames++;
+	while(vars->map.map[i])
+	{
+		while (vars->map.map[i][j])
+		{
+			if (vars->map.map[i][j] == '0')
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[vars->frames % 4], j * vars->img_width, i*vars->img_height);
+			if (vars->map.map[i][j] == 'P')
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[8 + vars->frames % 4], j * vars->img_width, i*vars->img_height);
+			j++;
+		}
+		i++;
+		j = 0;
+	}
+	printf("Animation terminee !\n");
+}
 
 void	ft_update_map(t_vars *vars)
 {
 	int	i;
 	int	j;
-	void	*img;
-	int	img_width;
-	int	img_height;
+	//void	*img;
+	//int	img_width;
+	//int	img_height;
 	int	adj;
 
 	adj = 0;
-	img = NULL;
+	//img = NULL;
 	i = 0;
 	j = 0;
 	while (vars->map.map[i])
@@ -127,17 +156,15 @@ void	ft_update_map(t_vars *vars)
 		{	
 			adj = is_adjacent(vars, i, j);
 			if (vars->map.map[i][j] == '0' && adj)
-				img = mlx_xpm_file_to_image(vars->mlx, "Sol1.xpm", &img_width, &img_height);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[0], j * vars->img_width, i * vars->img_height);
 			if (vars->map.map[i][j] == '1' && adj)
-				img = mlx_xpm_file_to_image(vars->mlx, "Obstacle1.xpm", &img_width, &img_height);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[13], j * vars->img_width, i * vars->img_height);
 			if (vars->map.map[i][j] == 'E' && adj)
-				img = mlx_xpm_file_to_image(vars->mlx, "Exit1.xpm", &img_width, &img_height);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[12], j * vars->img_width, i * vars->img_height);
 			if (vars->map.map[i][j] == 'P')
-				img = mlx_xpm_file_to_image(vars->mlx, "Personnage4.xpm", &img_width, &img_height);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[8], j * vars->img_width, i * vars->img_height);
 			if (vars->map.map[i][j] == 'C' && adj)
-				img = mlx_xpm_file_to_image(vars->mlx, "Collectible1.xpm", &img_width, &img_height);
-			if (adj != 0)
-				mlx_put_image_to_window(vars->mlx, vars->win, img, j * img_width, i * img_height);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[4], j * vars->img_width, i * vars->img_height);
 			j++;
 		}
 		i++;
@@ -425,6 +452,7 @@ void	ft_init_vars(t_vars *vars)
 	//vars->images = ft_init_images(vars);
 	vars->collected = 0;
 	vars->nb_moves = 0;
+	vars->frames = 0;
 }
 int main(int ac, char **av)
 {
