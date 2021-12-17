@@ -78,6 +78,9 @@ typedef struct	s_vars
 	clock_t	begin;
 }	t_vars;
 
+
+void	ft_mlx_close(t_vars *vars);
+
 typedef struct s_img
 {
 	void	*img;
@@ -86,6 +89,11 @@ typedef struct s_img
 	char	*path;
 }	t_img;
 
+int	exit_hook(t_vars *vars)
+{
+	ft_mlx_close(vars);
+	return (0);
+}
 
 void	ft_animate_map(t_vars *vars)
 {
@@ -426,6 +434,7 @@ void	ft_display_map(t_vars *vars)
 	}
 	mlx_key_hook(vars->win, key_hook, vars);
 	mlx_loop_hook(vars->mlx, &handle_no_event, vars);
+	mlx_hook(vars->win, 17, 0, exit_hook, vars);
 	//mlx_loop(vars->mlx);
 }
 
