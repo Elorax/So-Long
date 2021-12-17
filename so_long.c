@@ -19,6 +19,10 @@
 #define S_KEY 115
 #define D_KEY 100
 #define ESCAPE_KEY 65307
+#define FPS 5
+
+
+enum {UP, RIGHT, DOWN, LEFT};
 
 static int	ft_strlen(const char *str)
 {
@@ -70,6 +74,8 @@ typedef struct	s_vars
 	int	img_height;
 	void	**images;
 	int	frames;
+	int	dir;
+	clock_t	begin;
 }	t_vars;
 
 typedef struct s_img
@@ -81,13 +87,43 @@ typedef struct s_img
 }	t_img;
 
 
+void	ft_animate_map(t_vars *vars)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	printf("Animation !\n");
+	vars->frames++;
+	while(vars->map.map[i])
+	{
+		while (vars->map.map[i][j])
+		{
+			if (vars->map.map[i][j] == '0')
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[vars->frames % 4], j * vars->img_width, i*vars->img_height);
+			if (vars->map.map[i][j] == 'C')
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[4 + vars->frames % 4], j * vars->img_width, i*vars->img_height);
+			j++;
+		}
+		i++;
+		j = 0;
+	}
+	printf("Animation terminee !\n");
+}
+//Fonction bonus
 int	handle_no_event(t_vars *vars)
 {
-	static unsigned long count = 0;
-
-	count++;
-	if(!(count % 20000))
+//	static clock_t begin = clock();
+	clock_t		current = clock();
+	if (((current - vars->begin) / (CLOCKS_PER_SEC / FPS)) > vars->frames)
+	{
+	//	vars->frames++;
 		ft_animate_map(vars);
+		printf("frame %d\n", vars->frames);	
+	}
+//	if(!(count % 20000))
+//		ft_animate_map(vars);
 	return (0);
 }
 
@@ -111,30 +147,6 @@ int	is_adjacent(t_vars *vars, int y, int x)
 	return (0);
 }
 /*Fonction bonus*/
-void	ft_animate_map(t_vars *vars)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	printf("Animation !\n");
-	vars->frames++;
-	while(vars->map.map[i])
-	{
-		while (vars->map.map[i][j])
-		{
-			if (vars->map.map[i][j] == '0')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[vars->frames % 4], j * vars->img_width, i*vars->img_height);
-			if (vars->map.map[i][j] == 'P')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[8 + vars->frames % 4], j * vars->img_width, i*vars->img_height);
-			j++;
-		}
-		i++;
-		j = 0;
-	}
-	printf("Animation terminee !\n");
-}
 
 void	ft_update_map(t_vars *vars)
 {
@@ -161,7 +173,7 @@ void	ft_update_map(t_vars *vars)
 			if (vars->map.map[i][j] == 'E' && adj)
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[12], j * vars->img_width, i * vars->img_height);
 			if (vars->map.map[i][j] == 'P')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[8], j * vars->img_width, i * vars->img_height);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[8 + vars->dir], j * vars->img_width, i * vars->img_height);
 			if (vars->map.map[i][j] == 'C' && adj)
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[4], j * vars->img_width, i * vars->img_height);
 			j++;
@@ -176,7 +188,7 @@ void	ft_mlx_close(t_vars *vars)
 	mlx_destroy_window(vars->mlx, vars->win);
 //	ft_update_map(vars);
 	printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
-	exit(EXIT_SUCCESS);
+//	exit(EXIT_SUCCESS);
 }
 
 void	get_coords(t_vars *vars, int *x, int *y)
@@ -223,7 +235,7 @@ int	is_accessible(char c, t_vars vars)
 	return (1);
 }
 
-void	ft_move(t_vars *vars, int keycode)
+int	ft_move(t_vars *vars, int keycode)
 {
 	int	x;
 	int	y;
@@ -232,8 +244,9 @@ void	ft_move(t_vars *vars, int keycode)
 	{
 		vars->collected += (vars->map.map[y - 1][x] == 'C');
 		vars->nb_moves++;
+		vars->dir = UP;
 		if (vars->map.map[y - 1][x] == 'E')
-			ft_mlx_close(vars);
+			return (0);
 		vars->map.map[y][x] = '0';	
 		vars->map.map[y - 1][x] = 'P';	
 		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
@@ -242,8 +255,9 @@ void	ft_move(t_vars *vars, int keycode)
 	{
 		vars->collected += (vars->map.map[y + 1][x] == 'C');
 		vars->nb_moves++;
+		vars->dir = DOWN;
 		if (vars->map.map[y + 1][x] == 'E')
-			ft_mlx_close(vars);
+			return (0);
 		vars->map.map[y][x] = '0';	
 		vars->map.map[y + 1][x] = 'P';	
 		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
@@ -252,8 +266,9 @@ void	ft_move(t_vars *vars, int keycode)
 	{
 		vars->collected += (vars->map.map[y][x + 1] == 'C');
 		vars->nb_moves++;
+		vars->dir = RIGHT;
 		if (vars->map.map[y][x + 1] == 'E')
-			ft_mlx_close(vars);
+			return (0);
 		vars->map.map[y][x] = '0';	
 		vars->map.map[y][x + 1] = 'P';	
 		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
@@ -262,12 +277,14 @@ void	ft_move(t_vars *vars, int keycode)
 	{
 		vars->collected += (vars->map.map[y][x - 1] == 'C');
 		vars->nb_moves++;
+		vars->dir = LEFT;
 		if (vars->map.map[y][x - 1] == 'E')
-			ft_mlx_close(vars);
+			return (0);
 		vars->map.map[y][x] = '0';
 		vars->map.map[y][x - 1] = 'P';
 		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
 	}
+	return (1);
 }
 
 int	key_hook(int keycode, t_vars *vars)
@@ -276,8 +293,10 @@ int	key_hook(int keycode, t_vars *vars)
 		ft_mlx_close(vars);
 	if (keycode == W_KEY || keycode == A_KEY || keycode == S_KEY || keycode == D_KEY || keycode == UP_KEY || keycode == DOWN_KEY || keycode == RIGHT_KEY || keycode == LEFT_KEY || keycode == Z_KEY || keycode == Q_KEY)
 	{
-		ft_move(vars, keycode);
-		ft_update_map(vars);
+		if (ft_move(vars, keycode))	
+			ft_update_map(vars);
+		else
+			ft_mlx_close(vars);
 	}
 	return(keycode);
 }
@@ -407,7 +426,7 @@ void	ft_display_map(t_vars *vars)
 	}
 	mlx_key_hook(vars->win, key_hook, vars);
 	mlx_loop_hook(vars->mlx, &handle_no_event, vars);
-	mlx_loop(vars->mlx);
+	//mlx_loop(vars->mlx);
 }
 
 void	**ft_init_images(t_vars *vars)
@@ -423,9 +442,9 @@ void	**ft_init_images(t_vars *vars)
 	images[3] = mlx_xpm_file_to_image(vars->mlx, "Sol4.xpm", &vars->img_width, &vars->img_height);
 
 	images[4] = mlx_xpm_file_to_image(vars->mlx, "Collectible1.xpm", &vars->img_width, &vars->img_height);
-	images[5] = mlx_xpm_file_to_image(vars->mlx, "Collectible1.xpm", &vars->img_width, &vars->img_height);
-	images[6] = mlx_xpm_file_to_image(vars->mlx, "Collectible1.xpm", &vars->img_width, &vars->img_height);
-	images[7] = mlx_xpm_file_to_image(vars->mlx, "Collectible1.xpm", &vars->img_width, &vars->img_height);
+	images[5] = mlx_xpm_file_to_image(vars->mlx, "Collectible2.xpm", &vars->img_width, &vars->img_height);
+	images[6] = mlx_xpm_file_to_image(vars->mlx, "Collectible3.xpm", &vars->img_width, &vars->img_height);
+	images[7] = mlx_xpm_file_to_image(vars->mlx, "Collectible4.xpm", &vars->img_width, &vars->img_height);
 	
 	images[8] = mlx_xpm_file_to_image(vars->mlx, "Personnage1.xpm", &vars->img_width, &vars->img_height);
 	images[9] = mlx_xpm_file_to_image(vars->mlx, "Personnage2.xpm", &vars->img_width, &vars->img_height);
@@ -441,7 +460,6 @@ void	**ft_init_images(t_vars *vars)
 
 void	ft_init_vars(t_vars *vars)
 {
-
 	vars->map.length = 0;
 	vars->map.height = 0;
 	vars->map.nb_exit = 0;
@@ -452,22 +470,31 @@ void	ft_init_vars(t_vars *vars)
 	vars->collected = 0;
 	vars->nb_moves = 0;
 	vars->frames = 0;
+	vars->dir = UP;
+	vars->begin = clock();
 }
 int main(int ac, char **av)
 {
 	t_vars	vars;
-
-	ft_init_vars(&vars);
-	if (ac != 2)
+	int	i = 1;
+	if (ac < 2)
 		return(printf("Mauvais nombre d'arguments\n"), -1);
-	vars.map.fd = open(av[1], O_RDONLY);
-	if (vars.map.fd <= 0)
-		return(printf("Erreur lors de l'ouverture du fichier"), -1);
-	vars.map.height = ft_count_lines(vars.map);
-	close(vars.map.fd);
-	vars.map.fd = open(av[1], O_RDONLY);
-	if (ft_init_map(&vars.map) == -1)
-		return(-1);
-	printf("Map valide !\n");
-	ft_display_map(&vars);
+	while (av[i])
+	{
+		ft_init_vars(&vars);
+		vars.map.fd = open(av[i], O_RDONLY);
+		if (vars.map.fd <= 0)
+			return(printf("Erreur lors de l'ouverture du fichier"), -1);
+		vars.map.height = ft_count_lines(vars.map);
+		close(vars.map.fd);
+		vars.map.fd = open(av[i], O_RDONLY);
+		if (ft_init_map(&vars.map) == -1)
+			return(-1);
+		printf("Map valide !\n");
+		close(vars.map.fd);
+		ft_display_map(&vars);
+		mlx_loop(vars.mlx);
+		i++;
+		//A faire : ft_delete_vars(&vars);
+	}
 }
