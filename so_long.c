@@ -60,7 +60,7 @@ typedef struct s_map
 	int	nb_exit;
 	int	nb_player;
 	int	nb_collec;
-	char	*map[21];
+	char	**map;
 }	t_map;
 
 typedef struct	s_vars
@@ -109,9 +109,9 @@ void	ft_animate_map(t_vars *vars)
 		while (vars->map.map[i][j])
 		{
 			if (vars->map.map[i][j] == '0')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[vars->frames % 4], j * vars->img_width, i*vars->img_height);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[(vars->frames % 4)], j * vars->img_width, i*vars->img_height);
 			if (vars->map.map[i][j] == 'C')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[4 + vars->frames % 4], j * vars->img_width, i*vars->img_height);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[4 + (vars->frames % 4)], j * vars->img_width, i*vars->img_height);
 			j++;
 		}
 		i++;
@@ -359,13 +359,18 @@ int	ft_init_map(t_map *map)
 	int	i;
 
 	i = 0;
-	while ((map->map[i] = get_next_line(map->fd)))
+	map->map = malloc(sizeof(char *) * (map->height + 1));
+	if (!(map->map))
+		return (-1);//Gerer
+	map->map[i] = get_next_line(map->fd);
+	while (map->map[i])
 	{
 		if (ft_check_line(map, i) != 0)
 			return(printf("Erreur : Mauvaise map.\n"), -1);
 		if (i > 0 && ft_strlen(map->map[i]) != ft_strlen(map->map[i - 1]))
 			return(printf("Erreur : Mauvaise map.\n"), -1);
 		i++;
+		map->map[i] = get_next_line(map->fd);
 	}
 	if ((i > 1) && (ft_check_first_line(map->map[0]) || ft_check_first_line(map->map[i - 1])))
 		return(printf("Erreur : Mauvaise map.\n"), -1);
@@ -386,6 +391,7 @@ int	ft_count_lines(t_map map)
 	i = 0;
 	while (str != NULL)
 	{
+		free(str);
 		str = get_next_line(map.fd);
 		i++;
 	}
@@ -397,11 +403,7 @@ void	ft_display_map(t_vars *vars)
 {
 	int	i;
 	int	j;
-	//void	*img;
-	//int	img_width;
-	//int	img_height;
-
-	//img = NULL;
+	
 	i = 0;
 	j = 0;
 	vars->mlx = mlx_init();
@@ -413,20 +415,14 @@ void	ft_display_map(t_vars *vars)
 		{
 			if (vars->map.map[i][j] == '0')
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[0], j * vars->img_width, i * vars->img_height);
-				//img = mlx_xpm_file_to_image(vars->mlx, "Sol1.xpm", &img_width, &img_height);
 			if (vars->map.map[i][j] == '1')
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[13], j * vars->img_width, i * vars->img_height);
-				//img = mlx_xpm_file_to_image(vars->mlx, "Obstacle1.xpm", &img_width, &img_height);
 			if (vars->map.map[i][j] == 'E')
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[12], j * vars->img_width, i * vars->img_height);
-			//	img = mlx_xpm_file_to_image(vars->mlx, "Exit1.xpm", &img_width, &img_height);
 			if (vars->map.map[i][j] == 'P')
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[8], j * vars->img_width, i * vars->img_height);
-			//	img = mlx_xpm_file_to_image(vars->mlx, "Personnage1.xpm", &img_width, &img_height);
 			if (vars->map.map[i][j] == 'C')
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->images[4], j * vars->img_width, i * vars->img_height);
-			//	img = mlx_xpm_file_to_image(vars->mlx, "Collectible1.xpm", &img_width, &img_height);
-			//mlx_put_image_to_window(vars->mlx, vars->win, img, j * img_width, i * img_height);//Pour le scrolling c'est ici
 			j++;
 		}
 		i++;
@@ -435,7 +431,6 @@ void	ft_display_map(t_vars *vars)
 	mlx_key_hook(vars->win, key_hook, vars);
 	mlx_loop_hook(vars->mlx, &handle_no_event, vars);
 	mlx_hook(vars->win, 17, 0, exit_hook, vars);
-	//mlx_loop(vars->mlx);
 }
 
 void	**ft_init_images(t_vars *vars)
@@ -482,6 +477,25 @@ void	ft_init_vars(t_vars *vars)
 	vars->dir = UP;
 	vars->begin = clock();
 }
+
+void	ft_delete_vars(t_vars *vars)
+{
+	int	i;
+
+	i = -1;
+	while (vars->map.map[++i])
+		free(vars->map.map[i]);
+	free(vars->map.map);
+	i = -1;
+	while (vars->images[++i])
+	{
+		mlx_destroy_image(vars->mlx, vars->images[i]);
+	}
+	free(vars->images);
+	mlx_destroy_display(vars->mlx);
+	free(vars->mlx);
+}
+
 int main(int ac, char **av)
 {
 	t_vars	vars;
@@ -504,6 +518,6 @@ int main(int ac, char **av)
 		ft_display_map(&vars);
 		mlx_loop(vars.mlx);
 		i++;
-		//A faire : ft_delete_vars(&vars);
+		ft_delete_vars(&vars);
 	}
 }
