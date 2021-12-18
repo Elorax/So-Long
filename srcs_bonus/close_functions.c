@@ -1,0 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   close_functions.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/18 14:10:20 by abiersoh          #+#    #+#             */
+/*   Updated: 2021/12/18 17:33:25 by abiersoh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../so_long_bonus.h"
+
+void	ft_mlx_close_escape(t_vars *vars)
+{
+	if (vars->win)
+	{
+		mlx_clear_window(vars->mlx, vars->win);
+		mlx_destroy_window(vars->mlx, vars->win);
+		vars->win = NULL;
+	}
+	printf("Collectibles : %d / %d\n", vars->collected, vars->map.nb_collec);
+	printf("Moves : %d\n", vars->nb_moves);
+}
+
+void	ft_mlx_close_croix_rouge_de_ses_morts(t_vars *vars)
+{
+	t_xvar	*ptr;
+
+	if (vars->win != NULL)
+	{
+		mlx_clear_window(vars->mlx, vars->win);
+		mlx_destroy_window(vars->mlx, vars->win);
+		vars->win = NULL;
+		ptr = (t_xvar *)(vars->mlx);
+		ptr->end_loop = 1;
+	}
+	printf("Collectibles : %d / %d\n", vars->collected, vars->map.nb_collec);
+	printf("Moves : %d\n", vars->nb_moves);
+}
