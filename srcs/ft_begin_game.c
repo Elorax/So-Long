@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:17:02 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 15:26:04 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:21:20 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_begin_game(t_vars *vars)
 {
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, 50 * vars->map.length,
-		50 * vars->map.height, "Thanks for all the fish !");
+			50 * vars->map.height, "Thanks for all the fish !");
 	vars->images = ft_init_images(vars);
 	ft_display_map(vars);
 	ft_setup_hooks(vars);

@@ -6,10 +6,9 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 22:51:35 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 16:13:10 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:27:43 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
@@ -38,7 +37,7 @@
 # define DOWN_KEY 65364
 # define FPS 5
 
-enum {UP, RIGHT, DOWN, LEFT};
+enum {up, right, down, left};
 
 /* Structures */
 
@@ -68,14 +67,14 @@ typedef struct s_vars
 	clock_t	begin;
 }	t_vars;
 
-
 void	ft_mlx_close_croix_rouge_de_ses_morts(t_vars *vars);
 void	ft_mlx_close(t_vars *vars);
 int		exit_hook(t_vars *vars);
 void	ft_animate_map(t_vars *vars);
 int		handle_no_event(t_vars *vars);
 void	**ft_init_images(t_vars *vars);
-int		is_adjacent(t_vars *vars, int y, int x);//Changer son implementation pour s'appuyer sur la direction du perso.
+int		is_adjacent(t_vars *vars, int y, int x);
+//Changer son implementation pour s'appuyer sur la direction du perso.
 void	ft_update_map(t_vars *vars);
 void	ft_mlx_close_escape(t_vars *vars);
 void	get_coords(t_vars *vars, int *x, int *y);
@@ -102,6 +101,6 @@ void	ft_delete_vars(t_vars *vars);
 int		is_name_valid(char *av);
 int		ft_play(t_vars *vars, char *av, int index);
 void	*read_image(t_vars *vars, char *path);
-int	ft_strlen(const char *str);
+int		ft_strlen(const char *str);
 char	*ft_strchr(char *str, char c);
 #endif

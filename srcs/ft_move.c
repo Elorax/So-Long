@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:27:18 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 16:11:54 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:23:38 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,5 @@ int	ft_move(t_vars *vars, int keycode)
 	int	y;
 
 	get_coords(vars, &x, &y);
-	return(manage_keycode(vars, keycode, x, y));
+	return (manage_keycode(vars, keycode, x, y));
 }

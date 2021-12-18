@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:07:28 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 16:07:31 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:26:08 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_play(t_vars *vars, char *av, int index)
 	if (!is_name_valid(av))
 		return (-1);
 	ft_init_vars(vars);
-	vars->map.fd= open(av, O_RDONLY);
+	vars->map.fd = open(av, O_RDONLY);
 	if (vars->map.fd <= 0)
 	{
 		printf("Erreur lors de l'ouverture du fichier de l'arg %d\n", index);
@@ -35,17 +35,19 @@ int	ft_play(t_vars *vars, char *av, int index)
 	return (0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_vars	vars;
-	int	i;
+	int		i;
 
 	i = 0;
 	if (ac < 2)
-		return(printf("Mauvais nombre d'arguments\n"), -1);
+		return (printf("Mauvais nombre d'arguments\n"), -1);
 	while (av[++i])
 	{
 		if (ft_play(&vars, av[i], i) == -1)
-		{}//Gerer les potentiels leaks
+		{
+		}
+		//Gerer les potentiels leaks
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:29:00 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 15:07:33 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:22:51 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*read_image(t_vars *vars, char *path)
 	void	*img;
 
 	img = mlx_xpm_file_to_image(vars->mlx, path,
-		&vars->img_width, &vars->img_height);
+			&vars->img_width, &vars->img_height);
 	return (img);
 }
 
@@ -62,7 +62,6 @@ void	**ft_init_images(t_vars *vars)
 }
 //Probably leaks si mauvaise map
 
-
 int	ft_init_map(t_map *map)
 {
 	int	i;
@@ -70,23 +69,23 @@ int	ft_init_map(t_map *map)
 	i = 0;
 	map->map = malloc(sizeof(char *) * (map->height + 1));
 	if (!(map->map))
-		return (-1);// Gerer ?
+		return (-1);
 	map->map[i] = get_next_line(map->fd);
 	while (map->map[i])
 	{
 		printf("%s", map->map[i]);
 		if (ft_check_line(map, i) != 0)
-			return(printf("Erreur : Mauvaise map.\n"), -1);
+			return (printf("Erreur : Mauvaise map.\n"), -1);
 		if (i > 0 && ft_strlen(map->map[i]) != ft_strlen(map->map[i - 1]))
-			return(printf("Erreur : Mauvaise map.\n"), -1);
+			return (printf("Erreur : Mauvaise map.\n"), -1);
 		i++;
 		map->map[i] = get_next_line(map->fd);
 	}
 	if ((i > 1) && (ft_check_first_line(map->map[0])
 			|| ft_check_first_line(map->map[i - 1])))
-	return(printf("Ereur : Mauvaise map.\n"), -1);
+		return (printf("Erreur : Mauvaise map.\n"), -1);
 	if (map->nb_player != 1 || map->nb_exit != 1 || map->nb_collec < 1)
-		return(printf("Erreur : Mauvaise map.\n"),-1);
+		return (printf("Erreur : Mauvaise map.\n"), -1);
 	map->height = i;
 	map->length = ft_strlen(map->map[0]) - 1;
 	return (0);

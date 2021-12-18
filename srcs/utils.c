@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 13:45:09 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 14:07:24 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:23:50 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_strchr(char *str, char c)
 
 void	ft_cswitch(char *a, char *b)
 {
-	char tmp;
+	char	tmp;
 
 	tmp = *a;
 	*a = *b;
