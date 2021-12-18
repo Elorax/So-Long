@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:08:02 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 17:34:09 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 19:25:55 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ void	ft_update_map(t_vars *vars)
 				ft_put_img(vars, 8 + vars->dir, i, j);
 			if (vars->map.map[i][j] == 'C' && adj)
 				ft_put_img(vars, 4 + vars->frames % 4, i, j);
-			/*if (vars->map.map[i][j] == 'R' && adj)
-				ft_put_img(vars, 14, i, j);
-			if (vars->map.map[i][j] == 'L' && adj)
-				ft_put_img(vars, 15, i, j);*/
+			if (vars->map.map[i][j] == 'X' && adj)
+				ft_put_img(vars, 16, i, j);
 		}
 		j = -1;
 	}

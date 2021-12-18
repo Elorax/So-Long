@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:01:03 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 17:32:27 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 19:35:30 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ void	get_coords(t_vars *vars, int *x, int *y)
 	*y = 0;
 }
 
-int	is_accessible(char c, t_vars vars)
+int	is_accessible(char c, char c2, t_vars vars)
 {
-	if (c == '1' || (c == 'E' && vars.collected != vars.map.nb_collec))
+	if (c == '1' || (c == 'E' && vars.collected != vars.map.nb_collec)
+		|| (c == 'X' && c2 != '0'))
 		return (0);
 	return (1);
 }
