@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:27:18 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 16:23:38 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:33:45 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_move_up(t_vars *vars, int x, int y)
 {
-	vars->dir = UP;
+	vars->dir = up;
 	if (is_accessible(vars->map.map[y - 1][x], *vars))
 	{
 		vars->collected += (vars->map.map[y - 1][x] == 'C');
@@ -31,7 +31,7 @@ int	ft_move_up(t_vars *vars, int x, int y)
 
 int	ft_move_down(t_vars *vars, int x, int y)
 {
-	vars->dir = DOWN;
+	vars->dir = down;
 	if (is_accessible(vars->map.map[y + 1][x], *vars))
 	{
 		vars->collected += (vars->map.map[y + 1][x] == 'C');
@@ -48,7 +48,7 @@ int	ft_move_down(t_vars *vars, int x, int y)
 
 int	ft_move_right(t_vars *vars, int x, int y)
 {
-	vars->dir = RIGHT;
+	vars->dir = right;
 	if (is_accessible(vars->map.map[y][x + 1], *vars))
 	{
 		vars->collected += (vars->map.map[y][x + 1] == 'C');
@@ -65,7 +65,7 @@ int	ft_move_right(t_vars *vars, int x, int y)
 
 int	ft_move_left(t_vars *vars, int x, int y)
 {
-	vars->dir = LEFT;
+	vars->dir = left;
 	if (is_accessible(vars->map.map[y][x - 1], *vars))
 	{
 		vars->collected += (vars->map.map[y][x - 1] == 'C');
