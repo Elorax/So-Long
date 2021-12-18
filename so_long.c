@@ -1,6 +1,6 @@
 #include "./minilibx/mlx.h"
 //#include "so_long.h"
-
+#include "minilibx/mlx_int.h"
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,8 +48,7 @@ static char	*ft_strdup(const char *src)
 		dest[i] = src[i];
 		i++;
 	}
-	return (dest);
-	
+	return (dest);	
 }
 
 typedef struct s_map
@@ -79,21 +78,20 @@ typedef struct	s_vars
 }	t_vars;
 
 
+void	ft_mlx_close_croix_rouge_de_ses_morts(t_vars *vars);
 void	ft_mlx_close(t_vars *vars);
 
-typedef struct s_img
+/*typedef struct s_img
 {
 	void	*img;
 	int	img_width;
 	int	img_height;
 	char	*path;
-}	t_img;
+}	t_img;*/
 
 int	exit_hook(t_vars *vars)
 {
-	printf("On quitte avec la croix rouge\n");
-	key_hook(65307, vars);
-	//ft_mlx_close(vars);
+	ft_mlx_close_croix_rouge_de_ses_morts(vars);
 	return (0);
 }
 
@@ -104,7 +102,6 @@ void	ft_animate_map(t_vars *vars)
 
 	i = 0;
 	j = 0;
-	printf("Animation !\n");
 	vars->frames++;
 	while(vars->map.map[i])
 	{
@@ -119,7 +116,6 @@ void	ft_animate_map(t_vars *vars)
 		i++;
 		j = 0;
 	}
-	printf("Animation terminee !\n");
 }
 //Fonction bonus
 int	handle_no_event(t_vars *vars)
@@ -130,7 +126,6 @@ int	handle_no_event(t_vars *vars)
 	{
 	//	vars->frames++;
 		ft_animate_map(vars);
-		printf("frame %d\n", vars->frames);	
 	}
 //	if(!(count % 20000))
 //		ft_animate_map(vars);
@@ -141,7 +136,6 @@ void	**ft_init_images(t_vars *vars);
 
 int	is_adjacent(t_vars *vars, int y, int x)
 {
-//	printf("On entre dans adjacent\n");
 	if (!x || !y || x == vars->map.length - 1 || y == vars->map.height - 1)
 		return (0);
 	if (vars->map.map[y - 1][x] == 'P')
@@ -193,12 +187,33 @@ void	ft_update_map(t_vars *vars)
 	}
 }
 
-void	ft_mlx_close(t_vars *vars)
+void	ft_mlx_close_escape(t_vars *vars)
 {
 	if (vars->win != NULL)
 	{
+		mlx_clear_window(vars->mlx, vars->win);
 		mlx_destroy_window(vars->mlx, vars->win);
-		vars->win = NULL;	
+		vars->win = NULL;
+		//exit(0);
+	}
+//	ft_update_map(vars);
+	printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
+//	exit(EXIT_SUCCESS);
+}
+
+void	ft_mlx_close_croix_rouge_de_ses_morts(t_vars *vars)
+{
+
+	t_xvar *ptr;
+
+	if (vars->win != NULL)
+	{
+		mlx_clear_window(vars->mlx, vars->win);
+		mlx_destroy_window(vars->mlx, vars->win);
+		vars->win = NULL;
+		ptr = (t_xvar *)(vars->mlx);
+		ptr->end_loop = 1;
+		//exit(0);
 	}
 //	ft_update_map(vars);
 	printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
@@ -229,7 +244,6 @@ void	get_coords(t_vars *vars, int *x, int *y)
 	}
 	*x = 0;
 	*y = 0;
-	printf("Perso non trouve\n");
 }
 
 void	ft_cswitch(char *a, char *b)
@@ -237,7 +251,6 @@ void	ft_cswitch(char *a, char *b)
 	char	tmp;
 
 	tmp = *a;
-	printf("switching %c & %c\n", *a, *b);
 	*a = *b;
 	*b = tmp;
 }
@@ -254,49 +267,62 @@ int	ft_move(t_vars *vars, int keycode)
 	int	x;
 	int	y;
 	get_coords(vars, &x, &y);
-	if ((keycode == W_KEY || keycode == UP_KEY || keycode == Z_KEY) && is_accessible(vars->map.map[y - 1][x], *vars))
+	if (keycode == W_KEY || keycode == UP_KEY || keycode == Z_KEY)
 	{
-		vars->collected += (vars->map.map[y - 1][x] == 'C');
-		vars->nb_moves++;
 		vars->dir = UP;
-		if (vars->map.map[y - 1][x] == 'E')
-			return (0);
-		vars->map.map[y][x] = '0';	
-		vars->map.map[y - 1][x] = 'P';	
-		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
+		if (is_accessible(vars->map.map[y - 1][x], *vars))
+		{
+			vars->collected += (vars->map.map[y - 1][x] == 'C');
+			vars->nb_moves++;
+			if (vars->map.map[y - 1][x] == 'E')
+				return (0);
+			vars->map.map[y][x] = '0';	
+			vars->map.map[y - 1][x] = 'P';	
+			printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
+		}
 	}
-	else if ((keycode == S_KEY || keycode == DOWN_KEY) && is_accessible(vars->map.map[y + 1][x], *vars))
+	else if ((keycode == S_KEY || keycode == DOWN_KEY))
 	{
-		vars->collected += (vars->map.map[y + 1][x] == 'C');
-		vars->nb_moves++;
 		vars->dir = DOWN;
-		if (vars->map.map[y + 1][x] == 'E')
-			return (0);
-		vars->map.map[y][x] = '0';	
-		vars->map.map[y + 1][x] = 'P';	
-		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
+		if (is_accessible(vars->map.map[y + 1][x], *vars))
+		{
+			vars->collected += (vars->map.map[y + 1][x] == 'C');
+			vars->nb_moves++;
+			if (vars->map.map[y + 1][x] == 'E')
+				return (0);
+			vars->map.map[y][x] = '0';	
+			vars->map.map[y + 1][x] = 'P';	
+			printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
+		}
 	}
-	else if ((keycode == D_KEY || keycode == RIGHT_KEY) && is_accessible(vars->map.map[y][x + 1], *vars))
+	else if ((keycode == D_KEY || keycode == RIGHT_KEY))
 	{
-		vars->collected += (vars->map.map[y][x + 1] == 'C');
-		vars->nb_moves++;
 		vars->dir = RIGHT;
-		if (vars->map.map[y][x + 1] == 'E')
-			return (0);
-		vars->map.map[y][x] = '0';	
-		vars->map.map[y][x + 1] = 'P';	
-		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
+		if (is_accessible(vars->map.map[y][x + 1], *vars))
+		{
+			vars->collected += (vars->map.map[y][x + 1] == 'C');
+			vars->nb_moves++;
+			if (vars->map.map[y][x + 1] == 'E')
+				return (0);
+			vars->map.map[y][x] = '0';	
+			vars->map.map[y][x + 1] = 'P';	
+			printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
+		}
 	}
-	else if ((keycode == A_KEY || keycode == Q_KEY || keycode == LEFT_KEY) && is_accessible(vars->map.map[y][x - 1], *vars))
+	else if ((keycode == A_KEY || keycode == Q_KEY || keycode == LEFT_KEY))
 	{
-		vars->collected += (vars->map.map[y][x - 1] == 'C');
-		vars->nb_moves++;
 		vars->dir = LEFT;
-		if (vars->map.map[y][x - 1] == 'E')
-			return (0);
-		vars->map.map[y][x] = '0';
-		vars->map.map[y][x - 1] = 'P';
-		printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
+		if (is_accessible(vars->map.map[y][x - 1], *vars))
+		{
+			vars->collected += (vars->map.map[y][x - 1] == 'C');
+			vars->nb_moves++;
+			vars->dir = LEFT;
+			if (vars->map.map[y][x - 1] == 'E')
+				return (0);
+			vars->map.map[y][x] = '0';
+			vars->map.map[y][x - 1] = 'P';
+			printf("collectibles : %d / %d\nMoves : %d\n", vars->collected, vars->map.nb_collec, vars->nb_moves);
+		}
 	}
 	return (1);
 }
@@ -304,13 +330,13 @@ int	ft_move(t_vars *vars, int keycode)
 int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 65307)
-		ft_mlx_close(vars);
+		ft_mlx_close_escape(vars);
 	if (keycode == W_KEY || keycode == A_KEY || keycode == S_KEY || keycode == D_KEY || keycode == UP_KEY || keycode == DOWN_KEY || keycode == RIGHT_KEY || keycode == LEFT_KEY || keycode == Z_KEY || keycode == Q_KEY)
 	{
 		if (ft_move(vars, keycode))	
 			ft_update_map(vars);
 		else
-			ft_mlx_close(vars);
+			ft_mlx_close_escape(vars);
 	}
 	return(keycode);
 }
@@ -435,8 +461,8 @@ void	ft_display_map(t_vars *vars)
 		j = 0;
 	}
 	mlx_loop_hook(vars->mlx, &handle_no_event, vars);
-	mlx_hook(vars->win, 17, 0, exit_hook, vars);
 	mlx_key_hook(vars->win, key_hook, vars);
+	mlx_hook(vars->win, 17, 0, exit_hook, vars);
 }
 
 void	**ft_init_images(t_vars *vars)
@@ -464,7 +490,6 @@ void	**ft_init_images(t_vars *vars)
 	images[12] = mlx_xpm_file_to_image(vars->mlx, "Exit1.xpm", &vars->img_width, &vars->img_height);
 	images[13] = mlx_xpm_file_to_image(vars->mlx, "Obstacle1.xpm", &vars->img_width, &vars->img_height);
 	images[14] = NULL;
-	printf("Coucou\n");
 	return(images);
 }
 
@@ -502,14 +527,27 @@ void	ft_delete_vars(t_vars *vars)
 	free(vars->mlx);
 }
 
+int	is_name_valid(char *av)
+{
+	int	i;
+
+	i = ft_strlen(av);
+	return(i > 3 && av[i - 1] == 'r' && av[i - 2] == 'e'
+		&& av[i - 3] == 'b' && av[i - 4] == '.');
+}
+
 int main(int ac, char **av)
 {
 	t_vars	vars;
-	int	i = 1;
+	int	i;
+
+	i = 0;
 	if (ac < 2)
 		return(printf("Mauvais nombre d'arguments\n"), -1);
-	while (av[i])
+	while (av[++i])
 	{
+		if (!is_name_valid(av[i]))
+			continue;
 		ft_init_vars(&vars);
 		vars.map.fd = open(av[i], O_RDONLY);
 		if (vars.map.fd <= 0)
@@ -523,9 +561,6 @@ int main(int ac, char **av)
 		close(vars.map.fd);
 		ft_display_map(&vars);
 		mlx_loop(vars.mlx);
-		printf("test ! \n");
-		i++;
 		ft_delete_vars(&vars);
 	}
-	printf("tout s'est bien passe\n");
 }
