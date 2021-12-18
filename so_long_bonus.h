@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:11:03 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 17:59:33 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 18:29:45 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ void	ft_begin_game(t_vars *vars);
 void	**ft_init_images(t_vars *vars);
 void	ft_init_vars(t_vars *vars);
 void	ft_delete_vars(t_vars *vars);
+int		ft_attack(t_vars *vars);
+int		ft_attack_up(t_vars *vars, int x, int y);
+int		ft_attack_down(t_vars *vars, int x, int y);
+int		ft_attack_right(t_vars *vars, int x, int y);
+int		ft_attack_left(t_vars *vars, int x, int y);
 int		is_name_valid(char *av);
 int		ft_play(t_vars *vars, char *av, int index);
 void	*read_image(t_vars *vars, char *path);

@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 13:38:34 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 17:32:49 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 18:21:28 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ int	key_hook(int keycode, t_vars *vars)
 			ft_update_map(vars);
 		else//fin du niveau ? Gerer autrement avec une troisieme fonction de close ?
 			ft_mlx_close_escape(vars);
+	}
+	if (keycode == 32)
+	{
+		ft_attack(vars);
 	}
 	return (keycode);
 }
