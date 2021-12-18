@@ -1,6 +1,6 @@
 #include "./minilibx/mlx.h"
-//#include "so_long.h"
-#include "minilibx/mlx_int.h"
+#include "so_long.h"
+/*#include "minilibx/mlx_int.h"
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,23 +34,6 @@ static int	ft_strlen(const char *str)
 	return (i);
 }
 
-static char	*ft_strdup(const char *src)
-{
-	int	i;
-	char	*dest;
-
-	dest = malloc(sizeof(char) * ft_strlen(src));
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	return (dest);	
-}
-
 typedef struct s_map
 {
 	int	fd;
@@ -80,15 +63,7 @@ typedef struct	s_vars
 
 void	ft_mlx_close_croix_rouge_de_ses_morts(t_vars *vars);
 void	ft_mlx_close(t_vars *vars);
-
-/*typedef struct s_img
-{
-	void	*img;
-	int	img_width;
-	int	img_height;
-	char	*path;
-}	t_img;*/
-
+*/
 int	exit_hook(t_vars *vars)
 {
 	ft_mlx_close_croix_rouge_de_ses_morts(vars);
@@ -132,7 +107,7 @@ int	handle_no_event(t_vars *vars)
 	return (0);
 }
 
-void	**ft_init_images(t_vars *vars);
+//void	**ft_init_images(t_vars *vars);
 
 int	is_adjacent(t_vars *vars, int y, int x)
 {
