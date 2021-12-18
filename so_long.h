@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 22:51:35 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 15:58:02 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:13:10 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		ft_move_up(t_vars *vars, int x, int y);
 int		ft_move_down(t_vars *vars, int x, int y);
 int		ft_move_right(t_vars *vars, int x, int y);
 int		ft_move_left(t_vars *vars, int x, int y);
-int		makage_keycode(t_vars *vars, int keycode, int x, int y);
+int		manage_keycode(t_vars *vars, int keycode, int x, int y);
 int		key_hook(int keycode, t_vars *vars);
 int		ft_check_line(t_map *map, int i);
 int		ft_check_first_line(char *str);

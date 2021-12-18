@@ -11,7 +11,8 @@ SRCS		= so_long.c get_next_line.c get_next_line_utils.c \
 				srcs/ft_delete_vars.c \
 				srcs/ft_update_map.c \
 				srcs/ft_begin_game.c \
-				srcs/ft_move.c
+				srcs/ft_move.c \
+				srcs/manage_keycode.c
 
 OBJS		= $(SRCS:.c=.o)
 
