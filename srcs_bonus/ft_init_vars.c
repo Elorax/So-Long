@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:29:00 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 19:18:18 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 21:36:51 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	**ft_init_images(t_vars *vars)
 {
 	void	**images;
 
-	images = malloc(sizeof(*images) * 18);
+	images = malloc(sizeof(*images) * 19);
 	if (!images)
 		return (NULL);
 	images[0] = read_image(vars, "Sol1.xpm");
@@ -60,7 +60,8 @@ void	**ft_init_images(t_vars *vars)
 	images[14] = read_image(vars, "Poulpyright.xpm");
 	images[15] = read_image(vars, "Poulpyleft.xpm");
 	images[16] = read_image(vars, "Moveable.xpm");
-	images[17] = NULL;
+	images[17] = read_image(vars, "Dead.xpm");
+	images[18] = NULL;
 	return (images);
 }
 //Probably leaks si mauvaise map

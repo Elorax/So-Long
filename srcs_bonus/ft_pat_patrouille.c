@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:04:16 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 17:55:24 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 22:33:36 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	ft_pat_patrouille(t_vars *vars)
 			if (vars->map.map[i][j] == 'R')
 			{
 				c = vars->map.map[i][j + 1];
-					printf("%d, %d : %c\n", j, i, vars->map.map[i][j]);
 				if (c == '0')
 				{
 					vars->map.map[i][j] = '0';
@@ -45,16 +44,13 @@ int	ft_pat_patrouille(t_vars *vars)
 				}
 				else
 				{
-					//printf("%c\n", vars->map[i][j]);
 					vars->map.map[i][j] = 'L';
-					//printf("%c\n", vars->map[i][j]);
 					ft_put_img(vars, 15, i, j);
 				}
 			}
 			else if (vars->map.map[i][j] == 'L')
 			{
 				c = vars->map.map[i][j - 1];
-					printf("%d, %d : %c\n", j, i, vars->map.map[i][j]);
 				if (c == '0')
 				{
 					vars->map.map[i][j] = '0';
@@ -69,9 +65,7 @@ int	ft_pat_patrouille(t_vars *vars)
 				}
 				else
 				{
-					//printf("%c\n", vars->map[i][j]);
 					vars->map.map[i][j] = 'R';
-					//printf("%c\n", vars->map[i][j]);
 					ft_put_img(vars, 14, i, j);
 				}
 			}

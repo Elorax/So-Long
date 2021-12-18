@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:11:03 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 19:24:13 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 22:13:08 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_update_map(t_vars *vars);
 void	ft_mlx_close_escape(t_vars *vars);
 void	get_coords(t_vars *vars, int *x, int *y);
 void	ft_cswitch(char *a, char *b);
-int		is_accessible(char c, char c2, t_vars vars);
+int		is_accessible(t_vars vars, int x, int y, int dir);
 int		ft_move(t_vars *vars, int keycode);
 int		ft_move_up(t_vars *vars, int x, int y);
 int		ft_move_down(t_vars *vars, int x, int y);

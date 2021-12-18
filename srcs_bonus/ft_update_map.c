@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:08:02 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 19:25:55 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 21:37:24 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	ft_update_map(t_vars *vars)
 				ft_put_img(vars, 4 + vars->frames % 4, i, j);
 			if (vars->map.map[i][j] == 'X' && adj)
 				ft_put_img(vars, 16, i, j);
+			if (vars->map.map[i][j] == '#' && adj)
+				ft_put_img(vars, 17, i, j);
 		}
 		j = -1;
 	}
