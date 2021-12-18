@@ -1,5 +1,17 @@
 
-SRCS		= so_long.c get_next_line.c get_next_line_utils.c
+SRCS		= so_long.c get_next_line.c get_next_line_utils.c \
+				srcs/hooks.c \
+				srcs/utils.c \
+				srcs/bonus_hooks.c \
+				srcs/bonus_animation.c \
+				srcs/adj_accessible.c \
+				srcs/close_functions.c \
+				srcs/check_map.c \
+				srcs/ft_init_vars.c \
+				srcs/ft_delete_vars.c \
+				srcs/ft_update_map.c \
+				srcs/ft_begin_game.c \
+				srcs/ft_move.c
 
 OBJS		= $(SRCS:.c=.o)
 

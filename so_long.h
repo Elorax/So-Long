@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 22:51:35 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 05:42:14 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/18 15:58:02 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define SO_LONG_H
 
 //# include "libft/libft.h"
+# include "minilibx/mlx.h"
 # include "minilibx/mlx_int.h"
 # include <limits.h>
 # include <stdio.h>
@@ -74,22 +75,33 @@ int		exit_hook(t_vars *vars);
 void	ft_animate_map(t_vars *vars);
 int		handle_no_event(t_vars *vars);
 void	**ft_init_images(t_vars *vars);
-int		is_adjacent(t_vars *vars, y, x);
+int		is_adjacent(t_vars *vars, int y, int x);//Changer son implementation pour s'appuyer sur la direction du perso.
 void	ft_update_map(t_vars *vars);
 void	ft_mlx_close_escape(t_vars *vars);
 void	get_coords(t_vars *vars, int *x, int *y);
 void	ft_cswitch(char *a, char *b);
 int		is_accessible(char c, t_vars vars);
 int		ft_move(t_vars *vars, int keycode);
-int		key_hook(int keycodem t_vars *vars);
+int		ft_move_up(t_vars *vars, int x, int y);
+int		ft_move_down(t_vars *vars, int x, int y);
+int		ft_move_right(t_vars *vars, int x, int y);
+int		ft_move_left(t_vars *vars, int x, int y);
+int		makage_keycode(t_vars *vars, int keycode, int x, int y);
+int		key_hook(int keycode, t_vars *vars);
 int		ft_check_line(t_map *map, int i);
 int		ft_check_first_line(char *str);
 int		ft_init_map(t_map *map);
 int		ft_count_lines(t_map map);
+void	ft_put_img(t_vars *vars, int index, int i, int j);
 void	ft_display_map(t_vars *vars);
+void	ft_setup_hooks(t_vars *vars);
+void	ft_begin_game(t_vars *vars);
 void	**ft_init_images(t_vars *vars);
 void	ft_init_vars(t_vars *vars);
 void	ft_delete_vars(t_vars *vars);
 int		is_name_valid(char *av);
-
+int		ft_play(t_vars *vars, char *av, int index);
+void	*read_image(t_vars *vars, char *path);
+int	ft_strlen(const char *str);
+char	*ft_strchr(char *str, char c);
 #endif
