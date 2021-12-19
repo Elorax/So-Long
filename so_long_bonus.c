@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:07:28 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 17:58:06 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 14:43:09 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	ft_play(t_vars *vars, char *av, int index)
 		return (-1);
 	printf("Argument %d : Map valide !\n", index);
 	close(vars->map.fd);
+	vars->map.path = ft_strdup(av);
 	ft_begin_game(vars);
 	ft_delete_vars(vars);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:29:00 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 21:36:51 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 18:41:12 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_init_vars(t_vars *vars)
 	vars->nb_moves = 0;
 	vars->frames = 0;
 	vars->dir = up;
+	vars->pause = 0;
 	vars->begin = clock();
 }
 
@@ -40,7 +41,7 @@ void	**ft_init_images(t_vars *vars)
 {
 	void	**images;
 
-	images = malloc(sizeof(*images) * 19);
+	images = malloc(sizeof(*images) * 21);
 	if (!images)
 		return (NULL);
 	images[0] = read_image(vars, "Sol1.xpm");
@@ -61,9 +62,28 @@ void	**ft_init_images(t_vars *vars)
 	images[15] = read_image(vars, "Poulpyleft.xpm");
 	images[16] = read_image(vars, "Moveable.xpm");
 	images[17] = read_image(vars, "Dead.xpm");
-	images[18] = NULL;
+	images[18] = read_image(vars, "Moveable_Placed.xpm");
+	images[19] = read_image(vars, "Brown_Cross.xpm");
+	images[20] = NULL;
 	return (images);
+i}
+
+//lit la map sans la verifier (On l'a deja verifiee avant)
+
+int	ft_read_map(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	map->map = malloc(sizeof(char *) * (map->height + 1));
+	if (!(map->map))
+		return (-1);
+	map->map[i] = get_next_line(map->fd);
+	while (map->map[i++])
+		map->map[i] = get_next_line(map->fd);
+	return (0);
 }
+
 //Probably leaks si mauvaise map
 
 int	ft_init_map(t_map *map)

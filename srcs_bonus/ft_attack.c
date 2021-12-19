@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:21:33 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 18:31:29 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 17:29:10 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	ft_attack(t_vars *vars)
 {
 	int	x;
 	int	y;
+
+	return (0);
 
 	get_coords(vars, &x, &y);
 	if (vars->dir == up)

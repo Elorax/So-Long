@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:11:03 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 22:13:08 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 15:34:39 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@
 # include <time.h>
 # include "get_next_line.h"
 
+# define R_KEY 114
 # define W_KEY 119
 # define A_KEY 97
 # define Z_KEY 122
+# define P_KEY 112
 # define Q_KEY 113
 # define S_KEY 115
 # define D_KEY 100
@@ -48,22 +50,24 @@ typedef struct s_map
 	int		nb_exit;
 	int		nb_player;
 	int		nb_collec;
-	char	**map;
+	char	*path;
+	char	**map;//free et reload
 }	t_map;
 
 typedef struct s_vars
 {
-	void	*mlx;
-	void	*win;
-	int		collected;
-	int		nb_moves;
+	void	*mlx;//clear only
+	void	*win;//clear only
+	int		collected;//0
+	int		nb_moves;//0
 	t_map	map;
 	int		img_width;
 	int		img_height;
 	void	**images;
-	int		frames;
-	int		dir;
-	clock_t	begin;
+	int		frames;//0
+	int		dir;//0
+	int		pause;
+	clock_t	begin;//clock()
 }	t_vars;
 
 void	ft_mlx_close_croix_rouge_de_ses_morts(t_vars *vars);
@@ -75,7 +79,8 @@ void	**ft_init_images(t_vars *vars);
 int		is_adjacent(t_vars *vars, int y, int x);
 //Changer son implementation pour s'appuyer sur la direction du perso.
 void	ft_update_map(t_vars *vars);
-void	ft_mlx_close_escape(t_vars *vars);
+void	ft_update_full_map(t_vars *vars);
+void	ft_mlx_close_end_level(t_vars *vars);
 void	get_coords(t_vars *vars, int *x, int *y);
 void	ft_cswitch(char *a, char *b);
 int		is_accessible(t_vars vars, int x, int y, int dir);
@@ -108,4 +113,7 @@ int		ft_play(t_vars *vars, char *av, int index);
 void	*read_image(t_vars *vars, char *path);
 int		ft_strlen(const char *str);
 char	*ft_strchr(char *str, char c);
+char	*ft_strdup(char *s);
+int		ft_read_map(t_map *map);
+void	ft_mlx_restart(t_vars *vars);
 #endif

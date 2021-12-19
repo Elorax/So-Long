@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 13:50:46 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 17:33:01 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 15:18:07 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ int	handle_no_event(t_vars *vars)
 
 	current = clock();
 	if (((current - vars->begin) / (CLOCKS_PER_SEC / FPS)) > vars->frames)
-		ft_animate_map(vars);
+	{
+		if (vars->pause)
+			vars->frames++;
+		else
+			ft_animate_map(vars);
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:30:49 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 17:33:44 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 14:43:36 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void	ft_delete_vars(t_vars *vars)
 	free(vars->images);
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
+	free(vars->map.path);
 }

@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:04:16 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 22:33:36 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 15:31:57 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_pat_patrouille(t_vars *vars)
 				}
 				else if (c == 'P')
 				{
-					ft_mlx_close_escape(vars);
+					ft_mlx_restart(vars);
 					return (-1);
 				}
 				else
@@ -60,7 +60,7 @@ int	ft_pat_patrouille(t_vars *vars)
 				}
 				else if (c == 'P')
 				{
-					ft_mlx_close_escape(vars);
+					ft_mlx_restart(vars);
 					return (-1);
 				}
 				else

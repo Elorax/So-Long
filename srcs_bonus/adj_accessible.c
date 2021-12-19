@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:01:03 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 22:43:39 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 17:21:25 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	is_accessible(t_vars vars, int x, int y, int dir)
 			return (1);
 		else if (y > 2 && vars.map.map[y - 1][x] == 'X' && vars.map.map[y - 2][x] == '0')
 			return (2);
-		else if (y > 2 && vars.map.map[y - 1][x] == 'X' && ft_strchr("RL", vars.map.map[y - 2][x]) && vars.map.map[y - 3][x] == '1')
+		else if (y > 2 && vars.map.map[y - 1][x] == 'X' && ft_strchr("RL", vars.map.map[y - 2][x]) && ft_strchr("X#1", vars.map.map[y - 3][x]))
 			return (3);
 	}
 	else if (dir == down)
@@ -76,7 +76,7 @@ int	is_accessible(t_vars vars, int x, int y, int dir)
 			return (1);
 		else if (y < vars.map.height - 2 && vars.map.map[y + 1][x] == 'X' && vars.map.map[y + 2][x] == '0')
 			return (2);
-		else if (y < vars.map.height - 3 && vars.map.map[y + 1][x] == 'X' && ft_strchr("RL", vars.map.map[y + 2][x]) && vars.map.map[y + 3][x] == '1')
+		else if (y < vars.map.height - 3 && vars.map.map[y + 1][x] == 'X' && ft_strchr("RL", vars.map.map[y + 2][x]) && ft_strchr("X#1", vars.map.map[y + 3][x]))
 			return (3);
 
 	}
@@ -89,7 +89,7 @@ int	is_accessible(t_vars vars, int x, int y, int dir)
 		//printf("x < vars.map.length - 1 : %d < %d\n", x, vars.map.length);
 		else if (x < vars.map.length - 2 && vars.map.map[y][x + 1] == 'X' && vars.map.map[y][x + 2] == '0')
 			return (2);
-		else if (x < vars.map.length - 3 && vars.map.map[y][x + 1] == 'X' && ft_strchr("RL", vars.map.map[y][x + 2]) && vars.map.map[y][x + 3] == '1')
+		else if (x < vars.map.length - 3 && vars.map.map[y][x + 1] == 'X' && ft_strchr("RL", vars.map.map[y][x + 2]) && ft_strchr("X#1", vars.map.map[y][x + 3]))
 			return (3);
 	}
 	else if (dir == left)
@@ -101,7 +101,7 @@ int	is_accessible(t_vars vars, int x, int y, int dir)
 		//printf("x < vars.map.length - 1 : %d < %d\n", x, vars.map.length);
 		else if (x > 2 && vars.map.map[y][x - 1] == 'X' && vars.map.map[y][x - 2] == '0')
 			return (2);
-		else if (x > 2 && vars.map.map[y][x - 1] == 'X' && ft_strchr("RL", vars.map.map[y][x - 2]) && vars.map.map[y][x - 3] == '1')
+		else if (x > 2 && vars.map.map[y][x - 1] == 'X' && ft_strchr("RL", vars.map.map[y][x - 2]) && ft_strchr("X#1", vars.map.map[y][x - 3]))
 			return (3);
 	}
 	return (0);

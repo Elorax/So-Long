@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:27:18 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 22:31:55 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 15:29:09 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int	ft_move_up(t_vars *vars, int x, int y)
 	vars->collected += (vars->map.map[y - 1][x] == 'C');
 	if (state == 1)
 	{
-		if (ft_strchr("ERL", vars->map.map[y - 1][x]))
+		if (ft_strchr("RL", vars->map.map[y - 1][x]))
 			return (0);
+		if (vars->map.map[y - 1][x] == 'E')
+			return (-1);
 	}
 	else if (state == 2)
 		vars->map.map[y - 2][x] = 'X';
@@ -50,8 +52,10 @@ int	ft_move_down(t_vars *vars, int x, int y)
 	vars->collected += (vars->map.map[y + 1][x] == 'C');
 	if (state == 1)
 	{
-		if (ft_strchr("ERL", vars->map.map[y + 1][x]))
+		if (ft_strchr("RL", vars->map.map[y + 1][x]))
 			return (0);
+		if (vars->map.map[y + 1][x] == 'E')
+			return (-1);
 	}
 	else if (state == 2)
 		vars->map.map[y + 2][x] = 'X';
@@ -76,8 +80,10 @@ int	ft_move_right(t_vars *vars, int x, int y)
 	vars->collected += (vars->map.map[y][x + 1] == 'C');
 	if (state == 1)
 	{
-		if (ft_strchr("ERL", vars->map.map[y][x + 1]))
+		if (ft_strchr("RL", vars->map.map[y][x + 1]))
 			return (0);
+		if (vars->map.map[y][x + 1] == 'E')
+			return (-1);
 	}
 	else if (state == 2)
 		vars->map.map[y][x + 2] = 'X';
@@ -102,8 +108,10 @@ int	ft_move_left(t_vars *vars, int x, int y)
 	vars->collected += (vars->map.map[y][x - 1] == 'C');
 	if (state == 1)
 	{
-		if (ft_strchr("ERL", vars->map.map[y][x - 1]))
+		if (ft_strchr("RL", vars->map.map[y][x - 1]))
 			return (0);
+		if (vars->map.map[y][x - 1] == 'E')
+			return (-1);
 	}
 	else if (state == 2)
 		vars->map.map[y][x - 2] = 'X';
