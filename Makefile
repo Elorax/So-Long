@@ -29,7 +29,8 @@ SRCS_BONUS	= so_long_bonus.c get_next_line.c get_next_line_utils.c \
 				srcs_bonus/ft_move.c \
 				srcs_bonus/manage_keycode.c \
 				srcs_bonus/ft_pat_patrouille.c \
-				srcs_bonus/ft_attack.c
+				srcs_bonus/ft_attack.c \
+				srcs_bonus/check_doors.c
 
 OBJS		= $(SRCS:.c=.o)
 

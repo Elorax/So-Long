@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:29:00 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/19 18:41:12 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 21:47:50 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	**ft_init_images(t_vars *vars)
 {
 	void	**images;
 
-	images = malloc(sizeof(*images) * 21);
+	images = malloc(sizeof(*images) * 27);
 	if (!images)
 		return (NULL);
 	images[0] = read_image(vars, "Sol1.xpm");
@@ -64,9 +64,16 @@ void	**ft_init_images(t_vars *vars)
 	images[17] = read_image(vars, "Dead.xpm");
 	images[18] = read_image(vars, "Moveable_Placed.xpm");
 	images[19] = read_image(vars, "Brown_Cross.xpm");
-	images[20] = NULL;
+	images[20] = read_image(vars, "Closed_Door.xpm");
+	images[21] = read_image(vars, "Open_Door.xpm");
+//	images[22] = read_image(vars, "Personnage_Cross.xpm");
+	images[22] = read_image(vars, "Personnage_Door1.xpm");
+	images[23] = read_image(vars, "Personnage_Door2.xpm");
+	images[24] = read_image(vars, "Personnage_Door3.xpm");
+	images[25] = read_image(vars, "Personnage_Door4.xpm");
+	images[26] = NULL;
 	return (images);
-i}
+}
 
 //lit la map sans la verifier (On l'a deja verifiee avant)
 

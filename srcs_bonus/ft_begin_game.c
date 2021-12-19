@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:17:02 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 19:49:56 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 20:10:48 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,24 @@ void	ft_display_map(t_vars *vars)
 		{
 			if (vars->map.map[i][j] == '0')
 				ft_put_img(vars, 0, i, j);
-			if (vars->map.map[i][j] == '1')
-				ft_put_img(vars, 13, i, j);
-			if (vars->map.map[i][j] == 'E')
-				ft_put_img(vars, 12, i, j);
-			if (vars->map.map[i][j] == 'P')
-				ft_put_img(vars, 8, i, j);
 			if (vars->map.map[i][j] == 'C')
 				ft_put_img(vars, 4, i, j);
+			if (vars->map.map[i][j] == 'P')
+				ft_put_img(vars, 8, i, j);
+			if (vars->map.map[i][j] == 'E')
+				ft_put_img(vars, 12, i, j);
+			if (vars->map.map[i][j] == '1')
+				ft_put_img(vars, 13, i, j);
 			if (vars->map.map[i][j] == 'R')
 				ft_put_img(vars, 14, i, j);
 			if (vars->map.map[i][j] == 'L')
 				ft_put_img(vars, 15, i, j);
 			if (vars->map.map[i][j] == 'X')
 				ft_put_img(vars, 16, i, j);
+			if (vars->map.map[i][j] == 'B')
+				ft_put_img(vars, 19, i, j);
+			if (vars->map.map[i][j] == 'D')
+				ft_put_img(vars, 20, i, j);
 		}
 		j = -1;
 	}

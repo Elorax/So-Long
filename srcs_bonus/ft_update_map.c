@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:08:02 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/19 15:11:47 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 21:19:28 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,32 @@ void	ft_update_full_map(t_vars *vars)
 		{
 			if (vars->map.map[i][j] == '0')
 				ft_put_img(vars, vars->frames % 4, i, j);
-			if (vars->map.map[i][j] == '1')
-				ft_put_img(vars, 13, i, j);
-			if (vars->map.map[i][j] == 'E')
-				ft_put_img(vars, 12, i, j);
-			if (vars->map.map[i][j] == 'P')
-				ft_put_img(vars, 8 + vars->dir, i, j);
 			if (vars->map.map[i][j] == 'C')
 				ft_put_img(vars, 4 + vars->frames % 4, i, j);
-			if (vars->map.map[i][j] == 'X')
-				ft_put_img(vars, 16, i, j);
-			if (vars->map.map[i][j] == '#')
-				ft_put_img(vars, 17, i, j);
+			if (ft_strchr("Pp", vars->map.map[i][j]))
+				ft_put_img(vars, 8 + vars->dir, i, j);
+			if (vars->map.map[i][j] == 'E')
+				ft_put_img(vars, 12, i, j);
+			if (vars->map.map[i][j] == '1')
+				ft_put_img(vars, 13, i, j);
 			if (vars->map.map[i][j] == 'R')
 				ft_put_img(vars, 14, i, j);
 			if (vars->map.map[i][j] == 'L')
 				ft_put_img(vars, 15, i, j);
+			if (vars->map.map[i][j] == 'X')
+				ft_put_img(vars, 16, i, j);
+			if (vars->map.map[i][j] == '#')
+				ft_put_img(vars, 17, i, j);
+			if (vars->map.map[i][j] == 'b')
+				ft_put_img(vars, 18, i, j);
+			if (vars->map.map[i][j] == 'B')
+				ft_put_img(vars, 19, i, j);
+			if (vars->map.map[i][j] == 'D')
+				ft_put_img(vars, 20, i, j);
+			if (vars->map.map[i][j] == 'd')
+				ft_put_img(vars, 21, i, j);
+			if (vars->map.map[i][j] == 'q')
+				ft_put_img(vars, 22 + vars->dir, i, j);
 		}
 		j = -1;
 	}
@@ -69,18 +79,28 @@ void	ft_update_map(t_vars *vars)
 			adj = is_adjacent(vars, i, j);
 			if (vars->map.map[i][j] == '0' && adj)
 				ft_put_img(vars, vars->frames % 4, i, j);
-			if (vars->map.map[i][j] == '1' && adj)
-				ft_put_img(vars, 13, i, j);
-			if (vars->map.map[i][j] == 'E' && adj)
-				ft_put_img(vars, 12, i, j);
-			if (vars->map.map[i][j] == 'P' && adj)
-				ft_put_img(vars, 8 + vars->dir, i, j);
 			if (vars->map.map[i][j] == 'C' && adj)
 				ft_put_img(vars, 4 + vars->frames % 4, i, j);
+			if (ft_strchr("Pp", vars->map.map[i][j]) && adj)
+				ft_put_img(vars, 8 + vars->dir, i, j);
+			if (vars->map.map[i][j] == 'E' && adj)
+				ft_put_img(vars, 12, i, j);
+			if (vars->map.map[i][j] == '1' && adj)
+				ft_put_img(vars, 13, i, j);
 			if (vars->map.map[i][j] == 'X' && adj)
 				ft_put_img(vars, 16, i, j);
 			if (vars->map.map[i][j] == '#' && adj)
 				ft_put_img(vars, 17, i, j);
+			if (vars->map.map[i][j] == 'b' && adj)
+				ft_put_img(vars, 18, i, j);
+			if (vars->map.map[i][j] == 'B' && adj)
+				ft_put_img(vars, 19, i, j);
+			if (vars->map.map[i][j] == 'D' && adj)
+				ft_put_img(vars, 20, i, j);
+			if (vars->map.map[i][j] == 'd' && adj)
+				ft_put_img(vars, 21, i, j);
+			if (vars->map.map[i][j] == 'q' && adj)
+				ft_put_img(vars, 22 + vars->dir, i, j);
 		}
 		j = -1;
 	}

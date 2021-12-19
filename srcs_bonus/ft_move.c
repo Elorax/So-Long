@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:27:18 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/19 15:29:09 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 22:01:05 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 int	ft_move_up(t_vars *vars, int x, int y)
 {
 	int	state;
+	int doors;
 
+	doors = 0;
 	vars->dir = up;
 	state = is_accessible(*vars, x, y, vars->dir);
 	vars->nb_moves += (state > 0);
@@ -29,13 +31,36 @@ int	ft_move_up(t_vars *vars, int x, int y)
 			return (-1);
 	}
 	else if (state == 2)
-		vars->map.map[y - 2][x] = 'X';
+	{
+		vars->map.map[y - 2][x] = 'X' + 10 * (vars->map.map[y - 2][x] == 'B');
+		check_doors(vars);
+	}
 	else if (state == 3)
 		vars->map.map[y - 2][x] = '#';
 	if (state > 0)
 	{
-		vars->map.map[y][x] = '0';
-		vars->map.map[y - 1][x] = 'P';
+		//avant, n'affichait que 0 et P
+		//faire une fonction pour.
+		if (vars->map.map[y][x] == 'P')
+			vars->map.map[y][x] = '0';
+		if (vars->map.map[y][x] == 'p')
+		{
+			vars->map.map[y][x] = 'B';
+			doors = 1;
+		}
+		if (vars->map.map[y][x] == 'q')
+			vars->map.map[y][x] = 'd';
+		if (ft_strchr("0XC", vars->map.map[y - 1][x]))
+			vars->map.map[y - 1][x] = 'P';
+		if (ft_strchr("Bb", vars->map.map[y - 1][x]))
+		{
+			vars->map.map[y - 1][x] = 'p';
+			doors = 1;
+		}
+		if (vars->map.map[y - 1][x] == 'd')
+			vars->map.map[y - 1][x] = 'q';
+		if (doors == 1)
+			check_doors(vars);
 	}
 	printf("Collectibles: %d / %d\n", vars->collected, vars->map.nb_collec);
 	printf("Moves: %d\n", vars->nb_moves);
@@ -45,7 +70,9 @@ int	ft_move_up(t_vars *vars, int x, int y)
 int	ft_move_down(t_vars *vars, int x, int y)
 {
 	int	state;
+	int	doors;
 
+	doors = 0;
 	vars->dir = down;
 	state = is_accessible(*vars, x, y, vars->dir);
 	vars->nb_moves += (state > 0);
@@ -58,13 +85,36 @@ int	ft_move_down(t_vars *vars, int x, int y)
 			return (-1);
 	}
 	else if (state == 2)
-		vars->map.map[y + 2][x] = 'X';
+	{
+		vars->map.map[y + 2][x] = 'X' + 10 * (vars->map.map[y + 2][x] == 'B');
+		check_doors(vars);
+	}
 	else if (state == 3)
 		vars->map.map[y + 2][x] = '#';
 	if (state > 0)
 	{
-		vars->map.map[y][x] = '0';
-		vars->map.map[y + 1][x] = 'P';
+		//vars->map.map[y][x] = '0';
+		//vars->map.map[y + 1][x] = 'P';
+		if (vars->map.map[y][x] == 'P')
+			vars->map.map[y][x] = '0';
+		if (vars->map.map[y][x] == 'p')
+		{
+			vars->map.map[y][x] = 'B';
+			doors = 1;
+		}
+		if (vars->map.map[y][x] == 'q')
+			vars->map.map[y][x] = 'd';
+		if (ft_strchr("0XC", vars->map.map[y + 1][x]))
+			vars->map.map[y + 1][x] = 'P';
+		if (ft_strchr("Bb", vars->map.map[y + 1][x]))
+		{
+			vars->map.map[y + 1][x] = 'p';
+			doors = 1;
+		}
+		if (vars->map.map[y + 1][x] == 'd')
+			vars->map.map[y + 1][x] = 'q';
+		if (doors == 1)
+			check_doors(vars);
 	}
 	printf("Collectibles: %d / %d\n", vars->collected, vars->map.nb_collec);
 	printf("Moves: %d\n", vars->nb_moves);
@@ -73,7 +123,9 @@ int	ft_move_down(t_vars *vars, int x, int y)
 int	ft_move_right(t_vars *vars, int x, int y)
 {
 	int	state;
+	int	doors;
 
+	doors = 0;
 	vars->dir = right;
 	state = is_accessible(*vars, x, y, vars->dir);
 	vars->nb_moves += (state > 0);
@@ -86,13 +138,36 @@ int	ft_move_right(t_vars *vars, int x, int y)
 			return (-1);
 	}
 	else if (state == 2)
-		vars->map.map[y][x + 2] = 'X';
+	{
+		vars->map.map[y][x + 2] = 'X' + 10 * (vars->map.map[y][x + 2] == 'B');
+		check_doors(vars);
+	}
 	else if (state == 3)
 		vars->map.map[y][x + 2] = '#';
 	if (state > 0)
 	{
-		vars->map.map[y][x] = '0';
-		vars->map.map[y][x + 1] = 'P';
+//		vars->map.map[y][x] = '0';
+//		vars->map.map[y][x + 1] = 'P';
+		if (vars->map.map[y][x] == 'P')
+			vars->map.map[y][x] = '0';
+		if (vars->map.map[y][x] == 'p')
+		{
+			vars->map.map[y][x] = 'B';
+			doors = 1;
+		}
+		if (vars->map.map[y][x] == 'q')
+			vars->map.map[y][x] = 'd';
+		if (ft_strchr("0XC", vars->map.map[y][x + 1]))
+			vars->map.map[y][x + 1] = 'P';
+		if (ft_strchr("Bb", vars->map.map[y][x + 1]))
+		{
+			vars->map.map[y][x + 1] = 'p';
+			doors = 1;
+		}
+		if (vars->map.map[y][x + 1] == 'd')
+			vars->map.map[y][x + 1] = 'q';
+		if (doors == 1)
+			check_doors(vars);
 	}
 	printf("Collectibles: %d / %d\n", vars->collected, vars->map.nb_collec);
 	printf("Moves: %d\n", vars->nb_moves);
@@ -101,7 +176,9 @@ int	ft_move_right(t_vars *vars, int x, int y)
 int	ft_move_left(t_vars *vars, int x, int y)
 {
 	int	state;
+	int	doors;
 
+	doors = 0;
 	vars->dir = left;
 	state = is_accessible(*vars, x, y, vars->dir);
 	vars->nb_moves += (state > 0);
@@ -114,13 +191,36 @@ int	ft_move_left(t_vars *vars, int x, int y)
 			return (-1);
 	}
 	else if (state == 2)
-		vars->map.map[y][x - 2] = 'X';
+	{
+		vars->map.map[y][x - 2] = 'X' + 10 * (vars->map.map[y][x - 2] == 'B');
+		check_doors(vars);
+	}
 	else if (state == 3)
 		vars->map.map[y][x - 2] = '#';
 	if (state > 0)
 	{
-		vars->map.map[y][x] = '0';
-		vars->map.map[y][x - 1] = 'P';
+	//	vars->map.map[y][x] = '0';
+	//	vars->map.map[y][x - 1] = 'P';
+		if (vars->map.map[y][x] == 'P')
+			vars->map.map[y][x] = '0';
+		if (vars->map.map[y][x] == 'p')
+		{
+			vars->map.map[y][x] = 'B';
+			doors = 1;
+		}
+		if (vars->map.map[y][x] == 'q')
+			vars->map.map[y][x] = 'd';
+		if (ft_strchr("0XC", vars->map.map[y][x - 1]))
+			vars->map.map[y][x - 1] = 'P';
+		if (ft_strchr("Bb", vars->map.map[y][x - 1]))
+		{
+			vars->map.map[y][x - 1] = 'p';
+			doors = 1;
+		}
+		if (vars->map.map[y][x - 1] == 'd')
+			vars->map.map[y][x - 1] = 'q';
+		if (doors == 1)
+			check_doors(vars);
 	}
 	printf("Collectibles: %d / %d\n", vars->collected, vars->map.nb_collec);
 	printf("Moves: %d\n", vars->nb_moves);

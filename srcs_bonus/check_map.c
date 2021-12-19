@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:18:19 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 19:17:25 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 22:03:55 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_check_line(t_map *map, int i)
 		return (-1);
 	while (*str)
 	{
-		if (!ft_strchr("01PECRLX\n", *str))
+		if (!ft_strchr("01PBDECRLX\n", *str))
 			return (-1);
 		else
 		{
