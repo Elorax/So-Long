@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:08:02 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/19 21:19:28 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 22:39:24 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	ft_update_full_map(t_vars *vars)
 {
 	int	i;
 	int	j;
+	int poissons;
 
+	poissons = 0;
 	i = -1;
 	j = -1;
 	while (vars->map.map[++i])
@@ -32,7 +34,7 @@ void	ft_update_full_map(t_vars *vars)
 			if (vars->map.map[i][j] == '0')
 				ft_put_img(vars, vars->frames % 4, i, j);
 			if (vars->map.map[i][j] == 'C')
-				ft_put_img(vars, 4 + vars->frames % 4, i, j);
+				ft_put_img(vars, 4 + (vars->frames + ++poissons) % 4, i, j);
 			if (ft_strchr("Pp", vars->map.map[i][j]))
 				ft_put_img(vars, 8 + vars->dir, i, j);
 			if (vars->map.map[i][j] == 'E')

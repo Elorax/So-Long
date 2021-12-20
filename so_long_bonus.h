@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:11:03 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/19 19:42:41 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/20 02:54:00 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define LEFT_KEY 65361
 # define RIGHT_KEY 65363
 # define DOWN_KEY 65364
-# define FPS 5
+# define FPS 3
 
 enum {up, right, down, left};
 
@@ -58,6 +58,8 @@ typedef struct s_vars
 {
 	void	*mlx;//clear only
 	void	*win;//clear only
+	char	*objectif;
+	char	*mobs_to_kill;
 	int		collected;//0
 	int		nb_moves;//0
 	t_map	map;

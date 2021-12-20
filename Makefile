@@ -1,4 +1,3 @@
-
 SRCS		= so_long.c get_next_line.c get_next_line_utils.c \
 				srcs/hooks.c \
 				srcs/utils.c \
@@ -70,8 +69,10 @@ fclean:		clean
 
 re:		fclean all
 
-bonus:	$(OBJS_BONUS)
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS):	$(OBJS_BONUS)
 		make -C $(PATH_MLX) all
 		$(CC) $(CFLAGS) $(OBJS_BONUS) minilibx/libmlx_Linux.a $(LINUX) -o $(NAME_BONUS)
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re bonus

@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:27:18 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/19 22:01:05 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 23:47:18 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_move_up(t_vars *vars, int x, int y)
 			doors = 1;
 		}
 		if (vars->map.map[y][x] == 'q')
-			vars->map.map[y][x] = 'd';
+			vars->map.map[y][x] = (doors++, 'd');
 		if (ft_strchr("0XC", vars->map.map[y - 1][x]))
 			vars->map.map[y - 1][x] = 'P';
 		if (ft_strchr("Bb", vars->map.map[y - 1][x]))
@@ -58,8 +58,8 @@ int	ft_move_up(t_vars *vars, int x, int y)
 			doors = 1;
 		}
 		if (vars->map.map[y - 1][x] == 'd')
-			vars->map.map[y - 1][x] = 'q';
-		if (doors == 1)
+			vars->map.map[y - 1][x] = (doors++, 'q');
+		if (doors)
 			check_doors(vars);
 	}
 	printf("Collectibles: %d / %d\n", vars->collected, vars->map.nb_collec);
@@ -103,7 +103,7 @@ int	ft_move_down(t_vars *vars, int x, int y)
 			doors = 1;
 		}
 		if (vars->map.map[y][x] == 'q')
-			vars->map.map[y][x] = 'd';
+			vars->map.map[y][x] = (doors++, 'd');
 		if (ft_strchr("0XC", vars->map.map[y + 1][x]))
 			vars->map.map[y + 1][x] = 'P';
 		if (ft_strchr("Bb", vars->map.map[y + 1][x]))
@@ -112,8 +112,8 @@ int	ft_move_down(t_vars *vars, int x, int y)
 			doors = 1;
 		}
 		if (vars->map.map[y + 1][x] == 'd')
-			vars->map.map[y + 1][x] = 'q';
-		if (doors == 1)
+			vars->map.map[y + 1][x] = (doors++, 'q');
+		if (doors)
 			check_doors(vars);
 	}
 	printf("Collectibles: %d / %d\n", vars->collected, vars->map.nb_collec);
@@ -156,7 +156,7 @@ int	ft_move_right(t_vars *vars, int x, int y)
 			doors = 1;
 		}
 		if (vars->map.map[y][x] == 'q')
-			vars->map.map[y][x] = 'd';
+			vars->map.map[y][x] = (doors++, 'd');
 		if (ft_strchr("0XC", vars->map.map[y][x + 1]))
 			vars->map.map[y][x + 1] = 'P';
 		if (ft_strchr("Bb", vars->map.map[y][x + 1]))
@@ -165,8 +165,8 @@ int	ft_move_right(t_vars *vars, int x, int y)
 			doors = 1;
 		}
 		if (vars->map.map[y][x + 1] == 'd')
-			vars->map.map[y][x + 1] = 'q';
-		if (doors == 1)
+			vars->map.map[y][x + 1] = (doors++, 'q');
+		if (doors)
 			check_doors(vars);
 	}
 	printf("Collectibles: %d / %d\n", vars->collected, vars->map.nb_collec);
@@ -209,7 +209,7 @@ int	ft_move_left(t_vars *vars, int x, int y)
 			doors = 1;
 		}
 		if (vars->map.map[y][x] == 'q')
-			vars->map.map[y][x] = 'd';
+			vars->map.map[y][x] = (doors++, 'd');
 		if (ft_strchr("0XC", vars->map.map[y][x - 1]))
 			vars->map.map[y][x - 1] = 'P';
 		if (ft_strchr("Bb", vars->map.map[y][x - 1]))
@@ -218,8 +218,8 @@ int	ft_move_left(t_vars *vars, int x, int y)
 			doors = 1;
 		}
 		if (vars->map.map[y][x - 1] == 'd')
-			vars->map.map[y][x - 1] = 'q';
-		if (doors == 1)
+			vars->map.map[y][x - 1] = (doors++, 'q');
+		if (doors)
 			check_doors(vars);
 	}
 	printf("Collectibles: %d / %d\n", vars->collected, vars->map.nb_collec);

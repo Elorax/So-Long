@@ -48,7 +48,7 @@ void	check_doors(t_vars *vars)
 	{
 		while(vars->map.map[i][++j])
 		{
-			if (ft_strchr("pB", vars->map.map[i][j]))
+			if (ft_strchr("B", vars->map.map[i][j]))
 				tmp = 1;
 		}
 		j = 0;

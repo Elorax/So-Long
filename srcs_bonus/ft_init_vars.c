@@ -6,20 +6,38 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:29:00 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/19 21:47:50 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/20 02:53:41 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
 
+char	*ft_get_settings(char *src)
+{
+	char	*dest;
+
+	dest = ft_strndup(vars->path, ft_strlen(src) - 4);
+	dest = ft_strjoin(dest, ".set");
+	return (dest);
+}
+
 void	ft_init_vars(t_vars *vars)
 {
+	int	fd;
+
 	vars->map.length = 0;
 	vars->map.height = 0;
 	vars->map.nb_exit = 0;
 	vars->map.nb_collec = 0;
 	vars->map.nb_player = 0;
 	vars->map.fd = 0;
+	vars->settings = ft_get_settings(vars->path);
+	fd = open(vars->settings, O_RDONLY);
+	if (fd > 0)
+	{
+		vars->objectif = get_next_line(fd);
+		vars->mobs_to_kill = get_next_line(fd);
+	}
 	vars->collected = 0;
 	vars->nb_moves = 0;
 	vars->frames = 0;

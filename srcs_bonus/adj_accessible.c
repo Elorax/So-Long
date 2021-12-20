@@ -6,11 +6,12 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:01:03 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/19 21:47:33 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/19 23:39:45 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
+#define ACCESSIBLE_CASE "0CRLBd"
 
 int	is_adjacent(t_vars *vars, int y, int x)
 {
@@ -59,7 +60,7 @@ int	is_accessible(t_vars vars, int x, int y, int dir)
 {
 	if (dir == up)
 	{
-		if (ft_strchr("0CRLBd", vars.map.map[y - 1][x]))
+		if (ft_strchr(ACCESSIBLE_CASE, vars.map.map[y - 1][x]))
 			return (1);
 		if (vars.map.map[y - 1][x] == 'E' && vars.collected == vars.map.nb_collec)
 			return (1);
@@ -70,7 +71,7 @@ int	is_accessible(t_vars vars, int x, int y, int dir)
 	}
 	else if (dir == down)
 	{
-		if (ft_strchr("0CRLBd", vars.map.map[y + 1][x]))
+		if (ft_strchr(ACCESSIBLE_CASE, vars.map.map[y + 1][x]))
 			return (1);
 		if (vars.map.map[y + 1][x] == 'E' && vars.collected == vars.map.nb_collec)
 			return (1);
@@ -82,7 +83,7 @@ int	is_accessible(t_vars vars, int x, int y, int dir)
 	}
 	else if (dir == right)
 	{
-		if (ft_strchr("0CRLBd", vars.map.map[y][x + 1]))
+		if (ft_strchr(ACCESSIBLE_CASE, vars.map.map[y][x + 1]))
 			return (1);
 		if (vars.map.map[y][x + 1] == 'E' && vars.collected == vars.map.nb_collec)
 			return (1);
@@ -93,7 +94,7 @@ int	is_accessible(t_vars vars, int x, int y, int dir)
 	}
 	else if (dir == left)
 	{
-		if (ft_strchr("0CRLBd", vars.map.map[y][x - 1]))
+		if (ft_strchr(ACCESSIBLE_CASE, vars.map.map[y][x - 1]))
 			return (1);
 		if (vars.map.map[y][x - 1] == 'E' && vars.collected == vars.map.nb_collec)
 			return (1);
