@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:27:18 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/19 23:47:18 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/20 07:17:03 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int	ft_move_up(t_vars *vars, int x, int y)
 		check_doors(vars);
 	}
 	else if (state == 3)
+	{
 		vars->map.map[y - 2][x] = '#';
+		vars->killed++;
+	}
 	if (state > 0)
 	{
 		//avant, n'affichait que 0 et P
@@ -64,6 +67,7 @@ int	ft_move_up(t_vars *vars, int x, int y)
 	}
 	printf("Collectibles: %d / %d\n", vars->collected, vars->map.nb_collec);
 	printf("Moves: %d\n", vars->nb_moves);
+	printf("%d poulpy de noel tues sur %d\n", vars->killed, vars->to_kill);
 	return(1);
 }
 
@@ -90,7 +94,10 @@ int	ft_move_down(t_vars *vars, int x, int y)
 		check_doors(vars);
 	}
 	else if (state == 3)
+	{
 		vars->map.map[y + 2][x] = '#';
+		vars->killed++;
+	}
 	if (state > 0)
 	{
 		//vars->map.map[y][x] = '0';
@@ -143,7 +150,10 @@ int	ft_move_right(t_vars *vars, int x, int y)
 		check_doors(vars);
 	}
 	else if (state == 3)
+	{
 		vars->map.map[y][x + 2] = '#';
+		vars->killed++;
+	}
 	if (state > 0)
 	{
 //		vars->map.map[y][x] = '0';
@@ -196,7 +206,10 @@ int	ft_move_left(t_vars *vars, int x, int y)
 		check_doors(vars);
 	}
 	else if (state == 3)
+	{
 		vars->map.map[y][x - 2] = '#';
+		vars->killed++;
+	}
 	if (state > 0)
 	{
 	//	vars->map.map[y][x] = '0';

@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:11:03 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/20 02:54:00 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/20 07:08:03 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct s_vars
 	void	*win;//clear only
 	char	*objectif;
 	char	*mobs_to_kill;
+	int		killed;
+	int		to_kill;
 	int		collected;//0
 	int		nb_moves;//0
 	t_map	map;

@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:29:00 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/20 02:53:41 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/20 07:16:08 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_init_vars(t_vars *vars)
 	{
 		vars->objectif = get_next_line(fd);
 		vars->mobs_to_kill = get_next_line(fd);
+		vars->to_kill = ft_atoi(mobs_to_kill);
 	}
 	vars->collected = 0;
 	vars->nb_moves = 0;
