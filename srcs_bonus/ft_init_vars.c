@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:29:00 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/20 07:16:08 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 00:38:38 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ char	*ft_get_settings(char *src)
 {
 	char	*dest;
 
-	dest = ft_strndup(vars->path, ft_strlen(src) - 4);
-	dest = ft_strjoin(dest, ".set");
+	dest = ft_so_long_strndup(src, ft_strlen(src) - 4);
+	dest = ft_strjoin2(dest, ".set", 1, 0);
 	return (dest);
 }
 
@@ -31,14 +31,17 @@ void	ft_init_vars(t_vars *vars)
 	vars->map.nb_collec = 0;
 	vars->map.nb_player = 0;
 	vars->map.fd = 0;
-	vars->settings = ft_get_settings(vars->path);
+	vars->settings = ft_get_settings(vars->map.path);
+
 	fd = open(vars->settings, O_RDONLY);
 	if (fd > 0)
 	{
 		vars->objectif = get_next_line(fd);
 		vars->mobs_to_kill = get_next_line(fd);
-		vars->to_kill = ft_atoi(mobs_to_kill);
+		vars->to_kill = ft_atoi(vars->mobs_to_kill);
 	}
+	vars->killed = 0;
+	close(fd);
 	vars->collected = 0;
 	vars->nb_moves = 0;
 	vars->frames = 0;
@@ -60,9 +63,11 @@ void	**ft_init_images(t_vars *vars)
 {
 	void	**images;
 
-	images = malloc(sizeof(*images) * 27);
+	images = malloc(sizeof(*images) * 30);
 	if (!images)
 		return (NULL);
+	images[27] = read_image(vars, "MiniPoulpy.xpm");
+	images[28] = read_image(vars, "MiniFish.xpm");
 	images[0] = read_image(vars, "Sol1.xpm");
 	images[1] = read_image(vars, "Sol2.xpm");
 	images[2] = read_image(vars, "Sol3.xpm");
@@ -90,7 +95,8 @@ void	**ft_init_images(t_vars *vars)
 	images[23] = read_image(vars, "Personnage_Door2.xpm");
 	images[24] = read_image(vars, "Personnage_Door3.xpm");
 	images[25] = read_image(vars, "Personnage_Door4.xpm");
-	images[26] = NULL;
+	images[26] = read_image(vars, "Void.xpm");
+	images[29] = NULL;
 	return (images);
 }
 
@@ -123,7 +129,6 @@ int	ft_init_map(t_map *map)
 	map->map[i] = get_next_line(map->fd);
 	while (map->map[i])
 	{
-		printf("%s", map->map[i]);
 		if (ft_check_line(map, i) != 0)
 			return (printf("Erreur : Mauvaise map.\n"), -1);
 		if (i > 0 && ft_strlen(map->map[i]) != ft_strlen(map->map[i - 1]))

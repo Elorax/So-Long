@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:11:03 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/20 07:08:03 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 00:02:54 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define LEFT_KEY 65361
 # define RIGHT_KEY 65363
 # define DOWN_KEY 65364
-# define FPS 3
+# define FPS 5
 
 enum {up, right, down, left};
 
@@ -58,9 +58,11 @@ typedef struct s_vars
 {
 	void	*mlx;//clear only
 	void	*win;//clear only
+	char	*settings;
 	char	*objectif;
 	char	*mobs_to_kill;
 	int		killed;
+	int		level;
 	int		to_kill;
 	int		collected;//0
 	int		nb_moves;//0
@@ -76,6 +78,7 @@ typedef struct s_vars
 
 void	ft_mlx_close_croix_rouge_de_ses_morts(t_vars *vars);
 void	ft_mlx_close(t_vars *vars);
+void	ft_mlx_close_game(t_vars *vars);
 int		exit_hook(t_vars *vars);
 void	ft_animate_map(t_vars *vars);
 int		handle_no_event(t_vars *vars);
@@ -122,6 +125,11 @@ void	*read_image(t_vars *vars, char *path);
 int		ft_strlen(const char *str);
 char	*ft_strchr(char *str, char c);
 char	*ft_strdup(char *s);
+char	*ft_so_long_strndup(char *s, int n);
 int		ft_read_map(t_map *map);
 void	ft_mlx_restart(t_vars *vars);
+int		ft_atoi(char *s);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin2(char *s1, char *s2, int a, int b);
+char	*ft_itoa(int n);
 #endif

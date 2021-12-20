@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 13:38:34 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/19 15:34:25 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/20 17:26:49 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	exit_hook(t_vars *vars)
 int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == ESCAPE_KEY)
-		ft_mlx_close_end_level(vars);
+		ft_mlx_close_game(vars);
 	else if (keycode == P_KEY)
 		vars->pause = !vars->pause;
 	if (vars->pause)
