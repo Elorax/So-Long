@@ -6,13 +6,13 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:27:18 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 02:47:07 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 03:31:28 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
 
-int	ft_check_right(t_vars *vars,int x, int y)
+int	ft_check_right(t_vars *vars, int x, int y)
 {
 	int	state;
 

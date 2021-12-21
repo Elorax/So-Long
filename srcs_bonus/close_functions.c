@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:10:20 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 02:41:05 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 03:29:38 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_mlx_close_end_level(t_vars *vars)
 
 void	ft_mlx_close_game(t_vars *vars)
 {
-	if(vars->win != NULL)
+	if (vars->win != NULL)
 	{
 		mlx_clear_window(vars->mlx, vars->win);
 		mlx_destroy_window(vars->mlx, vars->win);
@@ -49,8 +49,6 @@ void	ft_mlx_close_croix_rouge_de_ses_morts(t_vars *vars)
 		ptr = (t_xvar *)(vars->mlx);
 		ptr->end_loop = 1;
 	}
-//	printf("Collectibles : %d / %d\n", vars->collected, vars->map.nb_collec);
-//	printf("Moves : %d\n", vars->nb_moves);
 	ft_delete_vars(vars);
 	exit(EXIT_SUCCESS);
 }

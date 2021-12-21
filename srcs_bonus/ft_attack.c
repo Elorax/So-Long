@@ -6,12 +6,11 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:21:33 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/19 17:29:10 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 03:29:57 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
-
 
 int	ft_attack_up(t_vars *vars, int x, int y)
 {
@@ -34,8 +33,6 @@ int	ft_attack_right(t_vars *vars, int x, int y)
 	}
 	return (0);
 }
-
-
 
 int	ft_attack_left(t_vars *vars, int x, int y)
 {
@@ -65,7 +62,6 @@ int	ft_attack(t_vars *vars)
 	int	y;
 
 	return (0);
-
 	get_coords(vars, &x, &y);
 	if (vars->dir == up)
 		return (ft_attack_up(vars, x, y));

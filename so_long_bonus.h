@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:11:03 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 02:44:20 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 03:40:12 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <time.h>
-# include "get_next_line.h"
+# include "gnl/get_next_line.h"
 
 # define ACCESSIBLE_CASE "0CRLBd"
 # define R_KEY 114
@@ -86,7 +86,6 @@ int		handle_no_event(t_vars *vars);
 void	**ft_init_images(t_vars *vars);
 void	ft_init_images_p2(void **images, t_vars *vars);
 int		is_adjacent(t_vars *vars, int y, int x);
-//Changer son implementation pour s'appuyer sur la direction du perso.
 void	ft_update_map(t_vars *vars);
 void	ft_update_full_map(t_vars *vars);
 void	ft_mlx_close_end_level(t_vars *vars);
@@ -113,6 +112,8 @@ int		ft_check_first_line(char *str);
 int		ft_init_map(t_map *map);
 int		ft_count_lines(t_map map);
 int		ft_pat_patrouille(t_vars *vars);
+int		ft_pat_right(t_vars *vars, int i, int *j);
+int		ft_pat_left(t_vars *vars, int i, int j);
 void	ft_put_img(t_vars *vars, int index, int i, int j);
 void	ft_display_map(t_vars *vars);
 void	ft_setup_hooks(t_vars *vars);
@@ -123,7 +124,6 @@ void	ft_delete_vars(t_vars *vars);
 void	check_doors(t_vars *vars);
 void	open_doors(t_vars *vars);
 void	close_doors(t_vars *vars);
-
 int		ft_attack(t_vars *vars);
 int		ft_attack_up(t_vars *vars, int x, int y);
 int		ft_attack_down(t_vars *vars, int x, int y);

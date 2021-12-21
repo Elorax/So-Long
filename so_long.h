@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 22:51:35 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/18 16:27:43 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 03:04:32 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <time.h>
-# include "get_next_line.h"
+# include "gnl/get_next_line.h"
 
 # define W_KEY 119
 # define A_KEY 97

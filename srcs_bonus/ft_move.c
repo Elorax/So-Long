@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 01:52:41 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 02:09:57 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 03:31:09 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,15 @@ void	ft_print_data_ennemy(t_vars *vars)
 	{
 		str = ft_itoa(vars->to_kill - vars->killed);
 		if (*str == '-')
-			mlx_string_put(vars->mlx, vars->win, 90, 50 * vars->map.height + 45,
-				0x00FFFFFF, "0");
+			mlx_string_put(vars->mlx, vars->win, 103,
+				50 * vars->map.height + 45, 0x00FFFFFF, "0");
 		else
-			mlx_string_put(vars->mlx, vars->win, 90, 50 * vars->map.height + 45,
-				0x00FFFFFF, str);
+			mlx_string_put(vars->mlx, vars->win, 103,
+				50 * vars->map.height + 45, 0x00FFFFFF, str);
 		free(str);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->images[27], 105,
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->images[27], 115,
 			50 * vars->map.height + 25);
 	}
-
 }
 
 int	ft_move(t_vars *vars, int keycode)
@@ -65,7 +64,6 @@ int	ft_move(t_vars *vars, int keycode)
 	int		ret;
 
 	get_coords(vars, &x, &y);
-	
 	ret = manage_keycode(vars, keycode, x, y);
 	ft_print_data(vars);
 	return (ret);

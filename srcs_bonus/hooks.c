@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 13:38:34 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/20 17:26:49 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 03:35:20 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	exit_hook(t_vars *vars)
 
 int	key_hook(int keycode, t_vars *vars)
 {
+	int	i;
+
 	if (keycode == ESCAPE_KEY)
 		ft_mlx_close_game(vars);
 	else if (keycode == P_KEY)
@@ -34,17 +36,13 @@ int	key_hook(int keycode, t_vars *vars)
 		|| keycode == RIGHT_KEY || keycode == LEFT_KEY
 		|| keycode == Z_KEY || keycode == Q_KEY)
 	{
-		int i = ft_move(vars, keycode);
+		i = ft_move(vars, keycode);
 		if (i == 1)
 			ft_update_map(vars);
 		else if (i == 0)
 			ft_mlx_restart(vars);
 		else
 			ft_mlx_close_end_level(vars);
-	}
-	else if (keycode == 32)
-	{
-		ft_attack(vars);
 	}
 	return (keycode);
 }
