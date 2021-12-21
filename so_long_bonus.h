@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:11:03 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 00:02:54 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 02:44:20 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <time.h>
 # include "get_next_line.h"
 
+# define ACCESSIBLE_CASE "0CRLBd"
 # define R_KEY 114
 # define W_KEY 119
 # define A_KEY 97
@@ -83,6 +84,7 @@ int		exit_hook(t_vars *vars);
 void	ft_animate_map(t_vars *vars);
 int		handle_no_event(t_vars *vars);
 void	**ft_init_images(t_vars *vars);
+void	ft_init_images_p2(void **images, t_vars *vars);
 int		is_adjacent(t_vars *vars, int y, int x);
 //Changer son implementation pour s'appuyer sur la direction du perso.
 void	ft_update_map(t_vars *vars);
@@ -91,11 +93,19 @@ void	ft_mlx_close_end_level(t_vars *vars);
 void	get_coords(t_vars *vars, int *x, int *y);
 void	ft_cswitch(char *a, char *b);
 int		is_accessible(t_vars vars, int x, int y, int dir);
+int		is_accessible_up(t_vars vars, int x, int y);
+int		is_accessible_down(t_vars vars, int x, int y);
+int		is_accessible_right(t_vars vars, int x, int y);
+int		is_accessible_left(t_vars vars, int x, int y);
 int		ft_move(t_vars *vars, int keycode);
-int		ft_move_up(t_vars *vars, int x, int y);
-int		ft_move_down(t_vars *vars, int x, int y);
-int		ft_move_right(t_vars *vars, int x, int y);
-int		ft_move_left(t_vars *vars, int x, int y);
+int		ft_check_up(t_vars *vars, int x, int y);
+int		ft_check_down(t_vars *vars, int x, int y);
+int		ft_check_right(t_vars *vars, int x, int y);
+int		ft_check_left(t_vars *vars, int x, int y);
+void	ft_move_up(t_vars *vars, int x, int y);
+void	ft_move_down(t_vars *vars, int x, int y);
+void	ft_move_right(t_vars *vars, int x, int y);
+void	ft_move_left(t_vars *vars, int x, int y);
 int		manage_keycode(t_vars *vars, int keycode, int x, int y);
 int		key_hook(int keycode, t_vars *vars);
 int		ft_check_line(t_map *map, int i);
@@ -132,4 +142,7 @@ int		ft_atoi(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strjoin2(char *s1, char *s2, int a, int b);
 char	*ft_itoa(int n);
+void	ft_print_data(t_vars *vars);
+void	ft_print_data_ennemy(t_vars *vars);
+void	ft_print_case(t_vars *vars, char c, int i, int j);
 #endif

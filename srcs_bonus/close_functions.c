@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:10:20 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/20 17:28:42 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 02:41:05 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,37 +59,17 @@ void	ft_mlx_restart(t_vars *vars)
 {
 	int	i;
 
-
 	i = -1;
 	while (vars->map.map[++i])
 		free(vars->map.map[i]);
 	free(vars->map.map);
-	printf("1 marche\n\n");
-//	usleep(10000);
-	//mlx_clear_window(vars->mlx, vars->win);
-	printf("2 marche\n\n");
-//	usleep(10000);
 	vars->collected = 0;
 	vars->nb_moves = 0;
 	vars->frames = 0;
 	vars->killed = 0;
 	vars->dir = up;
-//	close(vars->map.fd);
-	printf("3 marche\n\n");
-//	usleep(10000);
 	vars->map.fd = open(vars->map.path, O_RDONLY);
-	printf("4 marche\n\n");
-//	usleep(10000);
 	ft_read_map(&vars->map);
-	printf("5 marche\n\n");
-//	usleep(1000000);
-	//ft_init_map(t_map *map);
-//	ft_update_map(vars);
 	ft_update_full_map(vars);
-//	usleep(10000);
-	printf("6 marche\n\n");
-//	usleep(10000);
 	vars->begin = clock();
-	printf("7 marche\n\n");
-	//usleep(10000);
 }

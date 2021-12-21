@@ -18,7 +18,8 @@ SRCS_BONUS	= so_long_bonus.c get_next_line.c get_next_line_utils.c \
 				srcs_bonus/utils.c \
 				srcs_bonus/bonus_hooks.c \
 				srcs_bonus/bonus_animation.c \
-				srcs_bonus/adj_accessible.c \
+				srcs_bonus/adj_coords.c \
+				srcs_bonus/accessible.c \
 				srcs_bonus/close_functions.c \
 				srcs_bonus/check_map.c \
 				srcs_bonus/ft_init_vars.c \
@@ -29,7 +30,9 @@ SRCS_BONUS	= so_long_bonus.c get_next_line.c get_next_line_utils.c \
 				srcs_bonus/manage_keycode.c \
 				srcs_bonus/ft_pat_patrouille.c \
 				srcs_bonus/ft_attack.c \
-				srcs_bonus/check_doors.c
+				srcs_bonus/check_doors.c \
+				srcs_bonus/ft_move_horizontal.c \
+				srcs_bonus/ft_move_vertical.c
 
 OBJS		= $(SRCS:.c=.o)
 
