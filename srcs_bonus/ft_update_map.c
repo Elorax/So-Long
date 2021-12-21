@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:08:02 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/19 22:39:24 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 08:32:19 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,48 +23,58 @@ void	ft_update_full_map(t_vars *vars)
 	int	i;
 	int	j;
 	int poissons;
+	int	imin;
+	int	imax;
+	int	jmin;
+	int	jmax;
 
+	printf("x, y : %d, %d\n", vars->x, vars->y);
+	ft_calcul_offset(vars, &imin, &imax, &jmin, &jmax);
 	poissons = 0;
-	i = -1;
-	j = -1;
-	while (vars->map.map[++i])
+	i = imin - 1;
+	j = jmin - 1;
+	printf("imin : %d\n", imin);
+	printf("imax : %d\n", imax);
+	printf("jmin : %d\n", jmin);
+	printf("jmax : %d\n\n", jmax);
+	while (++i <= imax)
 	{
-		while (vars->map.map[i][++j] != '\n')
+		while (++j <= jmax)
 		{
 			if (vars->map.map[i][j] == '0')
-				ft_put_img(vars, vars->frames % 4, i, j);
+				ft_put_img(vars, vars->frames % 4, i - imin, j - jmin);
 			if (vars->map.map[i][j] == 'C')
-				ft_put_img(vars, 4 + (vars->frames + ++poissons) % 4, i, j);
+				ft_put_img(vars, 4 + (vars->frames + ++poissons) % 4, i - imin, j - jmin);
 			if (ft_strchr("Pp", vars->map.map[i][j]))
-				ft_put_img(vars, 8 + vars->dir, i, j);
+				ft_put_img(vars, 8 + vars->dir, i - imin, j - jmin);
 			if (vars->map.map[i][j] == 'E')
-				ft_put_img(vars, 12, i, j);
+				ft_put_img(vars, 12, i - imin, j- jmin);
 			if (vars->map.map[i][j] == '1')
-				ft_put_img(vars, 13, i, j);
+				ft_put_img(vars, 13, i - imin, j - jmin);
 			if (vars->map.map[i][j] == 'R')
-				ft_put_img(vars, 14, i, j);
+				ft_put_img(vars, 14, i - imin, j - jmin);
 			if (vars->map.map[i][j] == 'L')
-				ft_put_img(vars, 15, i, j);
+				ft_put_img(vars, 15, i - imin, j - jmin);
 			if (vars->map.map[i][j] == 'X')
-				ft_put_img(vars, 16, i, j);
+				ft_put_img(vars, 16, i - imin, j - jmin);
 			if (vars->map.map[i][j] == '#')
-				ft_put_img(vars, 17, i, j);
+				ft_put_img(vars, 17, i - imin, j - jmin);
 			if (vars->map.map[i][j] == 'b')
-				ft_put_img(vars, 18, i, j);
+				ft_put_img(vars, 18, i - imin, j - jmin);
 			if (vars->map.map[i][j] == 'B')
-				ft_put_img(vars, 19, i, j);
+				ft_put_img(vars, 19, i - imin, j - jmin);
 			if (vars->map.map[i][j] == 'D')
-				ft_put_img(vars, 20, i, j);
+				ft_put_img(vars, 20, i - imin, j - jmin);
 			if (vars->map.map[i][j] == 'd')
-				ft_put_img(vars, 21, i, j);
+				ft_put_img(vars, 21, i - imin, j - jmin);
 			if (vars->map.map[i][j] == 'q')
-				ft_put_img(vars, 22 + vars->dir, i, j);
+				ft_put_img(vars, 22 + vars->dir, i - imin, j - jmin);
 		}
-		j = -1;
+		j = jmin - 1;
 	}
 }
 
-
+/*
 void	ft_update_map(t_vars *vars)
 {
 	int	i;
@@ -106,4 +116,4 @@ void	ft_update_map(t_vars *vars)
 		}
 		j = -1;
 	}
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 13:38:34 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 03:35:20 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 07:49:29 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	key_hook(int keycode, t_vars *vars)
 	{
 		i = ft_move(vars, keycode);
 		if (i == 1)
-			ft_update_map(vars);
+			ft_update_full_map(vars);
 		else if (i == 0)
 			ft_mlx_restart(vars);
 		else

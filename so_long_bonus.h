@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:11:03 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 03:40:12 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 09:12:49 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@
 # define LEFT_KEY 65361
 # define RIGHT_KEY 65363
 # define DOWN_KEY 65364
-# define FPS 5
+# define FPS 10
+# define WLENGTH 1600
+# define WHEIGHT 850
 
 enum {up, right, down, left};
 
@@ -74,6 +76,8 @@ typedef struct s_vars
 	int		frames;//0
 	int		dir;//0
 	int		pause;
+	int		x;
+	int		y;
 	clock_t	begin;//clock()
 }	t_vars;
 
@@ -145,4 +149,8 @@ char	*ft_itoa(int n);
 void	ft_print_data(t_vars *vars);
 void	ft_print_data_ennemy(t_vars *vars);
 void	ft_print_case(t_vars *vars, char c, int i, int j);
+void	ft_fill_coraux_bizarres(t_vars *vars);
+void	ft_calcul_offset(t_vars *vars, int *imin, int *imax, int *jmin, int *jmax);
+int		min(int a, int b);
+int		max(int a, int b);
 #endif

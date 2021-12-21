@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:27:18 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 03:31:28 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 08:11:22 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_move_right(t_vars *vars, int x, int y)
 	int	doors;
 
 	doors = 0;
+	(vars->x)++;
 	if (vars->map.map[y][x] == 'P')
 		vars->map.map[y][x] = '0';
 	if (vars->map.map[y][x] == 'p')
@@ -98,6 +99,7 @@ void	ft_move_left(t_vars *vars, int x, int y)
 	int	doors;
 
 	doors = 0;
+	(vars->x)--;
 	if (vars->map.map[y][x] == 'P')
 		vars->map.map[y][x] = '0';
 	if (vars->map.map[y][x] == 'p')

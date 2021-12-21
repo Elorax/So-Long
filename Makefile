@@ -37,7 +37,8 @@ SRCS_BONUS	=	so_long_bonus.c					\
 				srcs_bonus/check_doors.c		\
 				srcs_bonus/ft_move_horizontal.c	\
 				srcs_bonus/ft_move_vertical.c	\
-				srcs_bonus/images.c
+				srcs_bonus/images.c				\
+				srcs_bonus/ft_calcul_offset.c
 
 OBJS		= $(SRCS:.c=.o)
 

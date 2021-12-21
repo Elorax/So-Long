@@ -6,11 +6,36 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 03:28:42 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 03:29:09 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 07:12:45 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
+
+void	ft_update_doors(t_vars *vars)
+{
+	int	i;
+	int	j;
+	int	imin;
+	int	imax;
+	int	jmin;
+	int	jmax;
+
+	ft_calcul_offset(vars, &imin, &imax, &jmin, &jmax);
+	i = imin - 1;
+	j = jmin - 1;
+	while (++i <= imax)
+	{
+		while (++j <= jmax)
+		{
+			if (vars->map.map[i][j] == 'D')
+				ft_put_img(vars, 20, i - imin, j - jmin);
+			if (vars->map.map[i][j] == 'd')
+				ft_put_img(vars, 21, i - imin, j - jmin);
+		}
+		j = jmin -1;
+	}
+}
 
 void	open_doors(t_vars *vars)
 {
@@ -66,5 +91,6 @@ void	check_doors(t_vars *vars)
 		open_doors(vars);
 	else if (tmp == 1)
 		close_doors(vars);
-	ft_update_full_map(vars);
+	ft_update_doors(vars);
+//	ft_update_full_map(vars);
 }

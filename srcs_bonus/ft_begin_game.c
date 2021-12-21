@@ -6,11 +6,28 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:17:02 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 02:19:19 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 08:55:42 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
+
+void	ft_fill_coraux_bizarres(t_vars *vars)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	j = -1;
+	while (++i < 17)
+	{
+		while (++j < 27)
+		{
+			ft_put_img(vars, 13, i, j);
+		}
+		j = -1;
+	}
+}
 
 void	ft_print_case(t_vars *vars, char c, int i, int j)
 {
@@ -19,7 +36,11 @@ void	ft_print_case(t_vars *vars, char c, int i, int j)
 	else if (c == 'C')
 		ft_put_img(vars, 4, i, j);
 	else if (c == 'P')
+	{
 		ft_put_img(vars, 8, i, j);
+		vars->x = j;
+		vars->y = i;
+	}
 	else if (c == 'E')
 		ft_put_img(vars, 12, i, j);
 	else if (c == '1')
@@ -40,14 +61,27 @@ void	ft_display_map(t_vars *vars)
 {
 	int	i;
 	int	j;
+	int	imin;
+	int	imax;
+	int	jmin;
+	int	jmax;
 
-	i = -1;
-	j = -1;
-	while (vars->map.map[++i])
+	printf("x, y: %d, %d\n", vars->x, vars->y);
+	ft_calcul_offset(vars, &imin, &imax, &jmin, &jmax);
+	i = imin -1;
+	j = jmin -1;
+	printf("display : \n");
+	printf("imin : %d\n", imin);
+	printf("imax : %d\n", imax);
+	printf("jmin : %d\n", jmin);
+	printf("jmax : %d\n\n", jmax);
+	while (++i <= imax)
 	{
-		while (vars->map.map[i][++j])
-			ft_print_case(vars, vars->map.map[i][j], i, j);
-		j = -1;
+		while (++j <= jmax)
+		{
+			ft_print_case(vars, vars->map.map[i][j], i - imin, j - jmin);
+		}
+		j = jmin-1;
 	}
 }
 
@@ -61,9 +95,11 @@ void	ft_setup_hooks(t_vars *vars)
 void	ft_begin_game(t_vars *vars)
 {
 	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, 50 * vars->map.length,
-			50 * vars->map.height + 50, "Thanks for all the fish !");
+	vars->win = mlx_new_window(vars->mlx, WLENGTH,
+			WHEIGHT, "Thanks for all the fish !");
 	vars->images = ft_init_images(vars);
+	ft_fill_coraux_bizarres(vars);
+	get_coords(vars, &(vars->x), &(vars->y));
 	ft_display_map(vars);
 	ft_print_data(vars);
 	ft_setup_hooks(vars);

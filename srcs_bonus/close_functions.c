@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:10:20 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 03:29:38 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/21 07:15:50 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	ft_mlx_restart(t_vars *vars)
 	vars->dir = up;
 	vars->map.fd = open(vars->map.path, O_RDONLY);
 	ft_read_map(&vars->map);
+	get_coords(vars, &vars->x, &vars->y);
 	ft_update_full_map(vars);
 	vars->begin = clock();
 }
