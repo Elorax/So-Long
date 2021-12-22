@@ -69,10 +69,8 @@ typedef struct s_vars
 	int		to_kill;
 	int		collected;//0
 	int		nb_moves;//0
-	t_map	map;
 	int		img_width;
 	int		img_height;
-	void	**images;
 	int		frames;//0
 	int		dir;//0
 	int		pause;
@@ -80,8 +78,10 @@ typedef struct s_vars
 	int		y;
 	int		offset_x;
 	int		offset_y;
-
 	clock_t	begin;//clock()
+	void	**images;
+	t_map	map;
+
 }	t_vars;
 
 void	ft_mlx_close_croix_rouge_de_ses_morts(t_vars *vars);

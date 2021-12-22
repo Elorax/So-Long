@@ -98,5 +98,6 @@ void	ft_begin_game(t_vars *vars)
 	ft_display_map(vars);
 	ft_print_data(vars);
 	ft_setup_hooks(vars);
+	printf("%ld\n", CLOCKS_PER_SEC);
 	mlx_loop(vars->mlx);
 }
