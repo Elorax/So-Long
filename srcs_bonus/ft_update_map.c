@@ -12,10 +12,15 @@
 
 #include "../so_long_bonus.h"
 
-void	ft_put_img(t_vars *vars, int index, int i, int j)
+void	ft_put_img_classic(t_vars *vars, int index, int i, int j)
 {
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[index],
 		j * vars->img_width, i * vars->img_height);
+}
+void	ft_put_img(t_vars *vars, int index, int i, int j)
+{
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[index],
+		(j + vars->offset_x) * vars->img_width, (i + vars->offset_y) * vars->img_height);
 }
 
 void	ft_update_full_map(t_vars *vars)
@@ -28,15 +33,11 @@ void	ft_update_full_map(t_vars *vars)
 	int	jmin;
 	int	jmax;
 
-	printf("x, y : %d, %d\n", vars->x, vars->y);
+	//printf("x, y : %d, %d\n", vars->x, vars->y);
 	ft_calcul_offset(vars, &imin, &imax, &jmin, &jmax);
 	poissons = 0;
 	i = imin - 1;
 	j = jmin - 1;
-	printf("imin : %d\n", imin);
-	printf("imax : %d\n", imax);
-	printf("jmin : %d\n", jmin);
-	printf("jmax : %d\n\n", jmax);
 	while (++i <= imax)
 	{
 		while (++j <= jmax)

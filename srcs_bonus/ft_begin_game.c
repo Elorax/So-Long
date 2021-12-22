@@ -23,7 +23,7 @@ void	ft_fill_coraux_bizarres(t_vars *vars)
 	{
 		while (++j < 27)
 		{
-			ft_put_img(vars, 13, i, j);
+			ft_put_img_classic(vars, 0, i, j);
 		}
 		j = -1;
 	}
@@ -38,8 +38,6 @@ void	ft_print_case(t_vars *vars, char c, int i, int j)
 	else if (c == 'P')
 	{
 		ft_put_img(vars, 8, i, j);
-		vars->x = j;
-		vars->y = i;
 	}
 	else if (c == 'E')
 		ft_put_img(vars, 12, i, j);
@@ -71,10 +69,6 @@ void	ft_display_map(t_vars *vars)
 	i = imin -1;
 	j = jmin -1;
 	printf("display : \n");
-	printf("imin : %d\n", imin);
-	printf("imax : %d\n", imax);
-	printf("jmin : %d\n", jmin);
-	printf("jmax : %d\n\n", jmax);
 	while (++i <= imax)
 	{
 		while (++j <= jmax)
@@ -100,6 +94,7 @@ void	ft_begin_game(t_vars *vars)
 	vars->images = ft_init_images(vars);
 	ft_fill_coraux_bizarres(vars);
 	get_coords(vars, &(vars->x), &(vars->y));
+	ft_calcul_decalage(vars, &(vars->offset_x), &(vars->offset_y));
 	ft_display_map(vars);
 	ft_print_data(vars);
 	ft_setup_hooks(vars);

@@ -37,7 +37,7 @@
 # define LEFT_KEY 65361
 # define RIGHT_KEY 65363
 # define DOWN_KEY 65364
-# define FPS 10
+# define FPS 5
 # define WLENGTH 1600
 # define WHEIGHT 850
 
@@ -78,6 +78,9 @@ typedef struct s_vars
 	int		pause;
 	int		x;
 	int		y;
+	int		offset_x;
+	int		offset_y;
+
 	clock_t	begin;//clock()
 }	t_vars;
 
@@ -119,6 +122,7 @@ int		ft_pat_patrouille(t_vars *vars);
 int		ft_pat_right(t_vars *vars, int i, int *j);
 int		ft_pat_left(t_vars *vars, int i, int j);
 void	ft_put_img(t_vars *vars, int index, int i, int j);
+void	ft_put_img_classic(t_vars *vars, int index, int i, int j);
 void	ft_display_map(t_vars *vars);
 void	ft_setup_hooks(t_vars *vars);
 void	ft_begin_game(t_vars *vars);
@@ -151,6 +155,7 @@ void	ft_print_data_ennemy(t_vars *vars);
 void	ft_print_case(t_vars *vars, char c, int i, int j);
 void	ft_fill_coraux_bizarres(t_vars *vars);
 void	ft_calcul_offset(t_vars *vars, int *imin, int *imax, int *jmin, int *jmax);
+void	ft_calcul_decalage(t_vars *vars, int *offset_x, int *offset_y);
 int		min(int a, int b);
 int		max(int a, int b);
 #endif
