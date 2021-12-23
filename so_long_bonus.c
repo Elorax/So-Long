@@ -12,24 +12,23 @@
 
 #include "so_long_bonus.h"
 
-int	ft_play(t_vars *vars, char *av, int index)
+int	ft_play(t_vars *vars)
 {
-	if (!is_name_valid(av))
-		return (-1);
-	vars->map.path = ft_strdup(av);
+	vars->level = 0;
+	while (!is_name_valid(vars->av[++(vars->level)]))
+		{}//Afficher erreur de nom de map.
+	vars->map.path = ft_strdup(vars->av[vars->level]);//inutile c'est vars->av[niveau]
 	ft_init_vars(vars);
-	vars->map.fd = open(av, O_RDONLY);
+	vars->map.fd = open(vars->av[vars->level], O_RDONLY);
 	if (vars->map.fd <= 0)
 	{
-		printf("Erreur lors de l'ouverture du fichier de l'arg %d\n", index);
-		return (-1);
+		printf("Erreur lors de l'ouverture du fichier de l'arg %d\n", vars->level);
 	}
 	vars->map.height = ft_count_lines(vars->map);
 	close(vars->map.fd);
-	vars->map.fd = open(av, O_RDONLY);
+	vars->map.fd = open(vars->av[vars->level], O_RDONLY);
 	if (ft_init_map(&(vars->map)) == -1)
-		return (-1);
-//	printf("Argument %d : Map valide !\n", index);
+		{}//Mauvaise map, gerer erreur.
 	close(vars->map.fd);
 	ft_begin_game(vars);
 	ft_delete_vars(vars);
@@ -39,17 +38,12 @@ int	ft_play(t_vars *vars, char *av, int index)
 int	main(int ac, char **av)
 {
 	t_vars	vars;
-	int		i;
 
-	i = 0;
 	if (ac < 2)
 		return (printf("Mauvais nombre d'arguments\n"), -1);
-	while (av[++i])
+	vars.av = av;
+	if (ft_play(&vars))
 	{
-		vars.level = i;
-		if (ft_play(&vars, av[i], i) == -1)
-		{
-		}
-		//gerer potentiel leaks
 	}
+	//gerer potentiel leaks
 }

@@ -31,7 +31,7 @@ void	ft_init_vars(t_vars *vars)
 	vars->map.nb_collec = 0;
 	vars->map.nb_player = 0;
 	vars->map.fd = 0;
-	vars->settings = ft_get_settings(vars->map.path);
+	vars->settings = ft_get_settings(vars->av[vars->level]);
 	fd = open(vars->settings, O_RDONLY);
 	if (fd > 0)
 	{

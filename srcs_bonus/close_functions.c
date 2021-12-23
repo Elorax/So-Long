@@ -53,6 +53,26 @@ void	ft_mlx_close_croix_rouge_de_ses_morts(t_vars *vars)
 	exit(EXIT_SUCCESS);
 }
 
+void ft_next_level(t_vars *vars)
+{
+	int	i;
+
+	i = -1;
+	while (vars->map.map[++i])
+		free(vars->map.map[i]);
+	free(vars->map.map);
+	vars->collected = 0;
+	vars->nb_moves = 0;
+	vars->frames = 0;
+	vars->killed = 0;
+	vars->dir = up;
+	free(vars->settings);
+	free(vars->objectif);
+	free(vars->mobs_to_kill);
+	vars->begin = clock();
+	ft_begin_level(vars);
+}
+
 void	ft_mlx_restart(t_vars *vars)
 {
 	int	i;
@@ -66,7 +86,7 @@ void	ft_mlx_restart(t_vars *vars)
 	vars->frames = 0;
 	vars->killed = 0;
 	vars->dir = up;
-	vars->map.fd = open(vars->map.path, O_RDONLY);
+	vars->map.fd = open(vars->av[vars->level], O_RDONLY);
 	ft_read_map(&vars->map);
 	get_coords(vars, &vars->x, &vars->y);
 	ft_update_full_map(vars);

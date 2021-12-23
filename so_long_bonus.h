@@ -80,6 +80,7 @@ typedef struct s_vars
 	int		offset_y;
 	clock_t	begin;//clock()
 	void	**images;
+	char	**av;
 	t_map	map;
 
 }	t_vars;
@@ -138,7 +139,7 @@ int		ft_attack_down(t_vars *vars, int x, int y);
 int		ft_attack_right(t_vars *vars, int x, int y);
 int		ft_attack_left(t_vars *vars, int x, int y);
 int		is_name_valid(char *av);
-int		ft_play(t_vars *vars, char *av, int index);
+int		ft_play(t_vars *vars);
 void	*read_image(t_vars *vars, char *path);
 int		ft_strlen(const char *str);
 char	*ft_strchr(char *str, char c);
@@ -146,6 +147,8 @@ char	*ft_strdup(char *s);
 char	*ft_so_long_strndup(char *s, int n);
 int		ft_read_map(t_map *map);
 void	ft_mlx_restart(t_vars *vars);
+void	ft_next_level(t_vars *vars);
+void	ft_begin_level(t_vars *vars);
 int		ft_atoi(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strjoin2(char *s1, char *s2, int a, int b);

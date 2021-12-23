@@ -86,6 +86,30 @@ void	ft_setup_hooks(t_vars *vars)
 	mlx_hook(vars->win, 17, 0, exit_hook, vars);
 }
 
+void	ft_begin_level(t_vars *vars)
+{
+	while (!is_name_valid(vars->av[++(vars->level)]))
+		;//afficher erreur de nom de map.
+	ft_init_vars(vars);
+	vars->map.fd = open(vars->av[vars->level], O_RDONLY);
+	if (vars->map.fd <= 0)
+	{
+		printf("Erreur lors de l'ouverture du fichier de l'arg %d\n", vars->level);
+		return ;//Gerer ce cas.
+	}
+	vars->map.height = ft_count_lines(vars->map);
+	close(vars->map.fd);
+	vars->map.fd = open(vars->av[vars->level], O_RDONLY);
+	if (ft_init_map(&(vars->map)) == -1)
+		return ;//Gerer le cas.
+	close(vars->map.fd);
+	ft_fill_coraux_bizarres(vars);
+	get_coords(vars, &(vars->x), &(vars->y));
+	ft_calcul_decalage(vars, &(vars->offset_x), &(vars->offset_y));
+	ft_display_map(vars);
+	ft_print_data(vars);
+}
+
 void	ft_begin_game(t_vars *vars)
 {
 	vars->mlx = mlx_init();
@@ -98,6 +122,5 @@ void	ft_begin_game(t_vars *vars)
 	ft_display_map(vars);
 	ft_print_data(vars);
 	ft_setup_hooks(vars);
-	printf("%ld\n", CLOCKS_PER_SEC);
 	mlx_loop(vars->mlx);
 }

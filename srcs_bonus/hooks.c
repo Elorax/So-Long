@@ -42,7 +42,12 @@ int	key_hook(int keycode, t_vars *vars)
 		else if (i == 0)
 			ft_mlx_restart(vars);
 		else
-			ft_mlx_close_end_level(vars);
+		{
+			if (vars->av[vars->level + 1])
+				ft_next_level(vars);
+			else
+			ft_mlx_close_game(vars);
+		}
 	}
 	return (keycode);
 }
