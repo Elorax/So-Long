@@ -60,6 +60,8 @@ void	ft_update_full_map(t_vars *vars)
 				ft_put_img(vars, 16, i - imin, j - jmin);
 			if (vars->map.map[i][j] == '#')
 				ft_put_img(vars, 17, i - imin, j - jmin);
+			if (vars->map.map[i][j] == 'x')
+				ft_put_img(vars, 29, i - imin, j - jmin);
 			if (vars->map.map[i][j] == 'b')
 				ft_put_img(vars, 18, i - imin, j - jmin);
 			if (vars->map.map[i][j] == 'B')

@@ -21,13 +21,13 @@ int	is_accessible_up(t_vars vars, int x, int y)
 		&& vars.killed >= vars.to_kill)
 		return (1);
 	else if (y > 2
-		&& ft_strchr("Xb", vars.map.map[y - 1][x])
+		&& ft_strchr("#xXb", vars.map.map[y - 1][x])
 		&& ft_strchr("0B", vars.map.map[y - 2][x]))
 		return (2);
 	else if (y > 2
-		&& ft_strchr("Xb", vars.map.map[y - 1][x])
+		&& ft_strchr("#xXb", vars.map.map[y - 1][x])
 		&& ft_strchr("RL", vars.map.map[y - 2][x])
-		&& ft_strchr("bDX#1", vars.map.map[y - 3][x]))
+		&& ft_strchr("bDxX#1", vars.map.map[y - 3][x]))
 		return (3);
 	return (0);
 }
@@ -41,13 +41,13 @@ int	is_accessible_down(t_vars vars, int x, int y)
 		&& vars.killed >= vars.to_kill)
 		return (1);
 	else if (y < vars.map.height - 2
-		&& ft_strchr("Xb", vars.map.map[y + 1][x])
+		&& ft_strchr("Xbx#", vars.map.map[y + 1][x])
 		&& ft_strchr("0B", vars.map.map[y + 2][x]))
 		return (2);
 	else if (y < vars.map.height - 3
-		&& ft_strchr("Xb", vars.map.map[y + 1][x])
+		&& ft_strchr("Xx#b", vars.map.map[y + 1][x])
 		&& ft_strchr("RL", vars.map.map[y + 2][x])
-		&& ft_strchr("bXD#1", vars.map.map[y + 3][x]))
+		&& ft_strchr("bXxD#1", vars.map.map[y + 3][x]))
 		return (3);
 	return (0);
 }
@@ -61,13 +61,13 @@ int	is_accessible_right(t_vars vars, int x, int y)
 		&& vars.killed >= vars.to_kill)
 		return (1);
 	else if (x < vars.map.length - 2
-		&& ft_strchr("Xb", vars.map.map[y][x + 1])
+		&& ft_strchr("Xx#b", vars.map.map[y][x + 1])
 		&& ft_strchr("0B", vars.map.map[y][x + 2]))
 		return (2);
 	else if (x < vars.map.length - 3
-		&& ft_strchr("Xb", vars.map.map[y][x + 1])
+		&& ft_strchr("Xx#b", vars.map.map[y][x + 1])
 		&& ft_strchr("RL", vars.map.map[y][x + 2])
-		&& ft_strchr("bX#1D", vars.map.map[y][x + 3]))
+		&& ft_strchr("bXx#1D", vars.map.map[y][x + 3]))
 		return (3);
 	return (0);
 }
@@ -80,12 +80,13 @@ int	is_accessible_left(t_vars vars, int x, int y)
 		&& vars.collected == vars.map.nb_collec
 		&& vars.killed >= vars.to_kill)
 		return (1);
-	else if (x > 2 && ft_strchr("Xb", vars.map.map[y][x - 1])
+	else if (x > 2
+		&& ft_strchr("Xx#b", vars.map.map[y][x - 1])
 		&& ft_strchr("0B", vars.map.map[y][x - 2]))
 		return (2);
 	else if (x > 2 && ft_strchr("Xb", vars.map.map[y][x - 1])
 		&& ft_strchr("RL", vars.map.map[y][x - 2])
-		&& ft_strchr("bXD#1", vars.map.map[y][x - 3]))
+		&& ft_strchr("bXDx#1", vars.map.map[y][x - 3]))
 		return (3);
 	return (0);
 }

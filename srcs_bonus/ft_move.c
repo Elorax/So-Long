@@ -19,6 +19,18 @@ void	ft_print_data(t_vars *vars)
 //	ft_put_img(vars, 26, vars->map.height, 0);
 //	ft_put_img(vars, 26, vars->map.height, 1);
 //	ft_put_img(vars, 26, vars->map.height, 2);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1350, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1400, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1450, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1350, 50);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1400, 50);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1450, 50);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1350, 100);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1400, 100);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1450, 100);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1350, 150);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1400, 150);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1450, 150);
 	str = ft_itoa(vars->nb_moves);
 	str = ft_strjoin2("Moves : ", str, 0, 1);
 	mlx_string_put(vars->mlx, vars->win, 1400, 50,

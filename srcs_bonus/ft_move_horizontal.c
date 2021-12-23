@@ -29,7 +29,14 @@ int	ft_check_right(t_vars *vars, int x, int y)
 	}
 	else if (state == 2)
 	{
-		vars->map.map[y][x + 2] = 'X' + 10 * (vars->map.map[y][x + 2] == 'B');
+		if (vars->map.map[y][x + 2] == 'B' && ft_strchr("#x", vars->map.map[y][x + 1]))
+			vars->map.map[y][x + 2] = 'x';
+		if (vars->map.map[y][x + 2] == 'B' && ft_strchr("bX", vars->map.map[y][x + 1]))
+			vars->map.map[y][x + 2] = 'b';
+		if (vars->map.map[y][x + 2] == '0' && ft_strchr("#x", vars->map.map[y][x + 1]))
+			vars->map.map[y][x + 2] = '#';
+		if (vars->map.map[y][x + 2] == '0' && ft_strchr("bX", vars->map.map[y][x + 1]))
+			vars->map.map[y][x + 2] = 'X';
 		check_doors(vars);
 	}
 	else if (state == 3)
@@ -54,9 +61,9 @@ void	ft_move_right(t_vars *vars, int x, int y)
 	}
 	if (vars->map.map[y][x] == 'q')
 		vars->map.map[y][x] = (doors++, 'd');
-	if (ft_strchr("0XC", vars->map.map[y][x + 1]))
+	if (ft_strchr("0X#C", vars->map.map[y][x + 1]))
 		vars->map.map[y][x + 1] = 'P';
-	if (ft_strchr("Bb", vars->map.map[y][x + 1]))
+	if (ft_strchr("Bbx", vars->map.map[y][x + 1]))
 	{
 		vars->map.map[y][x + 1] = 'p';
 		doors = 1;
@@ -84,7 +91,14 @@ int	ft_check_left(t_vars *vars, int x, int y)
 	}
 	else if (state == 2)
 	{
-		vars->map.map[y][x - 2] = 'X' + 10 * (vars->map.map[y][x - 2] == 'B');
+		if (vars->map.map[y][x - 2] == 'B' && ft_strchr("#x", vars->map.map[y][x - 1]))
+			vars->map.map[y][x - 2] = 'x';
+		if (vars->map.map[y][x - 2] == 'B' && ft_strchr("bX", vars->map.map[y][x - 1]))
+			vars->map.map[y][x - 2] = 'b';
+		if (vars->map.map[y][x - 2] == '0' && ft_strchr("#x", vars->map.map[y][x - 1]))
+			vars->map.map[y][x - 2] = '#';
+		if (vars->map.map[y][x - 2] == '0' && ft_strchr("bX", vars->map.map[y][x - 1]))
+			vars->map.map[y][x - 2] = 'X';
 		check_doors(vars);
 	}
 	else if (state == 3)
@@ -109,9 +123,9 @@ void	ft_move_left(t_vars *vars, int x, int y)
 	}
 	if (vars->map.map[y][x] == 'q')
 		vars->map.map[y][x] = (doors++, 'd');
-	if (ft_strchr("0XC", vars->map.map[y][x - 1]))
+	if (ft_strchr("0X#C", vars->map.map[y][x - 1]))
 		vars->map.map[y][x - 1] = 'P';
-	if (ft_strchr("Bb", vars->map.map[y][x - 1]))
+	if (ft_strchr("Bbx", vars->map.map[y][x - 1]))
 	{
 		vars->map.map[y][x - 1] = 'p';
 		doors = 1;

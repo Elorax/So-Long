@@ -91,4 +91,5 @@ void	ft_mlx_restart(t_vars *vars)
 	get_coords(vars, &vars->x, &vars->y);
 	ft_update_full_map(vars);
 	vars->begin = clock();
+	ft_print_data(vars);
 }
