@@ -16,9 +16,6 @@ void	ft_print_data(t_vars *vars)
 {
 	char	*str;
 
-//	ft_put_img(vars, 26, vars->map.height, 0);
-//	ft_put_img(vars, 26, vars->map.height, 1);
-//	ft_put_img(vars, 26, vars->map.height, 2);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1350, 0);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1400, 0);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1450, 0);
@@ -56,13 +53,10 @@ void	ft_print_data_ennemy(t_vars *vars)
 
 	if (vars->to_kill > 0)
 	{
-		str = ft_itoa(vars->to_kill - vars->killed);
-		if (*str == '-')
-			mlx_string_put(vars->mlx, vars->win, 1400,
-				150, 0x00FFFFFF, "0");
-		else
-			mlx_string_put(vars->mlx, vars->win, 1400,
-				150, 0x00FFFFFF, str);
+		str = ft_strjoin2(ft_itoa(vars->killed), "/", 1, 0);
+		str = ft_strjoin2(str, ft_itoa(vars->to_kill), 1, 1);
+		mlx_string_put(vars->mlx, vars->win, 1400,
+			150, 0x00FFFFFF, str);
 		free(str);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->images[27], 1430,
 			150);

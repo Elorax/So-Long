@@ -70,6 +70,9 @@ int	ft_init_map(t_map *map)
 	int	i;
 
 	i = 0;
+	map->nb_player = 0;
+	map->nb_exit = 0;
+	map->nb_collec = 0;
 	map->map = malloc(sizeof(char *) * (map->height + 1));
 	if (!(map->map))
 		return (-1);
@@ -77,17 +80,17 @@ int	ft_init_map(t_map *map)
 	while (map->map[i])
 	{
 		if (ft_check_line(map, i) != 0)
-			return (printf("Erreur : Mauvaise map.\n"), -1);
+			return ((map->map[++i] = NULL), -1);
 		if (i > 0 && ft_strlen(map->map[i]) != ft_strlen(map->map[i - 1]))
-			return (printf("Erreur : Mauvaise map.\n"), -1);
+			return ((map->map[++i] = NULL), -1);
 		i++;
 		map->map[i] = get_next_line(map->fd);
 	}
 	if ((i > 1) && (ft_check_first_line(map->map[0])
 			|| ft_check_first_line(map->map[i - 1])))
-		return (printf("Erreur : Mauvaise map.\n"), -1);
+		return (-1);
 	if (map->nb_player != 1 || map->nb_exit != 1 || map->nb_collec < 1)
-		return (printf("Erreur : Mauvaise map.\n"), -1);
+		return (-1);
 	map->height = i;
 	map->length = ft_strlen(map->map[0]) - 1;
 	return (0);

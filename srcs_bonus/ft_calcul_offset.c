@@ -30,7 +30,6 @@ void	ft_calcul_decalage(t_vars *vars, int *offset_x, int *offset_y)
 {
 	*offset_x = max(0, ((WLENGTH - 250) / 50) - vars->map.length);
 	*offset_y = max(0, (WHEIGHT / 50) - vars->map.height);
-	printf("decalage de x : %d\ndecalage de y : %d\n", *offset_x, *offset_y);
 	*offset_x /= 2;//Middle
 	*offset_y /= 2;//Middle	
 }

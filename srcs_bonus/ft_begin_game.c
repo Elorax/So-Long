@@ -64,11 +64,9 @@ void	ft_display_map(t_vars *vars)
 	int	jmin;
 	int	jmax;
 
-	printf("x, y: %d, %d\n", vars->x, vars->y);
 	ft_calcul_offset(vars, &imin, &imax, &jmin, &jmax);
 	i = imin -1;
 	j = jmin -1;
-	printf("display : \n");
 	while (++i <= imax)
 	{
 		while (++j <= jmax)
@@ -88,8 +86,8 @@ void	ft_setup_hooks(t_vars *vars)
 
 void	ft_begin_level(t_vars *vars)
 {
-	while (!is_name_valid(vars->av[++(vars->level)]))
-		;//afficher erreur de nom de map.
+	if (!vars->av[vars->level])
+		ft_mlx_close_game(vars);
 	ft_init_vars(vars);
 	vars->map.fd = open(vars->av[vars->level], O_RDONLY);
 	if (vars->map.fd <= 0)
