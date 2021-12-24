@@ -15,17 +15,9 @@
 int	ft_play(t_vars *vars)
 {
 	vars->level = 1;
-//	while (vars->av[++(vars->level)] && !is_name_valid(vars->av[vars->level]))
-//		{}//Afficher erreur de nom de map.
-//	if (!vars->av[vars->level])
-//		return (-1);
 	vars->map.path = ft_strdup(vars->av[vars->level]);//inutile c'est vars->av[niveau]
 	ft_init_vars(vars);
 	vars->map.fd = open(vars->av[vars->level], O_RDONLY);
-//	if (vars->map.fd <= 0)
-//	{
-//		printf("Erreur lors de l'ouverture du fichier de l'arg %d\n", vars->level);
-//	}
 	vars->map.height = ft_count_lines(vars->map);
 	close(vars->map.fd);
 	vars->map.fd = open(vars->av[vars->level], O_RDONLY);
@@ -37,43 +29,45 @@ int	ft_play(t_vars *vars)
 	return (0);
 }
 
+int	check_argument(char *av, t_vars *vars)
+{
+	int	j;
+
+	j = -1;
+	if (!is_name_valid(av))
+		return (printf("%s : filename not valid\n", av), 0);
+	vars->map.fd = open(av, O_RDONLY);
+	if (vars->map.fd <= 0)
+		return(printf("Cannot open file %s\n", av), 0);
+	vars->map.height = ft_count_lines(vars->map);
+	close(vars->map.fd);
+	vars->map.fd = open(av, O_RDONLY);
+	if (ft_init_map(&(vars->map)) == -1)
+	{
+		while (vars->map.map[++j])
+			free(vars->map.map[j]);
+		free(vars->map.map);
+		return (printf("%s : invalid map\n", av), 0);
+	}
+	close(vars->map.fd);
+	while (vars->map.map[++j])
+		free(vars->map.map[j]);
+	free(vars->map.map);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_vars	vars;
 	int	i;
-	int	j;
 
 	i = 0;
 	if (ac < 2)
 		return (printf("Mauvais nombre d'arguments\n"), -1);
 	vars.av = av;
 	while (av[++i])
-	{
-		j = -1;
-		if (!is_name_valid(av[i]))
-			return (printf("%s : filename not valid\n", av[i]), 0);
-		vars.map.fd = open(av[i], O_RDONLY);
-		if (vars.map.fd <= 0)
-		{
-			printf("Cannot open file %s\n", av[i]);
-		}
-		vars.map.height = ft_count_lines(vars.map);
-		close(vars.map.fd);
-		vars.map.fd = open(av[i], O_RDONLY);
-		if (ft_init_map(&(vars.map)) == -1)
-		{
-			while (vars.map.map[++j])
-				free(vars.map.map[j]);
-			free(vars.map.map);
-			return (printf("%s : invalid map\n", av[i]), 0);
-		}
-		close(vars.map.fd);
-			while (vars.map.map[++j])
-				free(vars.map.map[j]);
-			free(vars.map.map);
-	}
-	if (ft_play(&vars))
-	{
-	}
+		if (check_argument(av[i], &vars) == 0)
+			return (0);
+	ft_play(&vars);
 	//gerer potentiel leaks
 }

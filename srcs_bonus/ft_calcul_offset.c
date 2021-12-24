@@ -35,7 +35,26 @@ void	ft_calcul_decalage(t_vars *vars, int *offset_x, int *offset_y)
 }
 
 
-void	ft_calcul_offset(t_vars *vars, int *imin, int *imax, int *jmin, int *jmax)
+void	ft_calcul_offset_i(t_vars *vars, int *imin, int *imax)
+{
+	if (vars->y < 9)
+	{
+		*imin = 0;
+		*imax = min(16, vars->map.height - 1);
+	}
+	else if (vars->y > vars->map.height - 9)
+	{
+		*imin = max(0, vars->map.height - 17);
+		*imax = vars->map.height - 1;
+	}
+	else
+	{
+		*imin = max(0, vars->y - 8);
+		*imax = min(vars->map.height - 1, vars->y + 8);
+	}
+}
+
+void	ft_calcul_offset_j(t_vars *vars, int *jmin, int *jmax)
 {
 	if (vars->x < 14)
 	{
@@ -51,20 +70,5 @@ void	ft_calcul_offset(t_vars *vars, int *imin, int *imax, int *jmin, int *jmax)
 	{
 		*jmin = max(0, vars->x - 13);
 		*jmax = min(vars->map.length - 1, vars->x + 13);
-	}
-	if (vars->y < 9)
-	{
-		*imin = 0;
-		*imax = min(16, vars->map.height - 1);
-	}
-	else if (vars->y > vars->map.height - 9)
-	{
-		*imin = max(0, vars->map.height - 17);
-		*imax = vars->map.height - 1;
-	}
-	else
-	{
-		*imin = max(0, vars->y - 8);
-		*imax = min(vars->map.height - 1, vars->y + 8);
 	}
 }

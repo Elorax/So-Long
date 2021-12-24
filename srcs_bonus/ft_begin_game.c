@@ -64,7 +64,8 @@ void	ft_display_map(t_vars *vars)
 	int	jmin;
 	int	jmax;
 
-	ft_calcul_offset(vars, &imin, &imax, &jmin, &jmax);
+	ft_calcul_offset_i(vars, &imin, &imax);
+	ft_calcul_offset_j(vars, &jmin, &jmax);
 	i = imin -1;
 	j = jmin -1;
 	while (++i <= imax)

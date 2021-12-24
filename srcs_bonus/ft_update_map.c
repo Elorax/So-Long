@@ -34,7 +34,8 @@ void	ft_update_full_map(t_vars *vars)
 	int	jmax;
 
 	//printf("x, y : %d, %d\n", vars->x, vars->y);
-	ft_calcul_offset(vars, &imin, &imax, &jmin, &jmax);
+	ft_calcul_offset_i(vars, &imin, &imax);
+	ft_calcul_offset_j(vars, &jmin, &jmax);
 	poissons = 0;
 	i = imin - 1;
 	j = jmin - 1;
@@ -76,47 +77,3 @@ void	ft_update_full_map(t_vars *vars)
 		j = jmin - 1;
 	}
 }
-
-/*
-void	ft_update_map(t_vars *vars)
-{
-	int	i;
-	int	j;
-	int	adj;
-
-	adj = 0;
-	i = -1;
-	j = -1;
-	while (vars->map.map[++i])
-	{
-		while (vars->map.map[i][++j] != '\n')
-		{
-			adj = is_adjacent(vars, i, j);
-			if (vars->map.map[i][j] == '0' && adj)
-				ft_put_img(vars, vars->frames % 4, i, j);
-			if (vars->map.map[i][j] == 'C' && adj)
-				ft_put_img(vars, 4 + vars->frames % 4, i, j);
-			if (ft_strchr("Pp", vars->map.map[i][j]) && adj)
-				ft_put_img(vars, 8 + vars->dir, i, j);
-			if (vars->map.map[i][j] == 'E' && adj)
-				ft_put_img(vars, 12, i, j);
-			if (vars->map.map[i][j] == '1' && adj)
-				ft_put_img(vars, 13, i, j);
-			if (vars->map.map[i][j] == 'X' && adj)
-				ft_put_img(vars, 16, i, j);
-			if (vars->map.map[i][j] == '#' && adj)
-				ft_put_img(vars, 17, i, j);
-			if (vars->map.map[i][j] == 'b' && adj)
-				ft_put_img(vars, 18, i, j);
-			if (vars->map.map[i][j] == 'B' && adj)
-				ft_put_img(vars, 19, i, j);
-			if (vars->map.map[i][j] == 'D' && adj)
-				ft_put_img(vars, 20, i, j);
-			if (vars->map.map[i][j] == 'd' && adj)
-				ft_put_img(vars, 21, i, j);
-			if (vars->map.map[i][j] == 'q' && adj)
-				ft_put_img(vars, 22 + vars->dir, i, j);
-		}
-		j = -1;
-	}
-}*/

@@ -91,7 +91,7 @@ int	ft_check_down(t_vars *vars, int x, int y)
 	}
 	else if (state == 2)
 	{
-		if (vars->map.map[y + 2][x] == 'B' && ft_strchr("bX", vars->map.map[y + 1][x]))
+		if (vars->map.map[y + 2][x] == 'B' && ft_strchr("#x", vars->map.map[y + 1][x]))
 			vars->map.map[y + 2][x] = 'x';
 		if (vars->map.map[y + 2][x] == 'B' && ft_strchr("bX", vars->map.map[y + 1][x]))
 			vars->map.map[y + 2][x] = 'b';

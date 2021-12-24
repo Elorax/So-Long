@@ -22,7 +22,8 @@ void	ft_animate_map(t_vars *vars)
 	int	jmin;
 	int	jmax;
 
-	ft_calcul_offset(vars, &imin, &imax, &jmin, &jmax);
+	ft_calcul_offset_i(vars, &imin, &imax);
+	ft_calcul_offset_j(vars, &jmin, &jmax);
 
 	poissons = 0;
 	i = imin - 1;

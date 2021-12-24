@@ -54,31 +54,31 @@ typedef struct s_map
 	int		nb_player;
 	int		nb_collec;
 	char	*path;
-	char	**map;//free et reload
+	char	**map;
 }	t_map;
 
 typedef struct s_vars
 {
-	void	*mlx;//clear only
-	void	*win;//clear only
+	void	*mlx;
+	void	*win;
 	char	*settings;
 	char	*objectif;
 	char	*mobs_to_kill;
 	int		killed;
 	int		level;
 	int		to_kill;
-	int		collected;//0
-	int		nb_moves;//0
+	int		collected;
+	int		nb_moves;
 	int		img_width;
 	int		img_height;
-	int		frames;//0
-	int		dir;//0
+	int		frames;
+	int		dir;
 	int		pause;
 	int		x;
 	int		y;
 	int		offset_x;
 	int		offset_y;
-	clock_t	begin;//clock()
+	clock_t	begin;
 	void	**images;
 	char	**av;
 	t_map	map;
@@ -157,7 +157,8 @@ void	ft_print_data(t_vars *vars);
 void	ft_print_data_ennemy(t_vars *vars);
 void	ft_print_case(t_vars *vars, char c, int i, int j);
 void	ft_fill_coraux_bizarres(t_vars *vars);
-void	ft_calcul_offset(t_vars *vars, int *imin, int *imax, int *jmin, int *jmax);
+void	ft_calcul_offset_i(t_vars *vars, int *imin, int *imax);
+void	ft_calcul_offset_j(t_vars *vars, int *jmin, int *jmax);
 void	ft_calcul_decalage(t_vars *vars, int *offset_x, int *offset_y);
 int		min(int a, int b);
 int		max(int a, int b);

@@ -84,7 +84,7 @@ int	is_accessible_left(t_vars vars, int x, int y)
 		&& ft_strchr("Xx#b", vars.map.map[y][x - 1])
 		&& ft_strchr("0B", vars.map.map[y][x - 2]))
 		return (2);
-	else if (x > 2 && ft_strchr("Xb", vars.map.map[y][x - 1])
+	else if (x > 2 && ft_strchr("Xx#b", vars.map.map[y][x - 1])
 		&& ft_strchr("RL", vars.map.map[y][x - 2])
 		&& ft_strchr("bXDx#1", vars.map.map[y][x - 3]))
 		return (3);
