@@ -15,14 +15,15 @@
 int	ft_play(t_vars *vars)
 {
 	vars->level = 1;
-	vars->map.path = ft_strdup(vars->av[vars->level]);//inutile c'est vars->av[niveau]
+	vars->map.path = ft_strdup(vars->av[vars->level]);
 	ft_init_vars(vars);
 	vars->map.fd = open(vars->av[vars->level], O_RDONLY);
 	vars->map.height = ft_count_lines(vars->map);
 	close(vars->map.fd);
 	vars->map.fd = open(vars->av[vars->level], O_RDONLY);
 	if (ft_init_map(&(vars->map)) == -1)
-		{}//Mauvaise map, gerer erreur.
+	{
+	}
 	close(vars->map.fd);
 	ft_begin_game(vars);
 	ft_delete_vars(vars);
@@ -38,7 +39,7 @@ int	check_argument(char *av, t_vars *vars)
 		return (printf("%s : filename not valid\n", av), 0);
 	vars->map.fd = open(av, O_RDONLY);
 	if (vars->map.fd <= 0)
-		return(printf("Cannot open file %s\n", av), 0);
+		return (printf("Cannot open file %s\n", av), 0);
 	vars->map.height = ft_count_lines(vars->map);
 	close(vars->map.fd);
 	vars->map.fd = open(av, O_RDONLY);
@@ -59,7 +60,7 @@ int	check_argument(char *av, t_vars *vars)
 int	main(int ac, char **av)
 {
 	t_vars	vars;
-	int	i;
+	int		i;
 
 	i = 0;
 	if (ac < 2)
@@ -69,5 +70,4 @@ int	main(int ac, char **av)
 		if (check_argument(av[i], &vars) == 0)
 			return (0);
 	ft_play(&vars);
-	//gerer potentiel leaks
 }

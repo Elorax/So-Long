@@ -93,5 +93,4 @@ void	check_doors(t_vars *vars)
 	else if (tmp == 1)
 		close_doors(vars);
 	ft_update_doors(vars);
-//	ft_update_full_map(vars);
 }

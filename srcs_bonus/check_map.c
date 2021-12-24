@@ -21,7 +21,7 @@ int	ft_check_line(t_map *map, int i)
 		return (-1);
 	while (*str)
 	{
-		if (!ft_strchr("01PBDECRLX\n", *str))
+		if (!ft_strchr("0b1PBDECRLX\n", *str))
 			return (-1);
 		else
 		{

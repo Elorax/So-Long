@@ -53,12 +53,13 @@ void	ft_mlx_close_croix_rouge_de_ses_morts(t_vars *vars)
 	exit(EXIT_SUCCESS);
 }
 
-void ft_next_level(t_vars *vars)
+void	ft_next_level(t_vars *vars)
 {
 	int	i;
 
 	while (vars->av[++(vars->level)] && !is_name_valid(vars->av[(vars->level)]))
-	{}
+	{
+	}
 	if (!vars->av[vars->level])
 		ft_mlx_close_game(vars);
 	i = -1;

@@ -36,9 +36,7 @@ void	ft_print_case(t_vars *vars, char c, int i, int j)
 	else if (c == 'C')
 		ft_put_img(vars, 4, i, j);
 	else if (c == 'P')
-	{
 		ft_put_img(vars, 8, i, j);
-	}
 	else if (c == 'E')
 		ft_put_img(vars, 12, i, j);
 	else if (c == '1')
@@ -51,6 +49,8 @@ void	ft_print_case(t_vars *vars, char c, int i, int j)
 		ft_put_img(vars, 16, i, j);
 	else if (c == 'B')
 		ft_put_img(vars, 19, i, j);
+	else if (c == 'b')
+		ft_put_img(vars, 18, i, j);
 	else if (c == 'D')
 		ft_put_img(vars, 20, i, j);
 }
@@ -106,6 +106,7 @@ void	ft_begin_level(t_vars *vars)
 	get_coords(vars, &(vars->x), &(vars->y));
 	ft_calcul_decalage(vars, &(vars->offset_x), &(vars->offset_y));
 	ft_display_map(vars);
+	check_doors(vars);
 	ft_print_data(vars);
 }
 
@@ -119,6 +120,7 @@ void	ft_begin_game(t_vars *vars)
 	get_coords(vars, &(vars->x), &(vars->y));
 	ft_calcul_decalage(vars, &(vars->offset_x), &(vars->offset_y));
 	ft_display_map(vars);
+	check_doors(vars);
 	ft_print_data(vars);
 	ft_setup_hooks(vars);
 	mlx_loop(vars->mlx);
