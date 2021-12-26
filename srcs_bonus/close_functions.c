@@ -59,10 +59,10 @@ void	ft_fondu(t_vars *vars)
 	int	j;
 
 	i = -1;
-	while (++i < 450)
+	while (++i < WHEIGHT)
 	{
 		j = -1;
-		while (++j < 1300)
+		while (++j < WLENGTH - 300)
 		{
 			mlx_pixel_put(vars->mlx, vars->win, j, i, 0);
 		}
