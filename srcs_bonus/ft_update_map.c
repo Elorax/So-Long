@@ -33,7 +33,6 @@ void	ft_update_full_map(t_vars *vars)
 	int	jmin;
 	int	jmax;
 
-	//printf("x, y : %d, %d\n", vars->x, vars->y);
 	ft_calcul_offset_i(vars, &imin, &imax);
 	ft_calcul_offset_j(vars, &jmin, &jmax);
 	poissons = 0;

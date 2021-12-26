@@ -53,10 +53,30 @@ void	ft_mlx_close_croix_rouge_de_ses_morts(t_vars *vars)
 	exit(EXIT_SUCCESS);
 }
 
+void	ft_fondu(t_vars *vars)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < 450)
+	{
+		j = -1;
+		while (++j < 1300)
+		{
+			mlx_pixel_put(vars->mlx, vars->win, j, i, 0);
+		}
+		usleep(1000);
+	}
+	usleep(500000);
+	printf("nani ?\n");
+}
+
 void	ft_next_level(t_vars *vars)
 {
 	int	i;
 
+	ft_fondu(vars);
 	while (vars->av[++(vars->level)] && !is_name_valid(vars->av[(vars->level)]))
 	{
 	}
@@ -83,6 +103,7 @@ void	ft_mlx_restart(t_vars *vars)
 	int	i;
 
 	i = -1;
+	ft_fondu(vars);
 	while (vars->map.map[++i])
 		free(vars->map.map[i]);
 	free(vars->map.map);

@@ -39,7 +39,8 @@
 # define DOWN_KEY 65364
 # define FPS 5
 # define WLENGTH 1600
-# define WHEIGHT 850
+# define WHEIGHT 900
+# define TILE_SIZE 100
 
 enum {up, right, down, left};
 
@@ -85,6 +86,7 @@ typedef struct s_vars
 
 }	t_vars;
 
+void	ft_fondu(t_vars *vars);
 void	ft_mlx_close_croix_rouge_de_ses_morts(t_vars *vars);
 void	ft_mlx_close(t_vars *vars);
 void	ft_mlx_close_game(t_vars *vars);

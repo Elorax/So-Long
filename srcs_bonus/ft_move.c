@@ -16,15 +16,19 @@ void	ft_print_data(t_vars *vars)
 {
 	char	*str;
 
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1300, 0);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1350, 0);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1400, 0);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1450, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1300, 50);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1350, 50);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1400, 50);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1450, 50);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1300, 100);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1350, 100);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1400, 100);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1450, 100);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1300, 150);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1350, 150);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1400, 150);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1450, 150);

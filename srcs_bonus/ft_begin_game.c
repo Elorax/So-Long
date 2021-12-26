@@ -19,9 +19,9 @@ void	ft_fill_coraux_bizarres(t_vars *vars)
 
 	i = -1;
 	j = -1;
-	while (++i < 17)
+	while (++i < WHEIGHT / TILE_SIZE)
 	{
-		while (++j < 27)
+		while (++j < (WLENGTH - 300) / TILE_SIZE)
 		{
 			ft_put_img_classic(vars, 0, i, j);
 		}
