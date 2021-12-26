@@ -68,8 +68,7 @@ void	ft_fondu(t_vars *vars)
 		}
 		usleep(1000);
 	}
-	usleep(500000);
-	printf("nani ?\n");
+	usleep(300000);
 }
 
 void	ft_next_level(t_vars *vars)
