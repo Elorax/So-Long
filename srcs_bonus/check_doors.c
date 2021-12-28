@@ -14,27 +14,24 @@
 
 void	ft_update_doors(t_vars *vars)
 {
-	int	i;
-	int	j;
-	int	imin;
-	int	imax;
-	int	jmin;
-	int	jmax;
+	int			i;
+	int			j;
+	t_coordmax	cmax;
 
-	ft_calcul_offset_i(vars, &imin, &imax);
-	ft_calcul_offset_j(vars, &jmin, &jmax);
-	i = imin - 1;
-	j = jmin - 1;
-	while (++i <= imax)
+	ft_calcul_offset_i(vars, &cmax);
+	ft_calcul_offset_j(vars, &cmax);
+	i = cmax.imin - 1;
+	j = cmax.jmin - 1;
+	while (++i <= cmax.imax)
 	{
-		while (++j <= jmax)
+		while (++j <= cmax.jmax)
 		{
 			if (vars->map.map[i][j] == 'D')
-				ft_put_img(vars, 20, i - imin, j - jmin);
+				ft_put_img(vars, 20, i - cmax.imin, j - cmax.jmin);
 			if (vars->map.map[i][j] == 'd')
-				ft_put_img(vars, 21, i - imin, j - jmin);
+				ft_put_img(vars, 21, i - cmax.imin, j - cmax.jmin);
 		}
-		j = jmin -1;
+		j = cmax.jmin -1;
 	}
 }
 

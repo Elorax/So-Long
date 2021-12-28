@@ -12,19 +12,6 @@
 
 #include "../so_long_bonus.h"
 
-void	ft_mlx_close_end_level(t_vars *vars)
-{
-	if (vars->win)
-	{
-		mlx_clear_window(vars->mlx, vars->win);
-		mlx_destroy_window(vars->mlx, vars->win);
-		vars->win = NULL;
-	}
-	printf("Collectibles : %d / %d\n", vars->collected, vars->map.nb_collec);
-	printf("Moves : %d\n", vars->nb_moves);
-	printf("Record de moves : %s", vars->objectif);
-}
-
 void	ft_mlx_close_game(t_vars *vars)
 {
 	if (vars->win != NULL)
@@ -75,6 +62,8 @@ void	ft_next_level(t_vars *vars)
 {
 	int	i;
 
+	printf("Moves : %d\n", vars->nb_moves);
+	printf("Record de moves : %s", vars->objectif);
 	ft_fondu(vars);
 	while (vars->av[++(vars->level)] && !is_name_valid(vars->av[(vars->level)]))
 	{
@@ -103,6 +92,7 @@ void	ft_mlx_restart(t_vars *vars)
 
 	i = -1;
 	ft_fondu(vars);
+	ft_print_life(vars);
 	while (vars->map.map[++i])
 		free(vars->map.map[i]);
 	free(vars->map.map);
@@ -114,6 +104,7 @@ void	ft_mlx_restart(t_vars *vars)
 	vars->map.fd = open(vars->av[vars->level], O_RDONLY);
 	ft_read_map(&vars->map);
 	get_coords(vars, &vars->x, &vars->y);
+	ft_fill_coraux_bizarres(vars);
 	ft_update_full_map(vars);
 	vars->begin = clock();
 	ft_print_data(vars);

@@ -12,23 +12,6 @@
 
 #include "../so_long_bonus.h"
 
-void	ft_fill_coraux_bizarres(t_vars *vars)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	j = -1;
-	while (++i < WHEIGHT / TILE_SIZE)
-	{
-		while (++j < (WLENGTH - 300) / TILE_SIZE)
-		{
-			ft_put_img_classic(vars, 0, i, j);
-		}
-		j = -1;
-	}
-}
-
 void	ft_print_case(t_vars *vars, char c, int i, int j)
 {
 	if (c == '0')
@@ -57,24 +40,22 @@ void	ft_print_case(t_vars *vars, char c, int i, int j)
 
 void	ft_display_map(t_vars *vars)
 {
-	int	i;
-	int	j;
-	int	imin;
-	int	imax;
-	int	jmin;
-	int	jmax;
+	int			i;
+	int			j;
+	t_coordmax	cmax;
 
-	ft_calcul_offset_i(vars, &imin, &imax);
-	ft_calcul_offset_j(vars, &jmin, &jmax);
-	i = imin -1;
-	j = jmin -1;
-	while (++i <= imax)
+	ft_calcul_offset_i(vars, &cmax);
+	ft_calcul_offset_j(vars, &cmax);
+	i = cmax.imin -1;
+	j = cmax.jmin -1;
+	while (++i <= cmax.imax)
 	{
-		while (++j <= jmax)
+		while (++j <= cmax.jmax)
 		{
-			ft_print_case(vars, vars->map.map[i][j], i - imin, j - jmin);
+			ft_print_case(vars, vars->map.map[i][j],
+				i - cmax.imin, j - cmax.jmin);
 		}
-		j = jmin-1;
+		j = cmax.jmin - 1;
 	}
 }
 
@@ -90,17 +71,20 @@ void	ft_begin_level(t_vars *vars)
 	if (!vars->av[vars->level])
 		ft_mlx_close_game(vars);
 	ft_init_vars(vars);
+	if (vars->life < 5)
+		vars->life++;
+	ft_print_life(vars);
 	vars->map.fd = open(vars->av[vars->level], O_RDONLY);
 	if (vars->map.fd <= 0)
 	{
-		printf("Erreur lors de l'ouverture du fichier de l'arg %d\n", vars->level);
-		return ;//Gerer ce cas.
+		printf("Error while opening arg number %d\n", vars->level);
+		return ;
 	}
 	vars->map.height = ft_count_lines(vars->map);
 	close(vars->map.fd);
 	vars->map.fd = open(vars->av[vars->level], O_RDONLY);
 	if (ft_init_map(&(vars->map)) == -1)
-		return ;//Gerer le cas.
+		return ;
 	close(vars->map.fd);
 	ft_fill_coraux_bizarres(vars);
 	get_coords(vars, &(vars->x), &(vars->y));
@@ -121,7 +105,9 @@ void	ft_begin_game(t_vars *vars)
 	ft_calcul_decalage(vars, &(vars->offset_x), &(vars->offset_y));
 	ft_display_map(vars);
 	check_doors(vars);
+	vars->life = 5;
 	ft_print_data(vars);
+	ft_print_life(vars);
 	ft_setup_hooks(vars);
 	mlx_loop(vars->mlx);
 }

@@ -21,8 +21,6 @@ int	ft_pat_right(t_vars *vars, int i, int *j)
 	{
 		vars->map.map[i][*j] = '0';
 		vars->map.map[i][*j + 1] = 'R';
-//		ft_put_img(vars, 14, i, *j + 1);
-//		ft_put_img(vars, 0, i, *j);
 		(*j)++;
 	}
 	else if (c == 'P')
@@ -31,10 +29,7 @@ int	ft_pat_right(t_vars *vars, int i, int *j)
 		return (-1);
 	}
 	else
-	{
 		vars->map.map[i][*j] = 'L';
-//		ft_put_img(vars, 15, i, *j);
-	}
 	return (0);
 }
 
@@ -47,8 +42,6 @@ int	ft_pat_left(t_vars *vars, int i, int j)
 	{
 		vars->map.map[i][j] = '0';
 		vars->map.map[i][j - 1] = 'L';
-//		ft_put_img(vars, 15, i, j - 1);
-//		ft_put_img(vars, 0, i, j);
 	}
 	else if (c == 'P')
 	{
@@ -56,10 +49,7 @@ int	ft_pat_left(t_vars *vars, int i, int j)
 		return (-1);
 	}
 	else
-	{
 		vars->map.map[i][j] = 'R';
-//		ft_put_img(vars, 14, i, j);
-	}
 	return (0);
 }
 

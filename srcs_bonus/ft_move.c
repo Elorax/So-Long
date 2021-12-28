@@ -15,32 +15,50 @@
 void	ft_print_data(t_vars *vars)
 {
 	char	*str;
+	int		i;
 
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1300, 0);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1350, 0);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1400, 0);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1450, 0);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1300, 50);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1350, 50);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1400, 50);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1450, 50);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1300, 100);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1350, 100);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1400, 100);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1450, 100);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1300, 150);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1350, 150);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1400, 150);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26], 1450, 150);
+	i = -1;
+	while (++i < 4)
+	{
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26],
+			1300, 50 * i);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26],
+			1350, 50 * i);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26],
+			1400, 50 * i);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->images[26],
+			1450, 50 * i);
+	}
 	str = ft_itoa(vars->nb_moves);
 	str = ft_strjoin2("Moves : ", str, 0, 1);
 	mlx_string_put(vars->mlx, vars->win, 1400, 50,
 		0x00FFFFFF, str);
-	free(str);
-	str = ft_strjoin2("Niveau ", ft_itoa(vars->level), 0, 1);
+	str = (free(str), ft_strjoin2("Niveau ", ft_itoa(vars->level), 0, 1));
 	mlx_string_put(vars->mlx, vars->win, 1400, 200,
 		0x00FFFFFF, str);
-	free(str);
+	(free(str), ft_print_data_ennemy(vars));
+}
+
+void	ft_print_life(t_vars *vars)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 5)
+	{
+		if (i < vars->life)
+			mlx_put_image_to_window(vars->mlx, vars->win,
+				vars->images[30], 1320 + i * 50, 300);
+		else
+			mlx_put_image_to_window(vars->mlx, vars->win,
+				vars->images[31], 1320 + i * 50, 300);
+	}
+}
+
+void	ft_print_data_ennemy(t_vars *vars)
+{
+	char	*str;
+
 	str = ft_strjoin2(ft_itoa(vars->collected), "/", 1, 0);
 	str = ft_strjoin2(str, ft_itoa(vars->map.nb_collec), 1, 1);
 	mlx_string_put(vars->mlx, vars->win, 1400, 100,
@@ -48,13 +66,6 @@ void	ft_print_data(t_vars *vars)
 	free(str);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->images[28], 1430,
 		100);
-	ft_print_data_ennemy(vars);
-}
-
-void	ft_print_data_ennemy(t_vars *vars)
-{
-	char	*str;
-
 	if (vars->to_kill > 0)
 	{
 		str = ft_strjoin2(ft_itoa(vars->killed), "/", 1, 0);
@@ -69,11 +80,8 @@ void	ft_print_data_ennemy(t_vars *vars)
 
 int	ft_move(t_vars *vars, int keycode)
 {
-//	int		x;
-//	int		y;
 	int		ret;
 
-//	get_coords(vars, &x, &y);
 	ret = manage_keycode(vars, keycode, vars->x, vars->y);
 	ft_print_data(vars);
 	return (ret);

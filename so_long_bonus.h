@@ -46,6 +46,14 @@ enum {up, right, down, left};
 
 /* Structures */
 
+typedef struct s_coordmax
+{
+	int	imin;
+	int	imax;
+	int	jmin;
+	int	jmax;
+}	t_coordmax;
+
 typedef struct s_map
 {
 	int		fd;
@@ -79,6 +87,7 @@ typedef struct s_vars
 	int		y;
 	int		offset_x;
 	int		offset_y;
+	int		life;
 	clock_t	begin;
 	void	**images;
 	char	**av;
@@ -98,7 +107,7 @@ void	ft_init_images_p2(void **images, t_vars *vars);
 int		is_adjacent(t_vars *vars, int y, int x);
 void	ft_update_map(t_vars *vars);
 void	ft_update_full_map(t_vars *vars);
-void	ft_mlx_close_end_level(t_vars *vars);
+void	ft_print_life(t_vars *vars);
 void	get_coords(t_vars *vars, int *x, int *y);
 void	ft_cswitch(char *a, char *b);
 int		is_accessible(t_vars vars, int x, int y, int dir);
@@ -159,8 +168,8 @@ void	ft_print_data(t_vars *vars);
 void	ft_print_data_ennemy(t_vars *vars);
 void	ft_print_case(t_vars *vars, char c, int i, int j);
 void	ft_fill_coraux_bizarres(t_vars *vars);
-void	ft_calcul_offset_i(t_vars *vars, int *imin, int *imax);
-void	ft_calcul_offset_j(t_vars *vars, int *jmin, int *jmax);
+void	ft_calcul_offset_i(t_vars *vars, t_coordmax *cmax);
+void	ft_calcul_offset_j(t_vars *vars, t_coordmax *cmax);
 void	ft_calcul_decalage(t_vars *vars, int *offset_x, int *offset_y);
 int		min(int a, int b);
 int		max(int a, int b);

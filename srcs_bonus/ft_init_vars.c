@@ -69,8 +69,7 @@ int	ft_init_map(t_map *map)
 {
 	int	i;
 
-	i = 0;
-	map->nb_player = 0;
+	map->nb_player = ((i = 0), 0);
 	map->nb_exit = 0;
 	map->nb_collec = 0;
 	map->map = malloc(sizeof(char *) * (map->height + 1));
@@ -83,8 +82,7 @@ int	ft_init_map(t_map *map)
 			return ((map->map[++i] = NULL), -1);
 		if (i > 0 && ft_strlen(map->map[i]) != ft_strlen(map->map[i - 1]))
 			return ((map->map[++i] = NULL), -1);
-		i++;
-		map->map[i] = get_next_line(map->fd);
+		map->map[++i] = get_next_line(map->fd);
 	}
 	if ((i > 1) && (ft_check_first_line(map->map[0])
 			|| ft_check_first_line(map->map[i - 1])))

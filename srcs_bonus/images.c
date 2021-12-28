@@ -37,18 +37,20 @@ void	ft_init_images_p2(void **images, t_vars *vars)
 	images[25] = read_image(vars, "img/Personnage_Door4.xpm");
 	images[26] = read_image(vars, "img/Void.xpm");
 	images[29] = read_image(vars, "img/Dead.xpm");
-	images[30] = NULL;
+	images[32] = NULL;
 }
 
 void	**ft_init_images(t_vars *vars)
 {
 	void	**images;
 
-	images = malloc(sizeof(*images) * 31);
+	images = malloc(sizeof(*images) * 33);
 	if (!images)
 		return (NULL);
 	images[27] = read_image(vars, "img/MiniPoulpy.xpm");
 	images[28] = read_image(vars, "img/MiniFish.xpm");
+	images[30] = read_image(vars, "img/full_heart.xpm");
+	images[31] = read_image(vars, "img/empty_heart.xpm");
 	images[0] = read_image(vars, "img/Sol1.xpm");
 	images[1] = read_image(vars, "img/Sol2.xpm");
 	images[2] = read_image(vars, "img/Sol3.xpm");

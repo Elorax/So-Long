@@ -30,7 +30,12 @@ int	key_hook(int keycode, t_vars *vars)
 	if (vars->pause)
 		return (0);
 	else if (keycode == R_KEY)
-		ft_mlx_restart(vars);
+		{
+			if (--vars->life >= 0)
+				ft_mlx_restart(vars);
+			else
+				ft_mlx_close_game(vars);
+		}
 	else if (keycode == W_KEY || keycode == A_KEY || keycode == S_KEY
 		|| keycode == D_KEY || keycode == UP_KEY || keycode == DOWN_KEY
 		|| keycode == RIGHT_KEY || keycode == LEFT_KEY
@@ -40,7 +45,12 @@ int	key_hook(int keycode, t_vars *vars)
 		if (i == 1)
 			ft_update_full_map(vars);
 		else if (i == 0)
-			ft_mlx_restart(vars);
+		{
+			if (--vars->life >= 0)
+				ft_mlx_restart(vars);
+			else
+				ft_mlx_close_game(vars);
+		}
 		else
 		{
 			if (vars->av[vars->level + 1])

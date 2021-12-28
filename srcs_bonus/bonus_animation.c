@@ -14,36 +14,29 @@
 
 void	ft_animate_map(t_vars *vars)
 {
-	int	i;
-	int	j;
-	int	poissons;
-	int	imin;
-	int	imax;
-	int	jmin;
-	int	jmax;
+	int			i;
+	int			j;
+	int			poissons;
+	t_coordmax	cmx;
 
-	ft_calcul_offset_i(vars, &imin, &imax);
-	ft_calcul_offset_j(vars, &jmin, &jmax);
-	poissons = 0;
-	i = imin - 1;
-	j = jmin -1;
-	vars->frames++;
-	if (!(vars->frames % 2))
-		if (ft_pat_patrouille(vars) == -1)
-			return ;
-	while (++i <= imax)
+	(ft_calcul_offset_i(vars, &cmx), ft_calcul_offset_j(vars, &cmx));
+	i = ((j = cmx.jmin - 1), (poissons = 0), vars->frames++, cmx.imin - 1);
+	if (!(vars->frames % 2) && ft_pat_patrouille(vars) == -1)
+		return ;
+	while (++i <= cmx.imax)
 	{
-		while (++j <= jmax)
+		while (++j <= cmx.jmax)
 		{
 			if (vars->map.map[i][j] == '0')
-				ft_put_img(vars, vars->frames % 4, i - imin, j - jmin);
+				ft_put_img(vars, vars->frames % 4, i - cmx.imin, j - cmx.jmin);
 			else if (vars->map.map[i][j] == 'C')
-				ft_put_img(vars, 4 + ((vars->frames + ++poissons) % 4), i - imin, j - jmin);
+				ft_put_img(vars, 4 + ((vars->frames + ++poissons) % 4),
+					i - cmx.imin, j - cmx.jmin);
 			else if (vars->map.map[i][j] == 'R')
-				ft_put_img(vars, 14, i - imin, j - jmin);
+				ft_put_img(vars, 14, i - cmx.imin, j - cmx.jmin);
 			else if (vars->map.map[i][j] == 'L')
-				ft_put_img(vars, 15, i - imin, j - jmin);
+				ft_put_img(vars, 15, i - cmx.imin, j - cmx.jmin);
 		}
-		j = jmin - 1;
+		j = cmx.jmin - 1;
 	}
 }
