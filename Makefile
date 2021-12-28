@@ -35,8 +35,10 @@ SRCS_BONUS	=	so_long_bonus.c					\
 				srcs_bonus/manage_keycode.c		\
 				srcs_bonus/ft_pat_patrouille.c	\
 				srcs_bonus/check_doors.c		\
-				srcs_bonus/ft_move_horizontal.c	\
-				srcs_bonus/ft_move_vertical.c	\
+				srcs_bonus/ft_move_left.c		\
+				srcs_bonus/ft_move_right.c		\
+				srcs_bonus/ft_move_up.c			\
+				srcs_bonus/ft_move_down.c		\
 				srcs_bonus/images.c				\
 				srcs_bonus/ft_calcul_offset.c	\
 				srcs_bonus/fill.c
