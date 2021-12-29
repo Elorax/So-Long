@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:04:16 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 06:27:52 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/29 12:44:02 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_pat_right(t_vars *vars, int i, int *j)
 	}
 	else if (c == 'P')
 	{
+		vars->life--;
 		ft_mlx_restart(vars);
 		return (-1);
 	}
@@ -45,6 +46,7 @@ int	ft_pat_left(t_vars *vars, int i, int j)
 	}
 	else if (c == 'P')
 	{
+		vars->life--;
 		ft_mlx_restart(vars);
 		return (-1);
 	}
