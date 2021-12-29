@@ -35,6 +35,8 @@ void	manage_movement(t_vars *vars, int keycode)
 	}
 	else
 	{
+		printf("Moves : %d\n", vars->nb_moves);
+		printf("Best moves possible : %s", vars->objectif);
 		if (vars->av[vars->level + 1])
 			ft_next_level(vars);
 		else

@@ -62,8 +62,6 @@ void	ft_next_level(t_vars *vars)
 {
 	int	i;
 
-	printf("Moves : %d\n", vars->nb_moves);
-	printf("Record de moves : %s", vars->objectif);
 	ft_fondu(vars);
 	while (vars->av[++(vars->level)] && !is_name_valid(vars->av[(vars->level)]))
 	{
