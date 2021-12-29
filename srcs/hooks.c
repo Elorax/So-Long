@@ -30,7 +30,7 @@ int	key_hook(int keycode, t_vars *vars)
 	{
 		if (ft_move(vars, keycode))
 			ft_update_map(vars);
-		else//fin du niveau ? Gerer autrement avec une troisieme fonction de close ?
+		else
 			ft_mlx_close_escape(vars);
 	}
 	return (keycode);

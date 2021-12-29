@@ -22,9 +22,6 @@ void	ft_init_vars(t_vars *vars)
 	vars->map.fd = 0;
 	vars->collected = 0;
 	vars->nb_moves = 0;
-	vars->frames = 0;
-	vars->dir = up;
-	vars->begin = clock();
 }
 
 void	*read_image(t_vars *vars, char *path)
@@ -40,27 +37,17 @@ void	**ft_init_images(t_vars *vars)
 {
 	void	**images;
 
-	images = malloc(sizeof(*images) * 15);
+	images = malloc(sizeof(*images) * 6);
 	if (!images)
 		return (NULL);
-	images[0] = read_image(vars, "Sol1.xpm");
-	images[1] = read_image(vars, "Sol2.xpm");
-	images[2] = read_image(vars, "Sol3.xpm");
-	images[3] = read_image(vars, "Sol4.xpm");
-	images[4] = read_image(vars, "Collectible1.xpm");
-	images[5] = read_image(vars, "Collectible2.xpm");
-	images[6] = read_image(vars, "Collectible3.xpm");
-	images[7] = read_image(vars, "Collectible4.xpm");
-	images[8] = read_image(vars, "Personnage1.xpm");
-	images[9] = read_image(vars, "Personnage2.xpm");
-	images[10] = read_image(vars, "Personnage3.xpm");
-	images[11] = read_image(vars, "Personnage4.xpm");
-	images[12] = read_image(vars, "Exit1.xpm");
-	images[13] = read_image(vars, "Obstacle1.xpm");
-	images[14] = NULL;
+	images[0] = read_image(vars, "img50/Sol1.xpm");
+	images[1] = read_image(vars, "img50/Collectible1.xpm");
+	images[2] = read_image(vars, "img50/Personnage1.xpm");
+	images[3] = read_image(vars, "img50/Exit1.xpm");
+	images[4] = read_image(vars, "img50/Obstacle1.xpm");
+	images[5] = NULL;
 	return (images);
 }
-//Probably leaks si mauvaise map
 
 int	ft_init_map(t_map *map)
 {

@@ -14,7 +14,6 @@
 
 int	ft_move_up(t_vars *vars, int x, int y)
 {
-	vars->dir = up;
 	if (is_accessible(vars->map.map[y - 1][x], *vars))
 	{
 		vars->collected += (vars->map.map[y - 1][x] == 'C');
@@ -23,15 +22,14 @@ int	ft_move_up(t_vars *vars, int x, int y)
 			return (0);
 		vars->map.map[y][x] = '0';
 		vars->map.map[y - 1][x] = 'P';
-		printf("Collectibles: %d / %d\n", vars->collected, vars->map.nb_collec);
-		printf("Moves: %d\n", vars->nb_moves);
+		printf("Collectibles : %d / %d\n", vars->collected, vars->map.nb_collec);
+		printf("Moves : %d\n", vars->nb_moves);
 	}
 	return (1);
 }
 
 int	ft_move_down(t_vars *vars, int x, int y)
 {
-	vars->dir = down;
 	if (is_accessible(vars->map.map[y + 1][x], *vars))
 	{
 		vars->collected += (vars->map.map[y + 1][x] == 'C');
@@ -40,15 +38,14 @@ int	ft_move_down(t_vars *vars, int x, int y)
 			return (0);
 		vars->map.map[y][x] = '0';
 		vars->map.map[y + 1][x] = 'P';
-		printf("Collectibles: %d / %d\n", vars->collected, vars->map.nb_collec);
-		printf("Moves: %d\n", vars->nb_moves);
+		printf("Collectibles : %d / %d\n", vars->collected, vars->map.nb_collec);
+		printf("Moves : %d\n", vars->nb_moves);
 	}
 	return (1);
 }
 
 int	ft_move_right(t_vars *vars, int x, int y)
 {
-	vars->dir = right;
 	if (is_accessible(vars->map.map[y][x + 1], *vars))
 	{
 		vars->collected += (vars->map.map[y][x + 1] == 'C');
@@ -57,15 +54,14 @@ int	ft_move_right(t_vars *vars, int x, int y)
 			return (0);
 		vars->map.map[y][x] = '0';
 		vars->map.map[y][x + 1] = 'P';
-		printf("Collectibles: %d / %d\n", vars->collected, vars->map.nb_collec);
-		printf("Moves: %d\n", vars->nb_moves);
+		printf("Collectibles : %d / %d\n", vars->collected, vars->map.nb_collec);
+		printf("Moves : %d\n", vars->nb_moves);
 	}
 	return (1);
 }
 
 int	ft_move_left(t_vars *vars, int x, int y)
 {
-	vars->dir = left;
 	if (is_accessible(vars->map.map[y][x - 1], *vars))
 	{
 		vars->collected += (vars->map.map[y][x - 1] == 'C');
@@ -74,7 +70,7 @@ int	ft_move_left(t_vars *vars, int x, int y)
 			return (0);
 		vars->map.map[y][x] = '0';
 		vars->map.map[y][x - 1] = 'P';
-		printf("Collectibles: %d / %d\n", vars->collected, vars->map.nb_collec);
+		printf("Collectibles : %d / %d\n", vars->collected, vars->map.nb_collec);
 		printf("Moves : %d\n", vars->nb_moves);
 	}
 	return (1);

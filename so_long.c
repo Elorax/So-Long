@@ -30,6 +30,7 @@ int	ft_play(t_vars *vars, char *av, int index)
 		return (-1);
 	printf("Argument %d : Map valide !\n", index);
 	close(vars->map.fd);
+	printf("Coucou\n");
 	ft_begin_game(vars);
 	ft_delete_vars(vars);
 	return (0);
@@ -38,16 +39,10 @@ int	ft_play(t_vars *vars, char *av, int index)
 int	main(int ac, char **av)
 {
 	t_vars	vars;
-	int		i;
 
-	i = 0;
-	if (ac < 2)
-		return (printf("Mauvais nombre d'arguments\n"), -1);
-	while (av[++i])
+	if (ac != 2)
+		return (printf("Please enter exactly one map.\n"), -1);
+	if (ft_play(&vars, av[1], 1) == -1)
 	{
-		if (ft_play(&vars, av[i], i) == -1)
-		{
-		}
-		//Gerer les potentiels leaks
 	}
 }

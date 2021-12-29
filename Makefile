@@ -3,8 +3,6 @@ SRCS		=	so_long.c						\
 				gnl/get_next_line_utils.c		\
 				srcs/hooks.c					\
 				srcs/utils.c					\
-				srcs/bonus_hooks.c				\
-				srcs/bonus_animation.c			\
 				srcs/adj_accessible.c			\
 				srcs/close_functions.c			\
 				srcs/check_map.c				\
@@ -54,7 +52,7 @@ CFLAGS = -Wall -Wextra -Werror -g3
 
 NAME=	so_long
 
-NAME_BONUS=	so_long
+NAME_BONUS=	so_long_bonus
 
 PATH_MLX		=./minilibx
 

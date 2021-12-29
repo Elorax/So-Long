@@ -33,15 +33,15 @@ void	ft_update_map(t_vars *vars)
 		{
 			adj = is_adjacent(vars, i, j);
 			if (vars->map.map[i][j] == '0' && adj)
-				ft_put_img(vars, vars->frames % 4, i, j);
+				ft_put_img(vars, 0, i, j);
 			if (vars->map.map[i][j] == '1' && adj)
-				ft_put_img(vars, 13, i, j);
+				ft_put_img(vars, 4, i, j);
 			if (vars->map.map[i][j] == 'E' && adj)
-				ft_put_img(vars, 12, i, j);
+				ft_put_img(vars, 3, i, j);
 			if (vars->map.map[i][j] == 'P' && adj)
-				ft_put_img(vars, 8 + vars->dir, i, j);
+				ft_put_img(vars, 2, i, j);
 			if (vars->map.map[i][j] == 'C' && adj)
-				ft_put_img(vars, 4 + vars->frames % 4, i, j);
+				ft_put_img(vars, 1, i, j);
 		}
 		j = -1;
 	}

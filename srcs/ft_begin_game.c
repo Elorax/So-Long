@@ -27,13 +27,13 @@ void	ft_display_map(t_vars *vars)
 			if (vars->map.map[i][j] == '0')
 				ft_put_img(vars, 0, i, j);
 			if (vars->map.map[i][j] == '1')
-				ft_put_img(vars, 13, i, j);
-			if (vars->map.map[i][j] == 'E')
-				ft_put_img(vars, 12, i, j);
-			if (vars->map.map[i][j] == 'P')
-				ft_put_img(vars, 8, i, j);
-			if (vars->map.map[i][j] == 'C')
 				ft_put_img(vars, 4, i, j);
+			if (vars->map.map[i][j] == 'E')
+				ft_put_img(vars, 3, i, j);
+			if (vars->map.map[i][j] == 'P')
+				ft_put_img(vars, 2, i, j);
+			if (vars->map.map[i][j] == 'C')
+				ft_put_img(vars, 1, i, j);
 		}
 		j = -1;
 	}
@@ -41,7 +41,6 @@ void	ft_display_map(t_vars *vars)
 
 void	ft_setup_hooks(t_vars *vars)
 {
-	mlx_loop_hook(vars->mlx, &handle_no_event, vars);
 	mlx_key_hook(vars->win, key_hook, vars);
 	mlx_hook(vars->win, 17, 0, exit_hook, vars);
 }

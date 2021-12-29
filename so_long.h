@@ -13,7 +13,6 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-//# include "libft/libft.h"
 # include "minilibx/mlx.h"
 # include "minilibx/mlx_int.h"
 # include <limits.h>
@@ -35,9 +34,6 @@
 # define LEFT_KEY 65361
 # define RIGHT_KEY 65363
 # define DOWN_KEY 65364
-# define FPS 5
-
-enum {up, right, down, left};
 
 /* Structures */
 
@@ -62,19 +58,13 @@ typedef struct s_vars
 	int		img_width;
 	int		img_height;
 	void	**images;
-	int		frames;
-	int		dir;
-	clock_t	begin;
 }	t_vars;
 
 void	ft_mlx_close_croix_rouge_de_ses_morts(t_vars *vars);
 void	ft_mlx_close(t_vars *vars);
 int		exit_hook(t_vars *vars);
-void	ft_animate_map(t_vars *vars);
-int		handle_no_event(t_vars *vars);
 void	**ft_init_images(t_vars *vars);
 int		is_adjacent(t_vars *vars, int y, int x);
-//Changer son implementation pour s'appuyer sur la direction du perso.
 void	ft_update_map(t_vars *vars);
 void	ft_mlx_close_escape(t_vars *vars);
 void	get_coords(t_vars *vars, int *x, int *y);
