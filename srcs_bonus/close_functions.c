@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:10:20 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 07:15:50 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/29 13:39:47 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_fondu(t_vars *vars)
 	int	j;
 
 	i = -1;
-	while (++i < WHEIGHT)
+	while (++i <= WHEIGHT + 10)
 	{
 		j = -1;
 		while (++j < WLENGTH - 300)
