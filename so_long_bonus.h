@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:11:03 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/30 19:08:36 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/30 22:51:53 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 /*	Setting up accessible cases	*/
 
-# define ACCESSIBLE_CASE "0CRLBd"
+# define ACCESSIBLE_CASE "0CRrlVUvuSLBd"
 
 /*	Setting up keybinds	*/
 
@@ -105,6 +105,7 @@ typedef struct s_vars
 	clock_t	begin;
 	t_map	map;
 	int		koko;
+	int		switch_dir_mobs;
 }	t_vars;
 
 /*	Hooks functions	*/
@@ -150,9 +151,12 @@ void	ft_move_left(t_vars *vars, int x, int y);
 /*	Ennemy handling	*/
 
 int		ft_pat_patrouille(t_vars *vars);
+int		ft_pat_patrouille_vertical(t_vars *vars);
 int		ft_pat_right(t_vars *vars, int i, int *j);
 int		ft_pat_left(t_vars *vars, int i, int j);
-
+int		ft_pat_up(t_vars *vars, int j, int i);
+int		ft_pat_down(t_vars *vars, int *j, int i);
+int		ft_swap_dir(t_vars *vars);
 /*	Launching game	*/
 
 int		ft_init_map(t_map *map);

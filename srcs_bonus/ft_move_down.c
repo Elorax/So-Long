@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 10:49:50 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/29 10:49:52 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/30 21:49:09 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_check_down(t_vars *vars, int x, int y)
 	vars->collected += (vars->map.map[y + 1][x] == 'C');
 	if (state == 1)
 	{
-		if (ft_strchr("RL", vars->map.map[y + 1][x]))
+		if (ft_strchr("RrLlUuVv", vars->map.map[y + 1][x]))
 			return (0);
 		if (vars->map.map[y + 1][x] == 'E')
 			return (-1);
@@ -70,6 +70,8 @@ void	ft_move_down(t_vars *vars, int x, int y)
 	}
 	if (vars->map.map[y][x] == 'q')
 		vars->map.map[y][x] = (doors++, 'd');
+	if (vars->map.map[y][x] == 's')
+		vars->map.map[y][x] = 'S';
 	if (ft_strchr("0X#C", vars->map.map[y + 1][x]))
 		vars->map.map[y + 1][x] = 'P';
 	if (ft_strchr("Bbx", vars->map.map[y + 1][x]))
@@ -79,6 +81,8 @@ void	ft_move_down(t_vars *vars, int x, int y)
 	}
 	if (vars->map.map[y + 1][x] == 'd')
 		vars->map.map[y + 1][x] = (doors++, 'q');
+	if (vars->map.map[y + 1][x] == 'S')
+		vars->map.map[y + 1][x] = (ft_swap_dir(vars), 's');
 	if (doors)
 		check_doors(vars);
 }

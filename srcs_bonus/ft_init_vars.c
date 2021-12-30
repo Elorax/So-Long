@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:29:00 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/30 19:06:29 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/30 22:48:39 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ft_init_vars(t_vars *vars)
 	vars->nb_moves = 0;
 	vars->frames = 0;
 	vars->dir = up;
+	vars->switch_dir_mobs = 0;
 	vars->pause = 0;
 	vars->begin = clock();
 }

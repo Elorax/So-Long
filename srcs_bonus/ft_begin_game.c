@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:17:02 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/30 18:31:53 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/30 21:49:46 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,18 @@ void	ft_print_case(t_vars *vars, char c, int i, int j)
 		ft_put_img(vars, 12, i, j);
 	else if (c == '1')
 		ft_put_img(vars, 13, i, j);
-	else if (c == 'R')
+	else if (ft_strchr("Rr", c))
 		ft_put_img(vars, 14, i, j);
-	else if (c == 'L')
+	else if (ft_strchr("Ll", c))
 		ft_put_img(vars, 15, i, j);
+	else if (ft_strchr("Uu", c))
+		ft_put_img(vars, 32, i, j);
+	else if (ft_strchr("Vv", c))
+		ft_put_img(vars, 33, i, j);
 	else if (c == 'X')
 		ft_put_img(vars, 16, i, j);
+	else if (c == 'S')
+		ft_put_img(vars, 34, i, j);
 	else if (c == 'B')
 		ft_put_img(vars, 19, i, j);
 	else if (c == 'b')

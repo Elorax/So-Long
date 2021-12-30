@@ -32,6 +32,7 @@ SRCS_BONUS	=	so_long_bonus.c					\
 				srcs_bonus/ft_move.c			\
 				srcs_bonus/manage_keycode.c		\
 				srcs_bonus/ft_pat_patrouille.c	\
+				srcs_bonus/ft_pat_patrouille_vertical.c	\
 				srcs_bonus/check_doors.c		\
 				srcs_bonus/ft_move_left.c		\
 				srcs_bonus/ft_move_right.c		\

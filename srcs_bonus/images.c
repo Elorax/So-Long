@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:29:00 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/29 10:50:39 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/30 21:50:23 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,17 @@ void	ft_init_images_p2(void **images, t_vars *vars)
 	images[25] = read_image(vars, "img/Personnage_Door4.xpm");
 	images[26] = read_image(vars, "img/Void.xpm");
 	images[29] = read_image(vars, "img/Dead.xpm");
-	images[32] = NULL;
+	images[32] = read_image(vars, "img/Poulpyup.xpm");
+	images[33] = read_image(vars, "img/Poulpydown.xpm");
+	images[34] = read_image(vars, "img/Star.xpm");
+	images[35] = NULL;
 }
 
 void	**ft_init_images(t_vars *vars)
 {
 	void	**images;
 
-	images = malloc(sizeof(*images) * 33);
+	images = malloc(sizeof(*images) * 36);
 	if (!images)
 		return (NULL);
 	images[27] = read_image(vars, "img/MiniPoulpy.xpm");

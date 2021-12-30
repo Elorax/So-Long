@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:01:03 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/29 10:47:14 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/30 21:30:32 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_accessible_up(t_vars vars, int x, int y)
 		return (2);
 	else if (y > 2
 		&& ft_strchr("#xXb", vars.map.map[y - 1][x])
-		&& ft_strchr("RL", vars.map.map[y - 2][x])
+		&& ft_strchr("RLUV", vars.map.map[y - 2][x])
 		&& ft_strchr("bDxX#1", vars.map.map[y - 3][x]))
 		return (3);
 	return (0);
@@ -46,7 +46,7 @@ int	is_accessible_down(t_vars vars, int x, int y)
 		return (2);
 	else if (y < vars.map.height - 3
 		&& ft_strchr("Xx#b", vars.map.map[y + 1][x])
-		&& ft_strchr("RL", vars.map.map[y + 2][x])
+		&& ft_strchr("RLUV", vars.map.map[y + 2][x])
 		&& ft_strchr("bXxD#1", vars.map.map[y + 3][x]))
 		return (3);
 	return (0);
@@ -66,7 +66,7 @@ int	is_accessible_right(t_vars vars, int x, int y)
 		return (2);
 	else if (x < vars.map.length - 3
 		&& ft_strchr("Xx#b", vars.map.map[y][x + 1])
-		&& ft_strchr("RL", vars.map.map[y][x + 2])
+		&& ft_strchr("RUVL", vars.map.map[y][x + 2])
 		&& ft_strchr("bXx#1D", vars.map.map[y][x + 3]))
 		return (3);
 	return (0);
@@ -85,7 +85,7 @@ int	is_accessible_left(t_vars vars, int x, int y)
 		&& ft_strchr("0B", vars.map.map[y][x - 2]))
 		return (2);
 	else if (x > 2 && ft_strchr("Xx#b", vars.map.map[y][x - 1])
-		&& ft_strchr("RL", vars.map.map[y][x - 2])
+		&& ft_strchr("RUVL", vars.map.map[y][x - 2])
 		&& ft_strchr("bXDx#1", vars.map.map[y][x - 3]))
 		return (3);
 	return (0);
