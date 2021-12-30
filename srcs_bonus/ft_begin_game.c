@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:17:02 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 08:55:42 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/30 18:31:53 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,6 @@ void	ft_begin_game(t_vars *vars)
 	ft_print_data(vars);
 	ft_print_life(vars);
 	ft_setup_hooks(vars);
+	ft_print_info(vars);
 	mlx_loop(vars->mlx);
 }

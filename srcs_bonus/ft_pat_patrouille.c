@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:04:16 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/29 16:43:14 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/30 19:05:32 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	ft_pat_right(t_vars *vars, int i, int *j)
 		vars->map.map[i][*j + 1] = 'R';
 		(*j)++;
 	}
-	else if (c == 'P')
+	else if (c == 'P' && !vars->koko)
 	{
-		if (vars->life-- <= 0)
+		if (vars->life-- >= 0)
 			ft_mlx_restart(vars);
 		else
 			ft_mlx_close_game(vars);
@@ -46,9 +46,9 @@ int	ft_pat_left(t_vars *vars, int i, int j)
 		vars->map.map[i][j] = '0';
 		vars->map.map[i][j - 1] = 'L';
 	}
-	else if (c == 'P')
+	else if (c == 'P' && !vars->koko)
 	{
-		if (vars->life-- <= 0)
+		if (vars->life-- >= 0)
 			ft_mlx_restart(vars);
 		else
 			ft_mlx_close_game(vars);

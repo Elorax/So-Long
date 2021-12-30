@@ -6,7 +6,7 @@
 /*   By: abiersoh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 14:29:00 by abiersoh          #+#    #+#             */
-/*   Updated: 2021/12/21 05:32:30 by abiersoh         ###   ########.fr       */
+/*   Updated: 2021/12/30 19:06:29 by abiersoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	ft_init_vars(t_vars *vars)
 {
 	int	fd;
 
-	vars->map.length = 0;
-	vars->map.height = 0;
+	vars->koko = 0;
+	vars->map.length = ((vars->map.height = 0), 0);
 	vars->map.nb_exit = 0;
 	vars->map.nb_collec = 0;
 	vars->map.nb_player = 0;
@@ -38,6 +38,11 @@ void	ft_init_vars(t_vars *vars)
 		vars->objectif = get_next_line(fd);
 		vars->mobs_to_kill = get_next_line(fd);
 		vars->to_kill = ft_atoi(vars->mobs_to_kill);
+	}
+	else
+	{
+		vars->to_kill = ((vars->objectif = ft_strdup("999")), 0);
+		vars->mobs_to_kill = NULL;
 	}
 	vars->killed = 0;
 	close(fd);
@@ -62,8 +67,6 @@ int	ft_read_map(t_map *map)
 		map->map[i] = get_next_line(map->fd);
 	return (0);
 }
-
-//Probably leaks si mauvaise map
 
 int	ft_init_map(t_map *map)
 {
