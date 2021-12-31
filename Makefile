@@ -46,10 +46,10 @@ OBJS		= $(SRCS:.c=.o)
 
 OBJS_BONUS	= $(SRCS_BONUS:.c=.o)
 
-CC		= clang
+CC		= gcc
 RM		= rm -rf
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -g3
 
 NAME=	so_long
 

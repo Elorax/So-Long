@@ -71,7 +71,6 @@ void	affichage_full_map_p2(t_vars *vars, t_coordmax cmax, int i, int j)
 		ft_put_img(vars, 21, i - cmax.imin, j - cmax.jmin);
 	if (vars->map.map[i][j] == 'q')
 		ft_put_img(vars, 22 + vars->dir, i - cmax.imin, j - cmax.jmin);
-	print_map(vars);
 }
 
 void	ft_update_full_map(t_vars *vars)
